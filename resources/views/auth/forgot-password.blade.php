@@ -28,7 +28,7 @@
                     <div class="flex justify-end">
                         <button type="submit"
                             class="py-3 px-6 border border-transparent rounded-full shadow-md text-xl font-bold text-white bg-tertiary hover:bg-orange-600 focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-orange-500">
-                            Reset Password
+                            Forgot Password
                         </button>
                     </div>
                 </div>
