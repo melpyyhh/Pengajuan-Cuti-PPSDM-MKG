@@ -1,7 +1,7 @@
 <x-guest-layout>
     <div class="flex h-screen">
         <!-- Kiri: Deskripsi -->
-        <div class="w-[900px] bg-primary text-white flex flex-col justify-center items-center p-10">
+        <div class="w-1/2 bg-primary text-white flex flex-col justify-center items-center p-10">
             <h1 class="text-4xl font-bold mb-4 text-center">Sistem Pengajuan Cuti</h1>
             <h1 class="text-4xl font-bold mb-4 text-center">PPSDM BMKG</h1>
             <p class="mt-4 text-lg text-center tracking-widest">
@@ -11,8 +11,9 @@
         </div>
 
         <!-- Kanan: Form Login -->
-        <div class="w-[1020px] bg-secondary flex flex-col justify-center items-center p-10 h-full">
-            <form method="POST" action="{{ route('login') }}" class="w-[675px] h-[800px] bg-white p-10 rounded-lg flex flex-col justify-center">
+        <div class="w-1/2 bg-secondary flex flex-col justify-center items-center p-10 h-full">
+            <form method="POST" action="{{ route('login') }}"
+                class="w-[675px] h-[800px] bg-white p-10 rounded-lg flex flex-col justify-center">
                 @csrf
                 <img src="/img/BMKG.png" alt="BMKG Logo" class="mb-8 w-40 mx-auto">
                 <div class="mb-4">
@@ -33,7 +34,8 @@
                     </div>
                 </div>
                 <div>
-                    <a href="{{ route('password.request') }}" class="text-sm text-blue-600 hover:underline tracking-widest">
+                    <a href="{{ route('password.request') }}"
+                        class="text-sm text-blue-600 hover:underline tracking-widest">
                         Lupa kata sandi? Klik disini
                     </a>
                     <div class="flex justify-end">
