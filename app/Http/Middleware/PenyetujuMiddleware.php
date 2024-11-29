@@ -4,9 +4,10 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class EnsureUserHasRole
+class PenyetujuMiddleware
 {
     /**
      * Handle an incoming request.
@@ -15,6 +16,11 @@ class EnsureUserHasRole
      */
     public function handle(Request $request, Closure $next): Response
     {
-        return $next($request);
+        if (Auth::check() && Auth::user()->role === 'penyetuju') {
+            return $next($request);
+        }
+
+        // Redirect jika role tidak sesuai
+        return redirect()->back();
     }
 }
