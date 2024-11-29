@@ -4,7 +4,9 @@
         <div class="px-6 py-4">
             <!-- User Info -->
             <div class="flex items-center space-x-4">
-                <div class="w-12 h-12 bg-gray-300 rounded-full"></div>
+                <div class="w-12 h-12 bg-gray-300 rounded-full">
+
+                </div>
                 <div>
                     <p class="text-sm font-semibold text-secondary">{{ Auth::user()->name }}</p>
                 </div>
@@ -72,7 +74,4 @@
             </form>
         </nav>
     </div>
-
-    <!-- Main Content -->
-    <div class="flex-1 p-6">Content Area</div>
 </div>
