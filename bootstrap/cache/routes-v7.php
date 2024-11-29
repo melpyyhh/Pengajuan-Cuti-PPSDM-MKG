@@ -13,7 +13,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::ABC8t4heheBVNeN5',
+            '_route' => 'generated::uA21yL4G2IwN6pfI',
           ),
           1 => NULL,
           2 => 
@@ -33,7 +33,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::zgNR0QHleRhOofKn',
+            '_route' => 'generated::irlH3qbtuyR6dxgV',
           ),
           1 => NULL,
           2 => 
@@ -122,7 +122,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::tpAdo3S4zio09As8',
+            '_route' => 'generated::11CHhj1g6V8DC9XH',
           ),
           1 => NULL,
           2 => 
@@ -158,7 +158,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::LZuu4sfzX1SBG4y9',
+            '_route' => 'generated::hswgqjqVxOVWoxDo',
           ),
           1 => NULL,
           2 => 
@@ -288,7 +288,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::icMZiZAQVil5VrZG',
+            '_route' => 'generated::slUbtmed07PpM0OO',
           ),
           1 => NULL,
           2 => 
@@ -339,7 +339,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      '/pengaju/dashboard' => 
+      '/pengaju' => 
       array (
         0 => 
         array (
@@ -359,13 +359,33 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      '/penyetuju/dashboard' => 
+      '/penyetuju' => 
       array (
         0 => 
         array (
           0 => 
           array (
             '_route' => 'penyetuju.dashboard',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/admin' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'admin.dashboard',
           ),
           1 => NULL,
           2 => 
@@ -471,7 +491,7 @@ app('router')->setCompiledRoutes(
   ),
   'attributes' => 
   array (
-    'generated::ABC8t4heheBVNeN5' => 
+    'generated::uA21yL4G2IwN6pfI' => 
     array (
       'methods' => 
       array (
@@ -500,7 +520,7 @@ app('router')->setCompiledRoutes(
                         \'exception\' => $exception,
                     ]), status: $exception ? 500 : 200);
                 }";s:5:"scope";s:54:"Illuminate\\Foundation\\Configuration\\ApplicationBuilder";s:4:"this";N;s:4:"self";s:32:"00000000000004f30000000000000000";}}',
-        'as' => 'generated::ABC8t4heheBVNeN5',
+        'as' => 'generated::uA21yL4G2IwN6pfI',
       ),
       'fallback' => false,
       'defaults' => 
@@ -516,7 +536,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::zgNR0QHleRhOofKn' => 
+    'generated::irlH3qbtuyR6dxgV' => 
     array (
       'methods' => 
       array (
@@ -538,7 +558,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::zgNR0QHleRhOofKn',
+        'as' => 'generated::irlH3qbtuyR6dxgV',
       ),
       'fallback' => false,
       'defaults' => 
@@ -704,7 +724,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::tpAdo3S4zio09As8' => 
+    'generated::11CHhj1g6V8DC9XH' => 
     array (
       'methods' => 
       array (
@@ -725,7 +745,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::tpAdo3S4zio09As8',
+        'as' => 'generated::11CHhj1g6V8DC9XH',
       ),
       'fallback' => false,
       'defaults' => 
@@ -779,7 +799,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::LZuu4sfzX1SBG4y9' => 
+    'generated::hswgqjqVxOVWoxDo' => 
     array (
       'methods' => 
       array (
@@ -800,7 +820,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::LZuu4sfzX1SBG4y9',
+        'as' => 'generated::hswgqjqVxOVWoxDo',
       ),
       'fallback' => false,
       'defaults' => 
@@ -1120,7 +1140,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::icMZiZAQVil5VrZG' => 
+    'generated::slUbtmed07PpM0OO' => 
     array (
       'methods' => 
       array (
@@ -1141,7 +1161,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::icMZiZAQVil5VrZG',
+        'as' => 'generated::slUbtmed07PpM0OO',
       ),
       'fallback' => false,
       'defaults' => 
@@ -1238,7 +1258,7 @@ app('router')->setCompiledRoutes(
         0 => 'GET',
         1 => 'HEAD',
       ),
-      'uri' => 'pengaju/dashboard',
+      'uri' => 'pengaju',
       'action' => 
       array (
         'middleware' => 
@@ -1277,7 +1297,7 @@ app('router')->setCompiledRoutes(
         0 => 'GET',
         1 => 'HEAD',
       ),
-      'uri' => 'penyetuju/dashboard',
+      'uri' => 'penyetuju',
       'action' => 
       array (
         'middleware' => 
@@ -1294,6 +1314,45 @@ app('router')->setCompiledRoutes(
         array (
         ),
         'as' => 'penyetuju.dashboard',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'admin.dashboard' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'admin',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'adminMiddleware',
+        ),
+        'uses' => 'App\\Http\\Controllers\\AdminController@index',
+        'controller' => 'App\\Http\\Controllers\\AdminController@index',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'admin.dashboard',
       ),
       'fallback' => false,
       'defaults' => 

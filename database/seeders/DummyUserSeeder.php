@@ -15,27 +15,30 @@ class DummyUserSeeder extends Seeder
     {
         $userData = [
             [
-                'name' => 'admin',
+                'name' => 'Admin',
+                'pegawai_id' => 1,
                 'email' => 'admin@gmail.com',
                 'role' => 'admin',
-                'password' => bcrypt('12345678'),
+                'password' => bcrypt('admin'),
             ],
             [
-                'name' => 'penyetuju',
+                'name' => 'Penyetuju',
+                'pegawai_id' => 2,
                 'email' => 'penyetuju@gmail.com',
                 'role' => 'penyetuju',
-                'password' => bcrypt('12345678'),
+                'password' => bcrypt('penyetuju'),
             ],
             [
-                'name' => 'pengaju',
+                'name' => 'Pengaju',
+                'pegawai_id' => 3,
                 'email' => 'pengaju@gmail.com',
                 'role' => 'pengaju',
-                'password' => bcrypt('12345678'),
+                'password' => bcrypt('pengaju'),
             ]
-            ];
+        ];
 
-            foreach($userData as $key => $var) {
-                User::create($var);
-            }
+        foreach ($userData as $key => $var) {
+            User::create($var);
+        }
     }
 }

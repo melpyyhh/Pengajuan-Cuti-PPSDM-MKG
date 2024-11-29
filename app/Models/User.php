@@ -18,6 +18,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'pegawai_id',
         'name',
         'email',
         'password',
@@ -50,5 +51,10 @@ class User extends Authenticatable
     public function hasRole($role)
     {
         return $this->role === $role;
+    }
+
+    public function pegawai()
+    {
+        return $this->belongsTo(Pegawai::class);
     }
 }

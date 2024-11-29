@@ -9,8 +9,13 @@ class JenisCuti extends Model
     protected $table = 'jenis_cuti';
     protected $fillable = ['jenis_cuti'];
 
-    public function pegawais()
+    public function pengajuan()
     {
-        return $this->belongsToMany(Pegawai::class, 'pegawai_cuti')->withPivot('jumlah_cuti');
+        return $this->hasMany(Pengajuan::class);
+    }
+
+    public function dataCutis()
+    {
+        return $this->hasMany(DataCuti::class);
     }
 }
