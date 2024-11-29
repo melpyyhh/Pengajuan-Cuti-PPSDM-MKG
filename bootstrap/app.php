@@ -12,7 +12,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         // $middleware->route([
-        //     'role' => \App\Http\Middleware\EnsureUserHasRole::class,
+        //     'role' => \App\Http\Middleware\RoleMiddleware::class,
         // ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
