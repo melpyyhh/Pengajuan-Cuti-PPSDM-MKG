@@ -18,12 +18,12 @@
                 <img src="/img/BMKG.png" alt="BMKG Logo" class="mb-8 w-40 mx-auto">
                 <div class="mb-4">
                     <label for="email" class="block text-lg font-bold ">NIP atau Email BMKG</label>
-                    <input type="text" name="email" id="email" placeholder="Masukkan NIP atau email BMKG"
+                    <input type="text" name="email" id="email" placeholder="Masukkan NIP atau Email BMKG"
                         class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-full shadow-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm text-center tracking-widest">
                 </div>
                 <div class="mb-4">
                     <label for="password" class="block text-lg font-bold">Kata Sandi</label>
-                    <input type="password" name="password" id="password" placeholder="Masukkan kata sandi"
+                    <input type="password" name="password" id="password" placeholder="Masukkan Kata Sandi"
                         class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-full shadow-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm text-center tracking-widest">
                 </div>
                 <div class="flex items-center justify-between mb-4">
@@ -35,13 +35,13 @@
                 </div>
                 <div>
                     <a href="{{ route('password.request') }}"
-                        class="text-sm text-blue-600 hover:underline tracking-widest">
+                        class="text-sm text-blue-600 hover:underline tracking-wider">
                         Lupa kata sandi? Klik disini
                     </a>
                     <div class="flex justify-end">
                         <button type="submit"
-                            class="w-[200px] h-[50px] py-3 px-6 border border-transparent rounded-full shadow-md text-xl font-bold text-white bg-tertiary hover:bg-orange-600 focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-orange-500">
-                            Sign In
+                            class="w-[200px] h-[50px] py-3 px-6 border border-transparent rounded-full shadow-md text-xl font-bold text-white bg-tertiary hover:bg-orange-600 focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-orange-500 tracking-wider">
+                            Login
                         </button>
                     </div>
                 </div>
