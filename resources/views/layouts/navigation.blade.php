@@ -9,9 +9,9 @@
                 </div>
                 <div>
                     @if (auth()->user() && auth()->user()->pegawai)
-                        <p class="text-sm font-semibold text-secondary">{{ auth()->user()->pegawai->nama }}</p>
+                    <p class="text-sm font-semibold text-secondary">{{ auth()->user()->pegawai->nama }}</p>
                     @else
-                        <p class="text-sm font-semibold text-secondary">Nama Pegawai Tidak Ditemukan</p>
+                    <p class="text-sm font-semibold text-secondary">Nama Pegawai Tidak Ditemukan</p>
                     @endif
 
                 </div>
@@ -23,49 +23,53 @@
             <ul class="space-y-2">
                 <!-- Menu Pengaju -->
                 @if (Auth::user()->hasRole('pengaju'))
-                    <li>
-                        <div class="px-6 text-xs font-semibold text-secondary uppercase">
-                            Menu Pengaju
-                        </div>
-                    </li>
-                    <li>
-                        <a href="#"
-                            class="flex items-center px-6 py-2 space-x-4 text-secondary hover:bg-gray-100">
-                            <span>Riwayat Cuti</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#"
-                            class="flex items-center px-6 py-2 space-x-4 text-secondary hover:bg-gray-100">
-                            <span>Pengajuan</span>
-                        </a>
-                    </li>
+                <li>
+                    <div class="px-6 text-lg font-semibold text-secondary uppercase">
+                        Menu Pengaju
+                    </div>
+                    <!-- Garis Horizontal -->
+                    <div class="border-t border-secondary mx-5 my-2"></div> <!-- Garis Horizontal -->
+                </li>
+                <li>
+                    <a href="/pengaju"
+                        class="flex items-center px-4 py-1.5 mx-6 space-x-4 pl-8 text-secondary hover:bg-tertiary hover:text-white 
+                        {{ request()->is('pengaju') ? 'bg-tertiary text-white font-semibold rounded-lg' : 'rounded-lg hover:shadow' }}">
+                        <span>Riwayat Cuti</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#"
+                        class="flex items-center px-6 py-2 mx-6 space-x-4 pl-8 text-secondary hover:bg-tertiary hover:text-white rounded-lg">
+                        <span>Pengajuan</span>
+                    </a>
+                </li>
                 @endif
 
                 <!-- Menu Penyetuju -->
                 @if (Auth::user()->hasRole('penyetuju'))
-                    <li>
-                        <div class="px-6 mt-6 text-xs font-semibold text-secondary uppercase">
-                            Menu Penyetuju
-                        </div>
-                    </li>
-                    <li>
-                        <a href="#"
-                            class="flex items-center px-6 py-2 space-x-4 text-secondary hover:bg-gray-100">
-                            <span>Daftar Ajuan Cuti Pegawai</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#"
-                            class="flex items-center px-6 py-2 space-x-4 text-secondary hover:bg-gray-100">
-                            <span>Dashboard Cuti Pegawai</span>
-                        </a>
-                    </li>
+                <li>
+                    <div class="px-6 mt-6 text-xs font-semibold text-secondary uppercase">
+                        Menu Penyetuju
+                    </div>
+                </li>
+                <li>
+                    <a href="#"
+                        class="flex items-center px-6 py-2 space-x-4 text-secondary hover:bg-tertiary hover:text-white">
+                        <span>Daftar Ajuan Cuti Pegawai</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#"
+                        class="flex items-center px-6 py-2 space-x-4 text-secondary hover:bg-tertiary hover:text-white">
+                        <span>Dashboard Cuti Pegawai</span>
+                    </a>
+                </li>
                 @endif
 
                 <!-- Pengaduan -->
                 <li>
-                    <a href="#" class="flex items-center px-6 py-2 space-x-4 text-secondary hover:bg-gray-100">
+                    <a href="#"
+                        class="flex items-center px-6 py-2 mx-6 space-x-4 pl-8 text-secondary hover:bg-tertiary hover:text-white rounded-lg">
                         <span>Ajukan Pengaduan ke Admin</span>
                     </a>
                 </li>
@@ -74,17 +78,14 @@
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
 
-                <!-- Authentication -->
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-
-                    <x-dropdown-link :href="route('logout')"
-                        onclick="event.preventDefault();
-                                                this.closest('form').submit();">
-                        {{ __('Log Out') }}
-                    </x-dropdown-link>
-                </form>
+                <x-dropdown-link :href="route('logout')"
+                    onclick="event.preventDefault();
+            this.closest('form').submit();"
+                    class="text-secondary rounded-lg pl-3 hover:text-white hover:bg-tertiary">
+                    {{ __('Log Out') }}
+                </x-dropdown-link>
             </form>
+
         </nav>
     </div>
 </div>

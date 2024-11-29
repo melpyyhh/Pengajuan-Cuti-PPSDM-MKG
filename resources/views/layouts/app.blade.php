@@ -13,7 +13,7 @@
 </head>
 
 <body class="font-sans antialiased">
-    <div class="min-h-screen bg-cyan-300 flex">
+    <div class="min-h-screen bg-secondary flex">
         <div class="w-64">
             @include('layouts.navigation')
         </div>
