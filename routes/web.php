@@ -21,11 +21,11 @@ require __DIR__ . '/auth.php';
 
 
 Route::middleware(['auth', 'pengajuMiddleware'])->group(function () {
-    Route::get('/pengaju', [PengajuController::class, 'index'])->name('pengaju.dashboard');
+    Route::get('/pengaju', [PengajuController::class, 'riwayatCuti'])->name('pengaju.riwayat');
 });
 
 Route::middleware(['auth', 'penyetujuMiddleware'])->group(function () {
-    Route::get('/penyetuju', [PenyetujuController::class, 'index'])->name('penyetuju.dashboard');
+    Route::get('/penyetuju', [PenyetujuController::class, 'daftarCuti'])->name('penyetuju.riwayat');
 });
 
 Route::middleware(['auth', 'adminMiddleware'])->group(function () {

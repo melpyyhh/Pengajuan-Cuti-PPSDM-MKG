@@ -13,7 +13,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::ABC8t4heheBVNeN5',
+            '_route' => 'generated::0dFwjIodqFLku6rS',
           ),
           1 => NULL,
           2 => 
@@ -33,7 +33,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::zgNR0QHleRhOofKn',
+            '_route' => 'generated::OcZhGXc0uYzpFvWY',
           ),
           1 => NULL,
           2 => 
@@ -122,7 +122,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::tpAdo3S4zio09As8',
+            '_route' => 'generated::LY0i7bDqJHZQFRHN',
           ),
           1 => NULL,
           2 => 
@@ -158,7 +158,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::LZuu4sfzX1SBG4y9',
+            '_route' => 'generated::zI5EHoCM3Sj32e8u',
           ),
           1 => NULL,
           2 => 
@@ -288,7 +288,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::icMZiZAQVil5VrZG',
+            '_route' => 'generated::pKA70QGseBe4YfkS',
           ),
           1 => NULL,
           2 => 
@@ -339,13 +339,13 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      '/pengaju/dashboard' => 
+      '/pengaju' => 
       array (
         0 => 
         array (
           0 => 
           array (
-            '_route' => 'pengaju.dashboard',
+            '_route' => 'pengaju.riwayat',
           ),
           1 => NULL,
           2 => 
@@ -359,13 +359,33 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      '/penyetuju/dashboard' => 
+      '/penyetuju' => 
       array (
         0 => 
         array (
           0 => 
           array (
-            '_route' => 'penyetuju.dashboard',
+            '_route' => 'penyetuju.riwayat',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/admin' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'admin.dashboard',
           ),
           1 => NULL,
           2 => 
@@ -471,7 +491,7 @@ app('router')->setCompiledRoutes(
   ),
   'attributes' => 
   array (
-    'generated::ABC8t4heheBVNeN5' => 
+    'generated::0dFwjIodqFLku6rS' => 
     array (
       'methods' => 
       array (
@@ -499,8 +519,8 @@ app('router')->setCompiledRoutes(
                     return response(\\Illuminate\\Support\\Facades\\View::file(\'C:\\\\laragon\\\\www\\\\Pengajuan-Cuti-PPSDM-MKG\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Foundation\\\\Configuration\'.\'/../resources/health-up.blade.php\', [
                         \'exception\' => $exception,
                     ]), status: $exception ? 500 : 200);
-                }";s:5:"scope";s:54:"Illuminate\\Foundation\\Configuration\\ApplicationBuilder";s:4:"this";N;s:4:"self";s:32:"00000000000004f30000000000000000";}}',
-        'as' => 'generated::ABC8t4heheBVNeN5',
+                }";s:5:"scope";s:54:"Illuminate\\Foundation\\Configuration\\ApplicationBuilder";s:4:"this";N;s:4:"self";s:32:"00000000000004f40000000000000000";}}',
+        'as' => 'generated::0dFwjIodqFLku6rS',
       ),
       'fallback' => false,
       'defaults' => 
@@ -516,7 +536,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::zgNR0QHleRhOofKn' => 
+    'generated::OcZhGXc0uYzpFvWY' => 
     array (
       'methods' => 
       array (
@@ -530,15 +550,15 @@ app('router')->setCompiledRoutes(
         array (
           0 => 'web',
         ),
-        'uses' => 'O:55:"Laravel\\SerializableClosure\\UnsignedSerializableClosure":1:{s:12:"serializable";O:46:"Laravel\\SerializableClosure\\Serializers\\Native":5:{s:3:"use";a:0:{}s:8:"function";s:43:"function () {
-    return view(\'welcome\');
-}";s:5:"scope";s:37:"Illuminate\\Routing\\RouteFileRegistrar";s:4:"this";N;s:4:"self";s:32:"00000000000004f90000000000000000";}}',
+        'uses' => 'O:55:"Laravel\\SerializableClosure\\UnsignedSerializableClosure":1:{s:12:"serializable";O:46:"Laravel\\SerializableClosure\\Serializers\\Native":5:{s:3:"use";a:0:{}s:8:"function";s:44:"function () {
+    return \\view(\'welcome\');
+}";s:5:"scope";s:37:"Illuminate\\Routing\\RouteFileRegistrar";s:4:"this";N;s:4:"self";s:32:"00000000000004fa0000000000000000";}}',
         'namespace' => NULL,
         'prefix' => '',
         'where' => 
         array (
         ),
-        'as' => 'generated::zgNR0QHleRhOofKn',
+        'as' => 'generated::OcZhGXc0uYzpFvWY',
       ),
       'fallback' => false,
       'defaults' => 
@@ -704,7 +724,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::tpAdo3S4zio09As8' => 
+    'generated::LY0i7bDqJHZQFRHN' => 
     array (
       'methods' => 
       array (
@@ -725,7 +745,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::tpAdo3S4zio09As8',
+        'as' => 'generated::LY0i7bDqJHZQFRHN',
       ),
       'fallback' => false,
       'defaults' => 
@@ -779,7 +799,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::LZuu4sfzX1SBG4y9' => 
+    'generated::zI5EHoCM3Sj32e8u' => 
     array (
       'methods' => 
       array (
@@ -800,7 +820,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::LZuu4sfzX1SBG4y9',
+        'as' => 'generated::zI5EHoCM3Sj32e8u',
       ),
       'fallback' => false,
       'defaults' => 
@@ -1120,7 +1140,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::icMZiZAQVil5VrZG' => 
+    'generated::pKA70QGseBe4YfkS' => 
     array (
       'methods' => 
       array (
@@ -1141,7 +1161,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::icMZiZAQVil5VrZG',
+        'as' => 'generated::pKA70QGseBe4YfkS',
       ),
       'fallback' => false,
       'defaults' => 
@@ -1231,14 +1251,14 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'pengaju.dashboard' => 
+    'pengaju.riwayat' => 
     array (
       'methods' => 
       array (
         0 => 'GET',
         1 => 'HEAD',
       ),
-      'uri' => 'pengaju/dashboard',
+      'uri' => 'pengaju',
       'action' => 
       array (
         'middleware' => 
@@ -1247,14 +1267,14 @@ app('router')->setCompiledRoutes(
           1 => 'auth',
           2 => 'pengajuMiddleware',
         ),
-        'uses' => 'App\\Http\\Controllers\\PengajuController@index',
-        'controller' => 'App\\Http\\Controllers\\PengajuController@index',
+        'uses' => 'App\\Http\\Controllers\\PengajuController@riwayatCuti',
+        'controller' => 'App\\Http\\Controllers\\PengajuController@riwayatCuti',
         'namespace' => NULL,
         'prefix' => '',
         'where' => 
         array (
         ),
-        'as' => 'pengaju.dashboard',
+        'as' => 'pengaju.riwayat',
       ),
       'fallback' => false,
       'defaults' => 
@@ -1270,14 +1290,14 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'penyetuju.dashboard' => 
+    'penyetuju.riwayat' => 
     array (
       'methods' => 
       array (
         0 => 'GET',
         1 => 'HEAD',
       ),
-      'uri' => 'penyetuju/dashboard',
+      'uri' => 'penyetuju',
       'action' => 
       array (
         'middleware' => 
@@ -1286,14 +1306,53 @@ app('router')->setCompiledRoutes(
           1 => 'auth',
           2 => 'penyetujuMiddleware',
         ),
-        'uses' => 'App\\Http\\Controllers\\PenyetujuController@index',
-        'controller' => 'App\\Http\\Controllers\\PenyetujuController@index',
+        'uses' => 'App\\Http\\Controllers\\PenyetujuController@daftarCuti',
+        'controller' => 'App\\Http\\Controllers\\PenyetujuController@daftarCuti',
         'namespace' => NULL,
         'prefix' => '',
         'where' => 
         array (
         ),
-        'as' => 'penyetuju.dashboard',
+        'as' => 'penyetuju.riwayat',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'admin.dashboard' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'admin',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'adminMiddleware',
+        ),
+        'uses' => 'App\\Http\\Controllers\\AdminController@index',
+        'controller' => 'App\\Http\\Controllers\\AdminController@index',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'admin.dashboard',
       ),
       'fallback' => false,
       'defaults' => 
@@ -1325,7 +1384,7 @@ app('router')->setCompiledRoutes(
                         $config,
                         $isProduction
                     ))($request, $path);
-                }";s:5:"scope";s:47:"Illuminate\\Filesystem\\FilesystemServiceProvider";s:4:"this";N;s:4:"self";s:32:"00000000000004fb0000000000000000";}}',
+                }";s:5:"scope";s:47:"Illuminate\\Filesystem\\FilesystemServiceProvider";s:4:"this";N;s:4:"self";s:32:"00000000000004fc0000000000000000";}}',
         'as' => 'storage.local',
       ),
       'fallback' => false,
