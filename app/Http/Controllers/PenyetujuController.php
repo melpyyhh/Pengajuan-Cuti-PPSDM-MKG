@@ -11,7 +11,7 @@ class PenyetujuController extends Controller
         return view('penyetuju.dashboard');
     }
 
-    public function daftarCuti() 
+    public function daftarCuti()
     {
         return view('penyetuju.riwayat');
     }

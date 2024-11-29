@@ -11,7 +11,7 @@ class PengajuController extends Controller
         return view('pengaju.dashboard');
     }
 
-    public function riwayatCuti() 
+    public function riwayatCuti()
     {
         return view('pengaju.riwayat');
     }
