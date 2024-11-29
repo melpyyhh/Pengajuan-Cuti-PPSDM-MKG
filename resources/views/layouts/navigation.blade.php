@@ -8,7 +8,12 @@
 
                 </div>
                 <div>
-                    <p class="text-sm font-semibold text-secondary">{{ Auth::user()->name }}</p>
+                    @if (auth()->user() && auth()->user()->pegawai)
+                        <p class="text-sm font-semibold text-secondary">{{ auth()->user()->pegawai->nama }}</p>
+                    @else
+                        <p class="text-sm font-semibold text-secondary">Nama Pegawai Tidak Ditemukan</p>
+                    @endif
+
                 </div>
             </div>
         </div>
@@ -24,7 +29,8 @@
                         </div>
                     </li>
                     <li>
-                        <a href="#" class="flex items-center px-6 py-2 space-x-4 text-secondary hover:bg-gray-100">
+                        <a href="#"
+                            class="flex items-center px-6 py-2 space-x-4 text-secondary hover:bg-gray-100">
                             <span>Riwayat Cuti</span>
                         </a>
                     </li>

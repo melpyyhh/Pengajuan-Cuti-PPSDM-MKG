@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pegawai_cuti', function (Blueprint $table) {
+        Schema::create('data_cutis', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pegawais_id')->constrained()->onDelete('cascade'); // Foreign Key ke pegawai
-            $table->foreignId('jenis_cuti_id')->constrained()->onDelete('cascade'); // Foreign Key ke jenis_cuti
+            $table->foreignId('pegawais_id')->constrained('pegawais')->onDelete('cascade'); // Foreign Key ke pegawai
+            $table->foreignId('jenis_cuti_id')->constrained('jenis_cuti')->onDelete('cascade'); // Foreign Key ke jenis_cuti
             $table->integer('jumlah_cuti');
+            $table->integer('sisa cuti');
             $table->timestamps();
         });
     }
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pegawai_cuti');
+        Schema::dropIfExists('data_cutis');
     }
 };

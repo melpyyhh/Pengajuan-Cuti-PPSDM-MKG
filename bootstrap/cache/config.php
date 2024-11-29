@@ -213,7 +213,11 @@
       array (
         'driver' => 'sqlite',
         'url' => NULL,
+<<<<<<< HEAD
         'database' => 'bmkg',
+=======
+        'database' => 'ppsdm_mkg',
+>>>>>>> 761499642b13fbc285245594321cac98edaa963f
         'prefix' => '',
         'foreign_key_constraints' => true,
         'busy_timeout' => NULL,
@@ -226,7 +230,11 @@
         'url' => NULL,
         'host' => '127.0.0.1',
         'port' => '3306',
+<<<<<<< HEAD
         'database' => 'bmkg',
+=======
+        'database' => 'ppsdm_mkg',
+>>>>>>> 761499642b13fbc285245594321cac98edaa963f
         'username' => 'root',
         'password' => '',
         'unix_socket' => '',
@@ -246,7 +254,11 @@
         'url' => NULL,
         'host' => '127.0.0.1',
         'port' => '3306',
+<<<<<<< HEAD
         'database' => 'bmkg',
+=======
+        'database' => 'ppsdm_mkg',
+>>>>>>> 761499642b13fbc285245594321cac98edaa963f
         'username' => 'root',
         'password' => '',
         'unix_socket' => '',
@@ -266,7 +278,11 @@
         'url' => NULL,
         'host' => '127.0.0.1',
         'port' => '3306',
+<<<<<<< HEAD
         'database' => 'bmkg',
+=======
+        'database' => 'ppsdm_mkg',
+>>>>>>> 761499642b13fbc285245594321cac98edaa963f
         'username' => 'root',
         'password' => '',
         'charset' => 'utf8',
@@ -281,7 +297,11 @@
         'url' => NULL,
         'host' => '127.0.0.1',
         'port' => '3306',
+<<<<<<< HEAD
         'database' => 'bmkg',
+=======
+        'database' => 'ppsdm_mkg',
+>>>>>>> 761499642b13fbc285245594321cac98edaa963f
         'username' => 'root',
         'password' => '',
         'charset' => 'utf8',

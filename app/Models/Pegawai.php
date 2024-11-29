@@ -6,11 +6,25 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pegawai extends Model
 {
-    //
-    protected $guarded = [];
+    protected $fillable = ['nip', 'nama', 'unitKerja', 'masaKerja', 'jabatan'];
 
-    public function jenisCuti()
+    public function user()
     {
-        return $this->belongsToMany(JenisCuti::class, 'pegawai_cuti')->withPivot('jumlah_cuti');
+        return $this->hasOne(User::class);
+    }
+
+    public function pengajuanSebagaiPengaju()
+    {
+        return $this->hasMany(Pengajuan::class, 'pengaju_id');
+    }
+
+    public function pengajuanSebagaiPenyetuju()
+    {
+        return $this->hasMany(Pengajuan::class, 'penyetuju_id');
+    }
+
+    public function dataCuti()
+    {
+        return $this->hasMany(DataCuti::class);
     }
 }
