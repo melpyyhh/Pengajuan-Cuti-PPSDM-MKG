@@ -12,10 +12,9 @@
             <h3 class="text-4xl font-bold text-black">Riwayat Cuti</h3>
         </div>
 
-        <div class="w-full -m-1.5 overflow-x-auto mx-auto">
+        <div class="w-full -m-1.5 overflow-hidden mx-auto">
             <div class="p-1.5 w-full inline-block align-middle">
                 <div class="overflow-hidden border border-gray-200 rounded-lg shadow-sm">
-                    <!-- Tabel dengan kelas w-full dan mx-auto untuk perataan tengah -->
                     <table class="w-full min-w-full divide-y divide-gray-200 mx-auto">
                         <thead class="bg-gray-50">
                             <tr>
