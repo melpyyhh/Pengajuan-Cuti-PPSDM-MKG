@@ -31,7 +31,7 @@ class AuthenticatedSessionController extends Controller
         $role = Auth::user()->role;
 
         if ($role === 'admin') {
-            return redirect(route('admin.dashboard'));
+            return redirect(route('admin.menu-pengaduan'));
         } elseif ($role === 'pengaju') {
             return redirect(route('pengaju.riwayat'));
         } elseif ($role === 'penyetuju') {

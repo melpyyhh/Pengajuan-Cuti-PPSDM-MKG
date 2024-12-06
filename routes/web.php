@@ -30,6 +30,5 @@ Route::middleware(['auth', 'penyetujuMiddleware'])->group(function () {
 });
 
 Route::middleware(['auth', 'adminMiddleware'])->group(function () {
-    Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
+    Route::get('/admin', [AdminController::class, 'menuPengaduan'])->name('admin.menu-pengaduan');
 });
-

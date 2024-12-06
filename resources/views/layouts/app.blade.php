@@ -13,17 +13,15 @@
 </head>
 
 <body class="font-sans antialiased">
-    <div class="min-h-screen bg-secondary flex">
-        <div class="w-64">
+    <div class="min-h-screen  bg-secondary flex">
+        <div class="flex-none basis-64">
             @include('layouts.navigation')
         </div>
 
         <!-- Page Content -->
-        <main>
-            <div class="flex-1 p-6">
-                {{ $slot }}
-            </div>
-        </main>
+        <div class="flex-1 p-6 max-w-screen-xl">
+            {{ $slot }}
+        </div>
     </div>
 </body>
 
