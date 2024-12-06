@@ -15,10 +15,7 @@ class PengajuController extends Controller
 
     public function riwayatCuti()
     {
-        // dd(auth()->user());
-        $riwayatCuti = RiwayatCuti::all();
-        // $riwayatCuti = RiwayatCuti::where('pegawai_id', Auth::user()->id); 
-        // dd($riwayatCuti); 
+        $riwayatCuti = RiwayatCuti::getByPegawaiId(Auth::user()->pegawai_id);
         return view('pengaju.riwayat', compact('riwayatCuti'));
     }
 }

@@ -24,8 +24,11 @@ class RiwayatCuti extends Model
 
     public function pegawai()
     {
-        return $this->belongsTo(Pegawai::class);
+        return $this->belongsTo(Pegawai::class, 'pegawai_id', 'id');
     }
 
-    
+    public static function getByPegawaiId($pegawaiId)
+    {
+        return self::where('pegawai_id', $pegawaiId)->get();
+    }
 }

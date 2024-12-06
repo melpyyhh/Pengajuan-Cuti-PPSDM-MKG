@@ -27,4 +27,9 @@ class Pegawai extends Model
     {
         return $this->hasMany(DataCuti::class);
     }
+
+    public function riwayatCuti()
+    {
+        return $this->hasMany(RiwayatCuti::class, 'pegawai_id', 'id');
+    }
 }
