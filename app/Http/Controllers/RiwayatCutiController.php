@@ -13,9 +13,10 @@ class RiwayatCutiController extends Controller
      */
     public function index()
     {
-        //
+        // $riwayatCuti = RiwayatCuti::all(); 
+        // return view('riwayat', compact('riwayatCuti')); 
     }
-
+    
     /**
      * Show the form for creating a new resource.
      */

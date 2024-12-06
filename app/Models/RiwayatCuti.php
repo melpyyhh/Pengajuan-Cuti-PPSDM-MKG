@@ -9,6 +9,7 @@ class RiwayatCuti extends Model
 {
     /** @use HasFactory<\Database\Factories\RiwayatCutiFactory> */
     use HasFactory;
+    protected $table = 'riwayat_cutis';
     protected $fillable = ['pengajuan_id', 'cuti_id', 'pegawai_id', 'lama_cuti', 'status_ajuan', 'tanggal_awal', 'tanggal_akhir'];
 
     public function pengajuan()
@@ -25,4 +26,6 @@ class RiwayatCuti extends Model
     {
         return $this->belongsTo(Pegawai::class);
     }
+
+    
 }

@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PengajuController;
 use App\Http\Controllers\PenyetujuController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RiwayatCutiController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -31,3 +32,4 @@ Route::middleware(['auth', 'penyetujuMiddleware'])->group(function () {
 Route::middleware(['auth', 'adminMiddleware'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
 });
+
