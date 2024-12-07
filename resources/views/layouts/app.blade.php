@@ -15,18 +15,15 @@
 </head>
 
 <body class="font-sans antialiased">
-    <div class="min-h-screen bg-secondary flex">
-        <!-- Sidebar -->
-        <div class="w-64">
+    <div class="min-h-screen  bg-secondary flex">
+        <div class="flex-none basis-64">
             @include('layouts.navigation')
         </div>
 
         <!-- Page Content -->
-        <main class="flex-grow bg-white">
-            <div class="max-w-7xl mx-auto w-full px-5 py-10">
-                {{ $slot }}
-            </div>
-        </main>
+        <div class="flex-1 p-6 max-w-screen-xl">
+            {{ $slot }}
+        </div>
     </div>
     @livewireScripts
 </body>

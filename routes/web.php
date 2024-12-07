@@ -25,6 +25,7 @@ require __DIR__ . '/auth.php';
 
 Route::middleware(['auth', 'pengajuMiddleware'])->group(function () {
     Route::get('/pengaju', [PengajuController::class, 'riwayatCuti'])->name('pengaju.riwayat');
+    Route::get('/pengajuan-form', \App\Http\Livewire\PengajuanForm::class)->name('pengajuan.form');
 });
 
 Route::middleware(['auth', 'penyetujuMiddleware'])->group(function () {
@@ -32,10 +33,5 @@ Route::middleware(['auth', 'penyetujuMiddleware'])->group(function () {
 });
 
 Route::middleware(['auth', 'adminMiddleware'])->group(function () {
-    Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
+    Route::get('/admin', [AdminController::class, 'menuPengaduan'])->name('admin.menu-pengaduan');
 });
-
-Route::middleware(['auth', 'pengajuMiddleware'])->group(function () {
-    Route::get('/pengajuan-form', \App\Http\Livewire\PengajuanForm::class)->name('pengajuan.form');
-});
-

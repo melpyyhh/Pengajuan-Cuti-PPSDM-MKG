@@ -23,6 +23,16 @@ class Pegawai extends Model
         return $this->hasMany(Pengajuan::class, 'penyetuju_id');
     }
 
+    public function pengaduanSebagaiAdmin()
+    {
+        return $this->hasMany(Pengaduan::class, 'admin_id');
+    }
+
+    public function pengaduansAsPegawai()
+    {
+        return $this->hasMany(Pengaduan::class, 'pegawai_id');
+    }
+
     public function dataCuti()
     {
         return $this->hasMany(DataCuti::class);
