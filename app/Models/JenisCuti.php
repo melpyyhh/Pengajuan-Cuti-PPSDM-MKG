@@ -18,4 +18,9 @@ class JenisCuti extends Model
     {
         return $this->hasMany(DataCuti::class);
     }
+
+    public static function getAllCuti()
+    {
+        return self::all();
+    }
 }

@@ -11,7 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
+        Schema::table('pengajuans', function (Blueprint $table) {
+            $table->string('alamatCuti');
+            $table->integer('selama');
+            $table->string('nomorHp');
+        });
     }
 
     /**
@@ -19,6 +23,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::table('pengajuan', function (Blueprint $table) {
+            //
+        });
     }
 };

@@ -2,6 +2,10 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\JenisCuti;
+use App\Models\Pengajuan;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class PengajuanForm extends Component
@@ -10,11 +14,16 @@ class PengajuanForm extends Component
     public $success;
 
     // Properti form
-    public $jenisCuti;
     public $tanggalMulai;
-    public $tanggalSelesai;
-    public $keterangan;
+    public $tanggalAkhir;
     public $dokumen;
+    public $nomorHp;
+    public $alamatCuti;
+    public $alasan;
+    public $durasiCuti;
+    public $jenisCutiList; // Untuk data dropdown
+    public $selectedJenisCuti; // Untuk nilai yang dipilih pengguna
+
 
     public $pages = [
         1 => ['heading' => 'Jenis Cuti', 'subheading' => 'Pilih jenis cuti.'],
@@ -25,16 +34,23 @@ class PengajuanForm extends Component
 
     // inin validasinya baru ngetes doang bang, nanti tambahin lagi ajaa
     protected $validationRules = [
-        1 => ['jenisCuti' => 'required|in:tahunan,sakit,lainnya'],
+        1 => ['selectedJenisCuti' => 'required'],
         2 => [
-            'tanggalMulai' => 'required|date|before_or_equal:tanggalSelesai',
+            'tanggalMulai' => 'required|date',
         ],
-        3 => ['keterangan' => 'required|string|max:255'],
+        3 => ['alasan' => 'required|string|max:255'],
+        4 => ['alamatCuti' => 'required|string'],
+        5 => ['nomorHp' => 'required|string'],
+        6 => ['durasiCuti' => 'required|integer|min:1']
     ];
 
     public function goToNextPage()
     {
-        // $this->validate($this->validationRules[$this->currentPage]);
+        if ($this->currentPage === 1) {
+            $this->validate([
+                'selectedJenisCuti' => 'required',
+            ]);
+        }
         $this->currentPage++;
     }
 
@@ -48,11 +64,22 @@ class PengajuanForm extends Component
     {
         // Validasi akhir
         $this->validate(array_merge(...array_values($this->validationRules)));
-
+        $tanggalAkhir = $this->hitungTanggalAkhir($this->tanggalMulai, $this->durasiCuti);
+        Pengajuan::ajukanCuti([
+            'pengaju_id' => Auth::user()->pegawai->id,
+            'penyetuju_id' => 2,
+            'cuti_id' => $this->selectedJenisCuti,
+            'tanggal_awal' => $this->tanggalMulai,
+            'selama' => $this->durasiCuti,
+            'alasan' => $this->alasan,
+            'alamat' => $this->alamatCuti,
+            'nomorHp' => $this->nomorHp,
+            'tanggal_akhir' => $tanggalAkhir,
+        ]);
         // Logika pengajuan cuti
         // Contoh: Simpan ke database atau proses lainnya
-        $this->success = 'Pengajuan cuti berhasil dikirim!';
-        $this->reset(['jenisCuti', 'tanggalMulai', 'tanggalSelesai', 'keterangan', 'currentPage']);
+        $this->dispatch('alert', type: 'success', title: 'Pengajuan Berhasil', position: 'center', timer: 1500);
+        $this->reset(['selectedJenisCuti', 'tanggalMulai', 'alasan', 'durasiCuti', 'alamatCuti', 'nomorHp', 'currentPage']);
     }
 
     public function resetSuccess()
@@ -63,5 +90,25 @@ class PengajuanForm extends Component
     public function render()
     {
         return view('livewire.pengajuan-form');
+    }
+
+    public function mount()
+    {
+        $this->jenisCutiList = JenisCuti::getAllCuti();
+    }
+
+    private function hitungTanggalAkhir($tanggalMulai, $durasiCuti)
+    {
+        $tanggal = Carbon::parse($tanggalMulai);
+
+        // Tambahkan durasi hanya untuk hari kerja
+        for ($i = 0; $i < $durasiCuti; $i++) {
+            // Tambahkan satu hari ke tanggal, jika itu hari Sabtu atau Minggu, tambahkan lagi
+            do {
+                $tanggal->addDay();
+            } while ($tanggal->isWeekend()); // Mengecek apakah hari tersebut Sabtu atau Minggu
+        }
+
+        return $tanggal;
     }
 }

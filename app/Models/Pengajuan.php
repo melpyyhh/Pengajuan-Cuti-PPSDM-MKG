@@ -10,7 +10,7 @@ class Pengajuan extends Model
     /** @use HasFactory<\Database\Factories\PengajuanFactory> */
     use HasFactory;
 
-    protected $fillable = ['pengaju_id', 'penyetuju_id', 'cuti_id', 'alasan', 'tanggal_awal', 'tanggal_akhir'];
+    protected $fillable = ['pengaju_id', 'penyetuju_id', 'cuti_id', 'alasan', 'tanggal_awal', 'tanggal_akhir', 'alamatCuti', 'nomorHp', 'selama'];
 
     public function pengaju()
     {
@@ -24,7 +24,7 @@ class Pengajuan extends Model
 
     public function cuti()
     {
-        return $this->belongsTo(JenisCuti::class);
+        return $this->belongsTo(JenisCuti::class, 'cuti_id');
     }
 
     public function riwayatCuti()
@@ -35,5 +35,20 @@ class Pengajuan extends Model
     public function prosesCuti()
     {
         return $this->hasOne(ProsesCuti::class);
+    }
+
+    public static function ajukanCuti($data)
+    {
+        return self::create([
+            'pengaju_id' => $data['pengaju_id'],
+            'penyetuju_id' => $data['penyetuju_id'],
+            'cuti_id' => $data['cuti_id'],
+            'alasan' => $data['alasan'],
+            'tanggal_awal' => $data['tanggal_awal'],
+            'tanggal_akhir' => $data['tanggal_akhir'],
+            'nomorHp' => $data['nomorHp'],
+            'selama' => $data['selama'],
+            'alamatCuti' => $data['alamat'],
+        ]);
     }
 }
