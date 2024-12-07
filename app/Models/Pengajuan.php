@@ -39,7 +39,7 @@ class Pengajuan extends Model
 
     public static function ajukanCuti($data)
     {
-        return self::create([
+        $pengajuan = self::create([
             'pengaju_id' => $data['pengaju_id'],
             'penyetuju_id' => $data['penyetuju_id'],
             'cuti_id' => $data['cuti_id'],
@@ -50,5 +50,13 @@ class Pengajuan extends Model
             'selama' => $data['selama'],
             'alamatCuti' => $data['alamat'],
         ]);
+
+        ProsesCuti::create([
+            'pengajuan_id' => $pengajuan->id,
+            'cuti_id' => $pengajuan->cuti_id,
+            'pegawai_id' => $pengajuan->pengaju_id,
+            'status_ajuan' => 'diproses', // Status 'diproses' saat pengajuan dibuat
+        ]);
+        return $pengajuan;
     }
 }

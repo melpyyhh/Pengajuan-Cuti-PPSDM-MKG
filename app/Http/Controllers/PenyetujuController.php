@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ProsesCuti;
 use Illuminate\Http\Request;
 
 class PenyetujuController extends Controller
@@ -13,6 +14,7 @@ class PenyetujuController extends Controller
 
     public function daftarCuti()
     {
-        return view('penyetuju.riwayat');
+        $listPengajuan = ProsesCuti::paginate(4);
+        return view('penyetuju.daftar-cuti', compact('listPengajuan'));
     }
 }

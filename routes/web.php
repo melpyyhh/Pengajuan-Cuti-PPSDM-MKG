@@ -28,7 +28,7 @@ Route::middleware(['auth', 'pengajuMiddleware'])->group(function () {
 });
 
 Route::middleware(['auth', 'penyetujuMiddleware'])->group(function () {
-    Route::get('/penyetuju', [PenyetujuController::class, 'daftarCuti'])->name('penyetuju.riwayat');
+    Route::get('/penyetuju', [PenyetujuController::class, 'daftarCuti'])->name('daftar-cuti');
 });
 
 Route::middleware(['auth', 'adminMiddleware'])->group(function () {
