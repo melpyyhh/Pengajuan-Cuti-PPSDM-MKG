@@ -19,3 +19,8 @@ window.addEventListener("alert", (event) => {
         timer: data.timer,
     });
 });
+
+window.addEventListener("refreshPage", (event) => {
+    // Melakukan refresh setelah notifikasi
+    location.reload();
+});

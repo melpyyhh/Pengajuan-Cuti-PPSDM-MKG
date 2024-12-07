@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class DataCuti extends Model
 {
-    protected $table = 'data_cuti';
-    protected $fillable = ['pegawai_id', 'jenis_cuti_id', 'jumlah_cuti', 'sisa_cuti'];
+    protected $table = 'data_cutis';
+    protected $fillable = ['pegawais_id', 'jenis_cuti_id', 'jumlah_cuti', 'sisa_cuti'];
 
     public function pegawai()
     {
@@ -17,5 +17,15 @@ class DataCuti extends Model
     public function jenisCuti()
     {
         return $this->belongsTo(JenisCuti::class);
+    }
+
+    public static function tambahDataCuti($data)
+    {
+        return self::create([
+            'pegawais_id' => $data['pegawai_id'],
+            'jenis_cuti_id' => $data['jenis_cuti_id'],
+            'jumlah_cuti' => $data['jumlah_cuti'],
+            'sisa_cuti' => $data['sisa_cuti'],
+        ]);
     }
 }

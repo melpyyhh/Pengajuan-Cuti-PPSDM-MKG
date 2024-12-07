@@ -136,13 +136,3 @@
         </div>
     </div>
 </div>
-
-<script>
-    Livewire.on('showAlert', (message, icon) => {
-        Swal.fire({
-            title: message,
-            icon: icon,
-            confirmButtonText: 'OK',
-        });
-    });
-</script>

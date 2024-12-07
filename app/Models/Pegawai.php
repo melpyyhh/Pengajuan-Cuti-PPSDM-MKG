@@ -43,8 +43,14 @@ class Pegawai extends Model
         return $this->hasMany(RiwayatCuti::class, 'pegawai_id', 'id');
     }
 
-    public static function getAllPegawai()
+    public static function tambahPegawai($data)
     {
-        return self::all();
+        return self::create([
+            'nama' => $data['nama'],
+            'nip' => $data['nip'],
+            'jabatan' => $data['jabatan'],
+            'unitKerja' => $data['unitKerja'],
+            'masaKerja' => $data['masaKerja'],
+        ]);
     }
 }
