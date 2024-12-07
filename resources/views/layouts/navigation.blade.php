@@ -23,27 +23,28 @@
             <ul class="space-y-2">
                 <!-- Menu Pengaju -->
                 @if (Auth::user()->hasRole('pengaju'))
-                    <li>
-                        <div class="px-6 text-lg font-semibold text-secondary uppercase">
-                            Menu Pengaju
-                        </div>
-                        <!-- Garis Horizontal -->
-                        <div class="border-t border-secondary mx-5 my-2"></div> <!-- Garis Horizontal -->
-                    </li>
-                    <li>
-                        <a href="/pengaju"
-                            class="flex items-center px-4 py-1.5 mx-6 space-x-4 pl-8 text-secondary hover:bg-tertiary hover:text-white
+                <li>
+                    <div class="px-6 text-lg font-semibold text-secondary uppercase">
+                        Menu Pengaju
+                    </div>
+                    <!-- Garis Horizontal -->
+                    <div class="border-t border-secondary mx-5 my-2"></div> 
+                </li>
+                <li>
+                    <a href="/pengaju"
+                        class="flex items-center px-4 py-1.5 mx-6 space-x-4 pl-8 text-secondary hover:bg-tertiary hover:text-white transition-colors
                         {{ request()->is('pengaju') ? 'bg-tertiary text-white font-semibold rounded-lg' : 'rounded-lg hover:shadow' }}">
-                            <span>Riwayat Cuti</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#"
-                            class="flex items-center px-6 py-2 mx-6 space-x-4 pl-8 text-secondary hover:bg-tertiary hover:text-white rounded-lg">
-                            <span>Pengajuan</span>
-                        </a>
-                    </li>
-                    <!-- Pengaduan -->
+                        <span>Riwayat Cuti</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/pengajuan-form"
+                        class="flex items-center px-4 py-1.5 mx-6 space-x-4 pl-8 text-secondary hover:bg-tertiary hover:text-white transition-colors 
+                    {{ request()->is('pengajuan-form') ? 'bg-tertiary text-white font-semibold rounded-lg' : 'rounded-lg hover:shadow' }}">
+                        <span>Pengajuan</span>
+                    </a>
+                </li>
+                <!-- Pengaduan -->
                     <li>
                         <a href="#"
                             class="flex items-center px-6 py-2 mx-6 space-x-4 pl-8 text-secondary hover:bg-tertiary hover:text-white rounded-lg">
@@ -87,7 +88,7 @@
                         </div>
                     </li>
                     <li>
-                        <a href="#"
+                        <a href="/admin"
                             class="flex items-center px-6 py-2 space-x-4 text-secondary hover:bg-tertiary hover:text-white">
                             <span>Menu Daftar Pengaduan</span>
                         </a>
@@ -122,7 +123,6 @@
                     {{ __('Log Out') }}
                 </x-dropdown-link>
             </form>
-
         </nav>
     </div>
 </div>

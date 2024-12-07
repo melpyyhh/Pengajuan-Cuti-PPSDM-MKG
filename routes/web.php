@@ -6,6 +6,8 @@ use App\Http\Controllers\PenyetujuController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RiwayatCutiController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\PengajuanForm;
+use Livewire\Livewire;
 
 Route::get('/', function () {
     return view('welcome');
@@ -23,6 +25,7 @@ require __DIR__ . '/auth.php';
 
 Route::middleware(['auth', 'pengajuMiddleware'])->group(function () {
     Route::get('/pengaju', [PengajuController::class, 'riwayatCuti'])->name('pengaju.riwayat');
+    Route::get('/pengajuan-form', \App\Http\Livewire\PengajuanForm::class)->name('pengajuan.form');
 });
 
 Route::middleware(['auth', 'penyetujuMiddleware'])->group(function () {
