@@ -6,6 +6,8 @@ use App\Http\Controllers\PenyetujuController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RiwayatCutiController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\PengajuanForm;
+use Livewire\Livewire;
 
 Route::get('/', function () {
     return view('welcome');
@@ -31,5 +33,9 @@ Route::middleware(['auth', 'penyetujuMiddleware'])->group(function () {
 
 Route::middleware(['auth', 'adminMiddleware'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
+});
+
+Route::middleware(['auth', 'pengajuMiddleware'])->group(function () {
+    Route::get('/pengajuan-form', \App\Http\Livewire\PengajuanForm::class)->name('pengajuan.form');
 });
 

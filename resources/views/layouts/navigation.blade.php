@@ -28,18 +28,19 @@
                         Menu Pengaju
                     </div>
                     <!-- Garis Horizontal -->
-                    <div class="border-t border-secondary mx-5 my-2"></div> <!-- Garis Horizontal -->
+                    <div class="border-t border-secondary mx-5 my-2"></div> 
                 </li>
                 <li>
                     <a href="/pengaju"
-                        class="flex items-center px-4 py-1.5 mx-6 space-x-4 pl-8 text-secondary hover:bg-tertiary hover:text-white 
+                        class="flex items-center px-4 py-1.5 mx-6 space-x-4 pl-8 text-secondary hover:bg-tertiary hover:text-white transition-colors
                         {{ request()->is('pengaju') ? 'bg-tertiary text-white font-semibold rounded-lg' : 'rounded-lg hover:shadow' }}">
                         <span>Riwayat Cuti</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#"
-                        class="flex items-center px-6 py-2 mx-6 space-x-4 pl-8 text-secondary hover:bg-tertiary hover:text-white rounded-lg">
+                    <a href="/pengajuan-form"
+                        class="flex items-center px-4 py-1.5 mx-6 space-x-4 pl-8 text-secondary hover:bg-tertiary hover:text-white transition-colors 
+                    {{ request()->is('pengajuan-form') ? 'bg-tertiary text-white font-semibold rounded-lg' : 'rounded-lg hover:shadow' }}">
                         <span>Pengajuan</span>
                     </a>
                 </li>
@@ -54,13 +55,13 @@
                 </li>
                 <li>
                     <a href="#"
-                        class="flex items-center px-6 py-2 space-x-4 text-secondary hover:bg-tertiary hover:text-white">
+                        class="flex items-center px-6 py-2 space-x-4 text-secondary hover:bg-tertiary hover:text-white transition-colors">
                         <span>Daftar Ajuan Cuti Pegawai</span>
                     </a>
                 </li>
                 <li>
                     <a href="#"
-                        class="flex items-center px-6 py-2 space-x-4 text-secondary hover:bg-tertiary hover:text-white">
+                        class="flex items-center px-6 py-2 space-x-4 text-secondary hover:bg-tertiary hover:text-white transition-colors">
                         <span>Dashboard Cuti Pegawai</span>
                     </a>
                 </li>
@@ -69,7 +70,7 @@
                 <!-- Pengaduan -->
                 <li>
                     <a href="#"
-                        class="flex items-center px-6 py-2 mx-6 space-x-4 pl-8 text-secondary hover:bg-tertiary hover:text-white rounded-lg">
+                        class="flex items-center px-6 py-2 mx-6 space-x-4 pl-8 text-secondary hover:bg-tertiary hover:text-white rounded-lg transition-colors">
                         <span>Ajukan Pengaduan ke Admin</span>
                     </a>
                 </li>
