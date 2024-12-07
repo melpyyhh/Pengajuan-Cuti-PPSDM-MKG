@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pegawai;
 use App\Models\Pengaduan;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -23,5 +24,14 @@ class AdminController extends Controller
         $daftartungguCount = Pengaduan::countDaftarTunggu();
         $ditanggapiCount = Pengaduan::countDitanggapi();
         return view('admin.menu-pengaduan', compact('pengaduans', 'totalPengaduan', 'daftartungguCount', 'ditanggapiCount'));
+    }
+
+    public function daftarPegawai()
+    {
+        // Menampilkan 4 pegawai per halaman
+        $listPegawai = Pegawai::paginate(4);
+
+        // Mengirimkan data ke view
+        return view('admin.daftar-pegawai', compact('listPegawai'));
     }
 }

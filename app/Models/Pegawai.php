@@ -42,4 +42,9 @@ class Pegawai extends Model
     {
         return $this->hasMany(RiwayatCuti::class, 'pegawai_id', 'id');
     }
+
+    public static function getAllPegawai()
+    {
+        return self::all();
+    }
 }
