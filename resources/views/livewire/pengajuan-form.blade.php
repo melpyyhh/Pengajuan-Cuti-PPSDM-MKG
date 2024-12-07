@@ -118,7 +118,7 @@
         </div>
 
         <!-- Button -->
-        <div class="px-4 py-3 bg-[#F4F7FE] flex justify-center sm:px-6 pt-20 space-x-6">
+        <div class="px-4 py-2 bg-[#F4F7FE] flex justify-center sm:px-6 space-x-6">
             @if ($currentPage > 1)
                 <button type="button" wire:click="goToPreviousPage"
                     class="bg-tertiary text-white py-2 px-7 rounded-2xl">Sebelumnya</button>

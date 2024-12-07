@@ -1,25 +1,22 @@
-<div class="flex h-screen bg-gray-100">
+<div class="flex h-full bg-gray-100">
     <!-- Sidebar -->
-    <div class="w-64 bg-primary border-r border-gray-200">
+    <div class="w-64 bg-primary border-r border-gray-200 flex flex-col min-h-screen overflow-x-hidden">
         <div class="px-6 py-4">
             <!-- User Info -->
             <div class="flex items-center space-x-4">
-                <div class="w-12 h-12 bg-gray-300 rounded-full">
-
-                </div>
+                <div class="w-12 h-12 bg-gray-300 rounded-full"></div>
                 <div>
                     @if (auth()->user() && auth()->user()->pegawai)
                     <p class="text-sm font-semibold text-secondary">{{ auth()->user()->pegawai->nama }}</p>
                     @else
                     <p class="text-sm font-semibold text-secondary">Nama Pegawai Tidak Ditemukan</p>
                     @endif
-
                 </div>
             </div>
         </div>
 
         <!-- Navigation -->
-        <nav class="mt-6">
+        <nav class="mt-6 flex-1 overflow-y-auto overflow-x-hidden">
             <ul class="space-y-2">
                 <!-- Menu Pengaju -->
                 @if (Auth::user()->hasRole('pengaju'))
@@ -27,24 +24,22 @@
                     <div class="px-6 text-lg font-semibold text-secondary uppercase">
                         Menu Pengaju
                     </div>
-                    <!-- Garis Horizontal -->
                     <div class="border-t border-secondary mx-5 my-2"></div>
                 </li>
                 <li>
                     <a href="/pengaju"
-                        class="flex items-center px-4 py-1.5 mx-6 space-x-4 pl-8 text-secondary hover:bg-tertiary hover:text-white transition-colors
+                        class="flex items-center px-3 py-1 mx-6 space-x-4 pl-8 text-secondary hover:bg-tertiary hover:text-white transition-colors
                         {{ request()->is('pengaju') ? 'bg-tertiary text-white font-semibold rounded-lg' : 'rounded-lg hover:shadow' }}">
                         <span>Riwayat Cuti</span>
                     </a>
                 </li>
                 <li>
                     <a href="/pengajuan-form"
-                        class="flex items-center px-4 py-1.5 mx-6 space-x-4 pl-8 text-secondary hover:bg-tertiary hover:text-white transition-colors 
+                        class="flex items-center px-3 py-1 mx-6 space-x-4 pl-8 text-secondary hover:bg-tertiary hover:text-white transition-colors 
                     {{ request()->is('pengajuan-form') ? 'bg-tertiary text-white font-semibold rounded-lg' : 'rounded-lg hover:shadow' }}">
                         <span>Pengajuan</span>
                     </a>
                 </li>
-                <!-- Pengaduan -->
                 <li>
                     <a href="#"
                         class="flex items-center px-6 py-2 mx-6 space-x-4 pl-8 text-secondary hover:bg-tertiary hover:text-white rounded-lg">
@@ -72,7 +67,6 @@
                         <span>Dashboard Cuti Pegawai</span>
                     </a>
                 </li>
-                <!-- Pengaduan -->
                 <li>
                     <a href="#"
                         class="flex items-center px-6 py-2 mx-6 space-x-4 pl-8 text-secondary hover:bg-tertiary hover:text-white rounded-lg">
@@ -80,6 +74,7 @@
                     </a>
                 </li>
                 @endif
+
                 {{-- Menu Admin --}}
                 @if (Auth::user()->hasRole('admin'))
                 <li>
@@ -88,8 +83,8 @@
                     </div>
                 </li>
                 <a href="/admin"
-                    class="flex items-center px-4 py-1.5 mx-6 space-x-4 pl-8 text-secondary hover:bg-tertiary hover:text-white transition-colors 
-                    {{ request()->is('admin') ? 'bg-tertiary text-white font-semibold rounded-lg' : 'rounded-lg hover:shadow' }}">
+                    class="flex items-center px-3 py-1 mx-6 space-x-4 pl-8 text-secondary hover:bg-tertiary hover:text-white transition-colors 
+                        {{ request()->is('admin') ? 'bg-tertiary text-white font-semibold rounded-lg' : 'rounded-lg hover:shadow' }}">
                     <span>Menu Daftar Pengajuan</span>
                 </a>
                 <li>
@@ -98,27 +93,29 @@
                     </div>
                 </li>
                 <li>
-                    <a href="#"
-                        class="flex items-center px-6 py-2 space-x-4 text-secondary hover:bg-tertiary hover:text-white">
+                    <a href="/daftar-pegawai"
+                        class="flex items-center px-3 py-1 mx-6 space-x-4 pl-8 text-secondary hover:bg-tertiary hover:text-white transition-colors 
+                    {{ request()->is('daftar-pegawai') ? 'bg-tertiary text-white font-semibold rounded-lg' : 'rounded-lg hover:shadow' }}">
                         <span>Data Daftar Pegawai</span>
                     </a>
                 </li>
                 <li>
                     <a href="/input-pegawai"
-                        class="flex items-center px-6 py-2 space-x-4 text-secondary hover:bg-tertiary hover:text-white">
+                        class="flex items-center px-3 py-1 mx-6 space-x-4 pl-8 text-secondary hover:bg-tertiary hover:text-white transition-colors 
+                    {{ request()->is('input-pegawai') ? 'bg-tertiary text-white font-semibold rounded-lg' : 'rounded-lg hover:shadow' }}">
                         <span>Input Data Pegawai</span>
                     </a>
                 </li>
                 @endif
             </ul>
+
             <!-- Authentication -->
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
-
                 <x-dropdown-link :href="route('logout')"
                     onclick="event.preventDefault();
-            this.closest('form').submit();"
-                    class="text-secondary rounded-lg pl-3 hover:text-white hover:bg-tertiary">
+                     this.closest('form').submit();"
+                    class="flex items-center text-secondary px-3 py-1 mx-3 rounded-lg pl-3 mt-4 uppercase tracking-wider font-bold hover:bg-transparent">
                     {{ __('Log Out') }}
                 </x-dropdown-link>
             </form>
