@@ -4,9 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PengajuController;
 use App\Http\Controllers\PenyetujuController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\RiwayatCutiController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Livewire\PengajuanForm;
 use Livewire\Livewire;
 
 Route::get('/', function () {
@@ -34,4 +32,5 @@ Route::middleware(['auth', 'penyetujuMiddleware'])->group(function () {
 
 Route::middleware(['auth', 'adminMiddleware'])->group(function () {
     Route::get('/admin', [AdminController::class, 'menuPengaduan'])->name('admin.menu-pengaduan');
+    Route::get('/input-pegawai', \App\Http\Livewire\InputPegawaiForm::class)->name('admin.input-pegawai.form');
 });
