@@ -19,7 +19,7 @@ class ProsesCuti extends Model
 
     public function cuti()
     {
-        return $this->belongsTo(JenisCuti::class);
+        return $this->belongsTo(JenisCuti::class, 'cuti_id');
     }
 
     public function pegawai()
