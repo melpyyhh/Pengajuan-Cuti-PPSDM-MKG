@@ -7,7 +7,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 use Livewire\Livewire;
-=======
+
 use App\Http\Livewire\PengajuanForm;
 
 Route::get('/', function () {
