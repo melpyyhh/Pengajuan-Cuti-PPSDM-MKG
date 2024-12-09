@@ -26,7 +26,7 @@
                     </div>
 
                     <!-- Tombol Input Data Pegawai -->
-                    <a href="{{ route('input-pegawai') }}" class="bg-tertiary text-white px-6 py-2 rounded-md">
+                    <a href="{{ route('admin.input-pegawai') }}" class="bg-tertiary text-white px-6 py-2 rounded-md">
                         Input Data Pegawai
                     </a>
                 </div>
