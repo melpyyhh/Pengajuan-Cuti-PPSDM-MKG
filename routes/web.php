@@ -12,6 +12,7 @@ use Livewire\Livewire;
 use App\Http\Livewire\PengajuanForm;
 use App\Http\Livewire\InputPegawaiForm;
 use App\Http\Livewire\PengaduanForm;
+use App\Http\Livewire\PenyetujuDetail;
 
 Route::get('/', function () {
     return view('welcome');
@@ -36,6 +37,7 @@ Route::middleware(['auth', 'pengajuMiddleware'])->group(function () {
 // Penyetuju
 Route::middleware(['auth', 'penyetujuMiddleware'])->group(function () {
     Route::get('/penyetuju', [PenyetujuController::class, 'daftarCuti'])->name('penyetuju.daftar-cuti');
+    Route::get('/penyetuju/penyetuju-detail', PenyetujuDetail::class)->name('penyetuju.penyetuju-detail');
     Route::get('/penyetuju/pengaduan-form', PengaduanForm::class)->name('penyetuju.pengaduan.form');
 });
 

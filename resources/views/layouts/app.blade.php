@@ -11,6 +11,8 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <!-- Alpine -->
+    <script src="https://cdn.jsdelivr.net/npm/@alpinejs/focus@2.0.0/dist/cdn.min.js"></script>
     @livewireStyles
 </head>
 
@@ -25,6 +27,7 @@
             {{ $slot }}
         </div>
     </div>
+    @livewire('livewire-ui-modal')
     @livewireScripts
 </body>
 
