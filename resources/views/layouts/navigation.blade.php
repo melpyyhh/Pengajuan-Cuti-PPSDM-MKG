@@ -41,7 +41,7 @@
                     </a>
                 </li>
                 <a href="{{ route('pengaju.pengaduan.form') }}"
-                class="flex items-center px-3 py-1 mx-6 space-x-4 pl-8 text-secondary hover:bg-tertiary hover:text-white transition-colors 
+                    class="flex items-center px-3 py-1 mx-6 space-x-4 pl-8 text-secondary hover:bg-tertiary hover:text-white transition-colors 
                 {{ request()->is('pengaju/pengaduan-form') ? 'bg-tertiary text-white font-semibold rounded-lg' : 'rounded-lg hover:shadow' }}">
                     <span>Ajukan Pengaduan ke Admin</span>
                 </a>
@@ -57,10 +57,11 @@
                 <li>
                     <a href="/penyetuju"
                         class="flex items-center px-3 py-1 mx-6 space-x-4 pl-8 text-secondary hover:bg-tertiary hover:text-white transition-colors
-                        {{ request()->is('penyetuju') ? 'bg-tertiary text-white font-semibold rounded-lg' : 'rounded-lg hover:shadow' }}">
+                        {{ request()->is('penyetuju') || request()->is('penyetuju/penyetuju-detail') ? 'bg-tertiary text-white font-semibold rounded-lg' : 'rounded-lg hover:shadow' }}">
                         <span>Daftar Ajuan Cuti Pegawai</span>
                     </a>
                 </li>
+
                 <li>
                     <a href="#"
                         class="flex items-center px-6 py-2 mx-6 space-x-4 pl-8 text-secondary hover:bg-tertiary hover:text-white rounded-lg">
@@ -69,7 +70,7 @@
                 </li>
                 <li>
                     <a href="{{ route('penyetuju.pengaduan.form') }}"
-                    class="flex items-center px-3 py-1 mx-6 space-x-4 pl-8 text-secondary hover:bg-tertiary hover:text-white transition-colors 
+                        class="flex items-center px-3 py-1 mx-6 space-x-4 pl-8 text-secondary hover:bg-tertiary hover:text-white transition-colors 
                     {{ request()->is('penyetuju/pengaduan-form') ? 'bg-tertiary text-white font-semibold rounded-lg' : 'rounded-lg hover:shadow' }}">
                         <span>Ajukan Pengaduan ke Admin</span>
                     </a>
