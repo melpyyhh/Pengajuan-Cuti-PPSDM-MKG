@@ -13,6 +13,7 @@ use App\Http\Livewire\PengajuanForm;
 use App\Http\Livewire\InputPegawaiForm;
 use App\Http\Livewire\PengaduanForm;
 use App\Http\Livewire\PenyetujuDetail;
+use App\Http\Livewire\PengajuanDetail;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 Route::middleware('guest')->group(function () {
@@ -34,6 +35,7 @@ require __DIR__ . '/auth.php';
 Route::middleware(['auth', 'pengajuMiddleware'])->group(function () {
     Route::get('/pengaju', [PengajuController::class, 'riwayatCuti'])->name('pengaju.riwayat');
     Route::get('/pengajuan-form', PengajuanForm::class)->name('pengajuan.form');
+    Route::get('/pengaju/pengajuan-detail/{idPengajuan}', PengajuanDetail::class)->name('pengaju.pengajuan-detail');
     Route::get('/pengaju/pengaduan-form', PengaduanForm::class)->name('pengaju.pengaduan.form');
 });
 // Penyetuju
