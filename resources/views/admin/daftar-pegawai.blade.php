@@ -192,6 +192,5 @@
                 </button>
             </nav>
         </div>
-
     </div>
 </x-app-layout>

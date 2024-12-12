@@ -24,12 +24,11 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
+        //logika login
         $request->authenticate();
-
         $request->session()->regenerate();
 
         $role = Auth::user()->role;
-
         if ($role === 'admin') {
             return redirect(route('admin.menu-pengaduan'));
         } elseif ($role === 'pengaju') {
@@ -37,7 +36,6 @@ class AuthenticatedSessionController extends Controller
         } elseif ($role === 'penyetuju') {
             return redirect(route('penyetuju.daftar-cuti'));
         }
-        return redirect()->intended(route('dashboard', absolute: false));
     }
 
     /**
