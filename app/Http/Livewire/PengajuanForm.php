@@ -59,7 +59,7 @@ class PengajuanForm extends Component
             // Jika cekKetersediaanCuti mengembalikan false, hentikan proses
             if (!$this->cekKetersediaanCuti($data)) {
                 $this->dispatch(
-                    'alert',
+                    'custom-alert',
                     type: 'error',
                     title: 'Cuti Tahunan Habis',
                     position: 'center',
@@ -98,10 +98,10 @@ class PengajuanForm extends Component
                 'tanggal_akhir' => $tanggalAkhir,
             ]);
             // Contoh: Simpan ke database atau proses lainnya
-            $this->dispatch('alert', type: 'success', title: 'Pengajuan Berhasil', position: 'center', timer: 1500);
+            $this->dispatch('custom-alert', type: 'success', title: 'Pengajuan Berhasil', position: 'center', timer: 1500);
             $this->reset(['selectedJenisCuti', 'tanggalMulai', 'alasan', 'durasiCuti', 'alamatCuti', 'nomorHp', 'currentPage']);
         } catch (\Throwable $e) {
-            $this->dispatch('alert', type: 'error', title: 'Terjadi Kesalahan', position: 'center', timer: 1500);
+            $this->dispatch('custom-alert', type: 'error', title: 'Terjadi Kesalahan', position: 'center', timer: 1500);
         }
     }
 
