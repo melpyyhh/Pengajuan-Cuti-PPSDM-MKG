@@ -44,6 +44,7 @@ class PenyetujuDetail extends Component
             ]);
         }
     }
+
     // Metode untuk membuka modal
     public function openModal()
     {
