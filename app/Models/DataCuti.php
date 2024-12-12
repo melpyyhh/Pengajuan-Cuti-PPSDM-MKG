@@ -28,4 +28,9 @@ class DataCuti extends Model
             'sisa_cuti' => $data['sisa_cuti'],
         ]);
     }
+
+    public static function cekDataCuti($idPegawai)
+    {
+        return DataCuti::where('pegawais_id', $idPegawai)->exists();
+    }
 }

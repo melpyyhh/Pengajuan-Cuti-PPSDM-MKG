@@ -57,6 +57,16 @@ class Pengajuan extends Model
             'pegawai_id' => $pengajuan->pengaju_id,
             'status_ajuan' => 'diproses', // Status 'diproses' saat pengajuan dibuat
         ]);
+
+        RiwayatCuti::create([
+            'pengajuan_id' => $pengajuan->id,
+            'cuti_id' => $pengajuan->cuti_id,
+            'pegawai_id' => $pengajuan->pengaju_id,
+            'lama_cuti' => $pengajuan->selama,
+            'status_ajuan' => 'diproses',
+            'tanggal_awal' => $pengajuan->tanggal_awal,
+            'tanggal_akhir' => $pengajuan->tanggal_akhir
+        ]);
         return $pengajuan;
     }
 }

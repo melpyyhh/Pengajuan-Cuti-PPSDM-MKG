@@ -2,8 +2,10 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\DataCuti;
 use App\Models\JenisCuti;
 use App\Models\Pengajuan;
+use Dflydev\DotAccessData\Data;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -50,9 +52,26 @@ class PengajuanForm extends Component
             $this->validate([
                 'selectedJenisCuti' => 'required',
             ]);
+            $data = [
+                'cuti_id' => intval($this->selectedJenisCuti),
+                'pegawai_id' => Auth::user()->pegawai->id,
+            ];
+            // Jika cekKetersediaanCuti mengembalikan false, hentikan proses
+            if (!$this->cekKetersediaanCuti($data)) {
+                $this->dispatch(
+                    'alert',
+                    type: 'error',
+                    title: 'Cuti Tahunan Habis',
+                    position: 'center',
+                    timer: 3000,
+                );
+                return;
+            }
         }
+
         $this->currentPage++;
     }
+
 
     public function goToPreviousPage()
     {
@@ -62,24 +81,28 @@ class PengajuanForm extends Component
     // Atur lagi aja bang ini submit"annya, ini cuman sementara karena viewnya gabisa dinext kalo gaada submit
     public function submitForm()
     {
-        // Validasi akhir
-        $this->validate(array_merge(...array_values($this->validationRules)));
-        $tanggalAkhir = $this->hitungTanggalAkhir($this->tanggalMulai, $this->durasiCuti);
-        Pengajuan::ajukanCuti([
-            'pengaju_id' => Auth::user()->pegawai->id,
-            'penyetuju_id' => 2,
-            'cuti_id' => $this->selectedJenisCuti,
-            'tanggal_awal' => $this->tanggalMulai,
-            'selama' => $this->durasiCuti,
-            'alasan' => $this->alasan,
-            'alamat' => $this->alamatCuti,
-            'nomorHp' => $this->nomorHp,
-            'tanggal_akhir' => $tanggalAkhir,
-        ]);
-        // Logika pengajuan cuti
-        // Contoh: Simpan ke database atau proses lainnya
-        $this->dispatch('alert', type: 'success', title: 'Pengajuan Berhasil', position: 'center', timer: 1500);
-        $this->reset(['selectedJenisCuti', 'tanggalMulai', 'alasan', 'durasiCuti', 'alamatCuti', 'nomorHp', 'currentPage']);
+        try {
+            // Validasi akhir
+            $this->validate(array_merge(...array_values($this->validationRules)));
+            // Logika pengajuan cuti
+            $tanggalAkhir = $this->hitungTanggalAkhir($this->tanggalMulai, $this->durasiCuti);
+            Pengajuan::ajukanCuti([
+                'pengaju_id' => Auth::user()->pegawai->id,
+                'penyetuju_id' => 2,
+                'cuti_id' => $this->selectedJenisCuti,
+                'tanggal_awal' => $this->tanggalMulai,
+                'selama' => $this->durasiCuti,
+                'alasan' => $this->alasan,
+                'alamat' => $this->alamatCuti,
+                'nomorHp' => $this->nomorHp,
+                'tanggal_akhir' => $tanggalAkhir,
+            ]);
+            // Contoh: Simpan ke database atau proses lainnya
+            $this->dispatch('alert', type: 'success', title: 'Pengajuan Berhasil', position: 'center', timer: 1500);
+            $this->reset(['selectedJenisCuti', 'tanggalMulai', 'alasan', 'durasiCuti', 'alamatCuti', 'nomorHp', 'currentPage']);
+        } catch (\Throwable $e) {
+            $this->dispatch('alert', type: 'error', title: 'Terjadi Kesalahan', position: 'center', timer: 1500);
+        }
     }
 
     public function resetSuccess()
@@ -110,5 +133,13 @@ class PengajuanForm extends Component
         }
 
         return $tanggal;
+    }
+
+    public function cekKetersediaanCuti($data)
+    {
+        if ($data["cuti_id"] === 1 && !DataCuti::cekDataCuti($data["pegawai_id"])) {
+            return false; // Tidak tersedia
+        }
+        return true; // Tersedia
     }
 }

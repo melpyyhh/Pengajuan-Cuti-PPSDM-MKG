@@ -9,7 +9,7 @@ class PenyetujuController extends Controller
 {
     public function index()
     {
-        return view('penyetuju.dashboard');
+        return view('penyetuju.daftar-cuti');
     }
 
     public function daftarCuti()

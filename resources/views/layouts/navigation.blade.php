@@ -40,12 +40,11 @@
                         <span>Pengajuan</span>
                     </a>
                 </li>
-                <li>
-                    <a href="#"
-                        class="flex items-center px-6 py-2 mx-6 space-x-4 pl-8 text-secondary hover:bg-tertiary hover:text-white rounded-lg">
-                        <span>Ajukan Pengaduan ke Admin</span>
-                    </a>
-                </li>
+                <a href="{{ route('pengaju.pengaduan.form') }}"
+                    class="flex items-center px-3 py-1 mx-6 space-x-4 pl-8 text-secondary hover:bg-tertiary hover:text-white transition-colors 
+                {{ request()->is('pengaju/pengaduan-form') ? 'bg-tertiary text-white font-semibold rounded-lg' : 'rounded-lg hover:shadow' }}">
+                    <span>Ajukan Pengaduan ke Admin</span>
+                </a>
                 @endif
 
                 <!-- Menu Penyetuju -->
@@ -56,20 +55,23 @@
                     </div>
                 </li>
                 <li>
-                    <a href="#"
-                        class="flex items-center px-6 py-2 space-x-4 text-secondary hover:bg-tertiary hover:text-white">
+                    <a href="/penyetuju"
+                        class="flex items-center px-3 py-1 mx-6 space-x-4 pl-8 text-secondary hover:bg-tertiary hover:text-white transition-colors
+                        {{ request()->is('penyetuju') || request()->is('penyetuju/penyetuju-detail') ? 'bg-tertiary text-white font-semibold rounded-lg' : 'rounded-lg hover:shadow' }}">
                         <span>Daftar Ajuan Cuti Pegawai</span>
                     </a>
                 </li>
+
                 <li>
                     <a href="#"
-                        class="flex items-center px-6 py-2 space-x-4 text-secondary hover:bg-tertiary hover:text-white">
+                        class="flex items-center px-6 py-2 mx-6 space-x-4 pl-8 text-secondary hover:bg-tertiary hover:text-white rounded-lg">
                         <span>Dashboard Cuti Pegawai</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#"
-                        class="flex items-center px-6 py-2 mx-6 space-x-4 pl-8 text-secondary hover:bg-tertiary hover:text-white rounded-lg">
+                    <a href="{{ route('penyetuju.pengaduan.form') }}"
+                        class="flex items-center px-3 py-1 mx-6 space-x-4 pl-8 text-secondary hover:bg-tertiary hover:text-white transition-colors 
+                    {{ request()->is('penyetuju/pengaduan-form') ? 'bg-tertiary text-white font-semibold rounded-lg' : 'rounded-lg hover:shadow' }}">
                         <span>Ajukan Pengaduan ke Admin</span>
                     </a>
                 </li>
@@ -114,8 +116,8 @@
                 @csrf
                 <x-dropdown-link :href="route('logout')"
                     onclick="event.preventDefault();
-                     this.closest('form').submit();"
-                    class="flex items-center text-secondary px-3 py-1 mx-3 rounded-lg pl-3 mt-4 uppercase tracking-wider font-bold hover:bg-transparent">
+                 this.closest('form').submit();"
+                    class="flex items-center text-secondary pl-3 mt-4 uppercase hover:bg-tertiary hover:text-white transition-colors tracking-wider font-bold">
                     {{ __('Log Out') }}
                 </x-dropdown-link>
             </form>

@@ -42,12 +42,12 @@
                             <tbody>
                                 @foreach ($riwayatCuti as $cuti)
                                     <tr class="odd:bg-white even:bg-gray-100 hover:bg-gray-100">
-                                        <td class="px-16 py-10 text-xs text-gray-800">{{ $loop->iteration }}</td>
-                                        <td class="px-16 py-10 text-xs text-gray-800">{{ $cuti->tanggal_awal }}</td>
-                                        <td class="px-16 py-10 text-xs text-gray-800">
+                                        <td class="px-16 py-10 text-s text-gray-800">{{ $loop->iteration }}</td>
+                                        <td class="px-16 py-10 text-s text-gray-800">{{ $cuti->tanggal_awal }}</td>
+                                        <td class="px-16 py-10 text-s text-gray-800">
                                             {{ $cuti->pengajuan->cuti->jenis_cuti ?? '-' }}</td>
-                                        <td class="px-16 py-10 text-xs text-gray-800">{{ $cuti->lama_cuti }} Hari</td>
-                                        <td class="px-16 py-10 text-xs text-gray-800">
+                                        <td class="px-16 py-10 text-s text-gray-800">{{ $cuti->lama_cuti }} Hari</td>
+                                        <td class="px-16 py-10 text-s text-gray-800">
                                             <span
                                                 class="
                                                     @if (strtolower($cuti->status_ajuan) == 'diproses') p-1.5 bg-yellow-200 text-yellow-700 uppercase font-bold text-wider rounded-xl
@@ -61,7 +61,7 @@
                                                 {{ ucfirst($cuti->status_ajuan) }}
                                             </span>
                                         </td>
-                                        <td class="px-16 py-10 text-left text-xs">
+                                        <td class="px-16 py-10 text-left text-s">
                                             <button type="button"
                                                 class="text-xs font-semibold text-blue-600 hover:text-blue-800 focus:outline-none">Detail</button>
                                         </td>
