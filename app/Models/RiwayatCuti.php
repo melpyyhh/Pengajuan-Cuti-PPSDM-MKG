@@ -10,6 +10,7 @@ class RiwayatCuti extends Model
     /** @use HasFactory<\Database\Factories\RiwayatCutiFactory> */
     use HasFactory;
     protected $table = 'riwayat_cutis';
+    protected $guarded = [];
     protected $fillable = ['pengajuan_id', 'cuti_id', 'pegawai_id', 'lama_cuti', 'status_ajuan', 'tanggal_awal', 'tanggal_akhir'];
 
     public function pengajuan()
@@ -30,5 +31,10 @@ class RiwayatCuti extends Model
     public static function getByPegawaiId($pegawaiId)
     {
         return self::where('pegawai_id', $pegawaiId)->get();
+    }
+
+    public static function getByPengajuanId($pengajuanId)
+    {
+        return self::where('pengajuan_id', $pengajuanId)->get();
     }
 }

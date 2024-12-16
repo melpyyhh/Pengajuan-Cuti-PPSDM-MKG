@@ -91,4 +91,23 @@ class Pengajuan extends Model
             }
         }
     }
+
+    public static function deletePengajuan($idRiwayat)
+    {
+        try {
+            $riwayatCuti = RiwayatCuti::find($idRiwayat);
+            if ($riwayatCuti && $riwayatCuti->status_ajuan === "diproses") {
+                $pengajuan = self::find($riwayatCuti->pengajuan_id);
+
+                if ($pengajuan) {
+                    $pengajuan->delete();
+                    return true; // Penghapusan berhasil
+                }
+            }
+            return false; // Data tidak valid
+        } catch (\Throwable $e) {
+            // Return exception jika terjadi error
+            throw $e;
+        }
+    }
 }
