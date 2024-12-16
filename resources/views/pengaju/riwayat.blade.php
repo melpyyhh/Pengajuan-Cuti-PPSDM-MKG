@@ -81,7 +81,7 @@
                 </div>
             </div>
         </div>
-        <div class="grid grid-cols-1 gap-4 md:hidden">
+        <div class="grid flex-1 grid-cols-1 gap-4 md:hidden">
             @foreach ($riwayatCuti as $cuti)
                 <div class="p-4 space-y-3 bg-white rounded-lg shadow">
                     <!-- Nomor
