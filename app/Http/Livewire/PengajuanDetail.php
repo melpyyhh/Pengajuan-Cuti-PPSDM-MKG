@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Pengajuan;
+use App\Models\RiwayatCuti;
 
 class PengajuanDetail extends Component
 {
@@ -16,6 +17,7 @@ class PengajuanDetail extends Component
     public $alamatCuti;
     public $dokumen;
     public $idPengajuan;
+    public $idRiwayat;
 
     public $pages = [
         1 => ['heading' => 'Detail Cuti', 'subheading' => 'Berikut adalah detail cuti yang telah anda ajukan.'],
@@ -26,7 +28,8 @@ class PengajuanDetail extends Component
         $this->idPengajuan = $idPengajuan;
 
         $pengajuan = Pengajuan::find($idPengajuan);
-
+        $riwayat = RiwayatCuti::getByPengajuanId($idPengajuan)->first();
+        $this->idRiwayat = $riwayat->id;
         if ($pengajuan) {
             $this->jenisCuti = $pengajuan->cuti->jenis_cuti;
             $this->alasanCuti = $pengajuan->alasan;
@@ -47,5 +50,43 @@ class PengajuanDetail extends Component
     public function render()
     {
         return view('livewire.pengajuan-detail');
+    }
+
+    public function buttonDelete()
+    {
+        try {
+            // Panggil method deletePengajuan di model
+            $isDeleted = Pengajuan::deletePengajuan($this->idRiwayat);
+            if ($isDeleted) {
+                // Notifikasi sukses
+                $this->dispatch(
+                    'custom-alert',
+                    type: 'success',
+                    title: 'Pengajuan Berhasil dihapus',
+                    position: 'center',
+                    timer: 3000
+                );
+                // Redirect setelah berhasil
+                return redirect()->route('pengaju.riwayat');
+            } else {
+                // Notifikasi gagal jika data tidak valid
+                $this->dispatch(
+                    'custom-alert',
+                    type: 'error',
+                    title: 'Pengajuan yang sudah disetujui atau ditolak tidak bisa dihapus',
+                    position: 'center',
+                    timer: 3000
+                );
+            }
+        } catch (\Throwable $e) {
+            // Tangani error yang terjadi
+            $this->dispatch(
+                'custom-alert',
+                type: 'error',
+                title: 'Terjadi kesalahan: ' . $e->getMessage(),
+                position: 'center',
+                timer: 3000
+            );
+        }
     }
 }

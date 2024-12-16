@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Pengajuan;
+use App\Models\RiwayatCuti;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Log;
@@ -20,6 +21,7 @@ class PenyetujuDetail extends Component
     public $isOpen = false; // Status modal
     public $modalAlasan = ''; // Alasan untuk penolakan
     public $idPengajuan;
+    public $statusAjuan;
 
     public $pages = [
         1 => ['heading' => 'Detail Pengajuan', 'subheading' => 'Berikut adalah detail pengajuan cuti pegawai'],
@@ -28,9 +30,9 @@ class PenyetujuDetail extends Component
     public function mount($idPengajuan)
     {
         $this->idPengajuan = $idPengajuan;
-
         $pengajuan = Pengajuan::find($idPengajuan);
-
+        $riwayat = RiwayatCuti::getByPengajuanId($idPengajuan)->first();
+        $this->statusAjuan = $riwayat->status_ajuan;
         if ($pengajuan) {
             $this->tanggalMulai = $pengajuan->tanggal_awal ? \Carbon\Carbon::parse($pengajuan->tanggal_awal)->format('Y-m-d') : '';
             $this->tanggalSelesai = $pengajuan->tanggal_akhir ? \Carbon\Carbon::parse($pengajuan->tanggal_akhir)->format('Y-m-d') : '';
