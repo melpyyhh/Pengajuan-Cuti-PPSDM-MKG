@@ -30,7 +30,7 @@ class RiwayatCuti extends Model
 
     public static function getByPegawaiId($pegawaiId)
     {
-        return self::where('pegawai_id', $pegawaiId)->get();
+        return self::where('pegawai_id', $pegawaiId);
     }
 
     public static function getByPengajuanId($pengajuanId)

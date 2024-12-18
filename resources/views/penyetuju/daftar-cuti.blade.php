@@ -25,8 +25,6 @@
                         </button>
                     </div>
                 </div>
-
-
                 <div class="overflow-x-hidden border border-gray-200">
                     <div class="overflow-hidden shadow rounded-xl">
                         <table class="w-full mx-auto divide-y divide-gray-200 table-auto ">
@@ -55,7 +53,9 @@
                             <tbody>
                                 @foreach ($listPengajuan as $data)
                                     <tr class="odd:bg-white even:bg-gray-100 hover:bg-gray-100">
-                                        <td class="px-16 py-10 text-gray-800 text-s">{{ $loop->iteration }}</td>
+                                        <td class="px-16 py-10 text-gray-800 text-s">
+                                            {{ ($listPengajuan->currentPage() - 1) * $listPengajuan->perPage() + $loop->iteration }}
+                                        </td>
                                         <td class="px-16 py-10 text-gray-800 text-s">
                                             {{ $data->pegawai->nama }}
                                         </td>
@@ -97,10 +97,10 @@
             <div class="grid flex-1 grid-cols-1 gap-4 md:hidden">
                 @foreach ($listPengajuan as $data)
                     <div class="p-4 space-y-3 bg-white rounded-lg shadow">
-                        <!-- Nomor
-                            <div class="text-sm font-semibold text-gray-800">
-                                {{ $loop->iteration }}
-                            </div> -->
+                        <!-- Nomor -->
+                        <div class="text-sm font-semibold text-gray-800">
+                            {{ ($listPengajuan->currentPage() - 1) * $listPengajuan->perPage() + $loop->iteration }}
+                        </div>
                         <!-- Nama Pegawai -->
                         <div class="text-sm text-gray-600">
                             Nama Pegawai: {{ $data->pegawai->nama }}
@@ -137,125 +137,48 @@
                 @endforeach
             </div>
         </div>
-        {{-- <nav class="flex items-center gap-x-1" aria-label="Pagination">
-                            <!-- Previous Button -->
-                            <button type="button"
-                                class="min-h-[38px] min-w-[38px] py-2 px-2.5 inline-flex justify-center items-center gap-x-1.5 text-sm rounded-lg text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:bg-primary dark:hover:bg-tertiary dark:focus:bg-tertiary"
-                                @if ($listPengajuan->onFirstPage()) disabled @endif aria-label="Previous"
-                                onclick="window.location='{{ $listPengajuan->previousPageUrl() }}'">
-                                <svg aria-hidden="true" class="hidden shrink-0 size-3.5"
-                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                    <path d="m15 18-6-6 6-6"></path>
-                                </svg>
-                                <span>Previous</span>
-                            </button>
+        <nav class="flex items-center py-3 gap-x-1" aria-label="Pagination">
+            <!-- Previous Button -->
+            <button type="button"
+                class="min-h-[38px] min-w-[38px] py-2 px-2.5 inline-flex justify-center items-center gap-x-1.5 text-sm rounded-lg text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:bg-primary dark:hover:bg-tertiary dark:focus:bg-tertiary"
+                @if ($listPengajuan->onFirstPage()) disabled @endif aria-label="Previous"
+                onclick="window.location='{{ $listPengajuan->previousPageUrl() }}'">
+                <svg aria-hidden="true" class="hidden shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg"
+                    width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m15 18-6-6 6-6"></path>
+                </svg>
+                <span>Previous</span>
+            </button>
 
-                            <div class="flex items-center gap-x-1">
-                                <!-- Page Number Buttons -->
-                                @foreach ($listPengajuan->links()->elements as $page)
-                                    @if (is_array($page))
-                                        @foreach ($page as $num => $url)
-                                            <button type="button"
-                                                class="min-h-[38px] min-w-[38px] flex justify-center items-center text-gray-800 hover:bg-blue-500 hover:text-white py-2 px-3 text-sm rounded-lg focus:outline-none focus:bg-blue-600 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:bg-primary dark:hover:bg-tertiary dark:focus:bg-tertiary"
-                                                @if ($num == $listPengajuan->currentPage()) style="background-color: #E99A20; color: white;" @endif
-                                                onclick="window.location='{{ $url }}'">
-                                                {{ $num }}
-                                            </button>
-                                        @endforeach
-                                    @endif
-                                @endforeach
-                            </div>
-
-                            <!-- Next Button -->
-                            <button type="button"
-                                class="min-h-[38px] min-w-[38px] py-2 px-2.5 inline-flex justify-center items-center gap-x-1.5 text-sm rounded-lg text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:bg-primary dark:hover:bg-tertiary dark:focus:bg-tertiary"
-                                @if ($listPengajuan->hasMorePages()) onclick="window.location='{{ $listPengajuan->nextPageUrl() }}'" @else disabled @endif
-                                aria-label="Next">
-                                <span>Next</span>
-                                <svg aria-hidden="true" class="hidden shrink-0 size-3.5"
-                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                    <path d="m9 18 6-6-6-6"></path>
-                                </svg>
-                            </button>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
-        {{-- <div class="grid grid-cols-1 gap-4 md:hidden">
-            @foreach ($listPengajuan as $data)
-            <div class="p-4 space-y-3 bg-white rounded-lg shadow">
-                <!-- Nama -->
-                <div class="text-sm text-gray-600">
-                    Nama : {{ $data->nama }}
-                </div>
-                <!-- NIP -->
-                <div class="text-sm text-gray-600">
-                    NIP : {{ $data->nip }}
-                </div>
-                <!-- Jabatan -->
-                <div class="text-sm text-gray-600">
-                    Jabatan : {{ $data->jabatan }}
-                </div>
-                <!-- Unit Kerja -->
-                <div class="text-sm text-gray-600">
-                    Unit Kerja : {{ $data->unitKerja }}
-                </div>
-                <!-- Detail -->
-                <div>
-                    <button type="button"
-                        class="text-xs font-semibold text-blue-600 hover:text-blue-800 focus:outline-none">Detail</button>
-                </div>
-            </div>
-            @endforeach
-            <nav class="flex items-center gap-x-1" aria-label="Pagination">
-                <!-- Previous Button -->
-                <button type="button"
-                    class="min-h-[38px] min-w-[38px] py-2 px-2.5 inline-flex justify-center items-center gap-x-1.5 text-sm rounded-lg text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:bg-primary dark:hover:bg-tertiary dark:focus:bg-tertiary"
-                    @if ($listPengajuan->onFirstPage()) disabled @endif aria-label="Previous"
-                    onclick="window.location='{{ $listPengajuan->previousPageUrl() }}'">
-                    <svg aria-hidden="true" class="hidden shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg"
-                        width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="m15 18-6-6 6-6"></path>
-                    </svg>
-                    <span>Previous</span>
-                </button>
-
-                <div class="flex items-center gap-x-1">
-                    <!-- Page Number Buttons -->
-                    @foreach ($listPengajuan->links()->elements as $page)
+            <div class="flex items-center gap-x-1">
+                <!-- Page Number Buttons -->
+                @foreach ($listPengajuan->links()->elements as $page)
                     @if (is_array($page))
-                    @foreach ($page as $num => $url)
-                    <button type="button"
-                        class="min-h-[38px] min-w-[38px] flex justify-center items-center text-gray-800 hover:bg-blue-500 hover:text-white py-2 px-3 text-sm rounded-lg focus:outline-none focus:bg-blue-600 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:bg-primary dark:hover:bg-tertiary dark:focus:bg-tertiary"
-                        @if ($num == $listPengajuan->currentPage()) style="background-color: #E99A20; color: white;" @endif
-                        onclick="window.location='{{ $url }}'">
-                        {{ $num }}
-                    </button>
-                    @endforeach
+                        @foreach ($page as $num => $url)
+                            <button type="button"
+                                class="min-h-[38px] min-w-[38px] flex justify-center items-center text-gray-800 hover:bg-blue-500 hover:text-white py-2 px-3 text-sm rounded-lg focus:outline-none focus:bg-blue-600 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:bg-primary dark:hover:bg-tertiary dark:focus:bg-tertiary"
+                                @if ($num == $listPengajuan->currentPage()) style="background-color: #E99A20; color: white;" @endif
+                                onclick="window.location='{{ $url }}'">
+                                {{ $num }}
+                            </button>
+                        @endforeach
                     @endif
-                    @endforeach
-                </div>
+                @endforeach
+            </div>
 
-                <!-- Next Button -->
-                <button type="button"
-                    class="min-h-[38px] min-w-[38px] py-2 px-2.5 inline-flex justify-center items-center gap-x-1.5 text-sm rounded-lg text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:bg-primary dark:hover:bg-tertiary dark:focus:bg-tertiary"
-                    @if ($listPengajuan->hasMorePages()) onclick="window.location='{{ $listPengajuan->nextPageUrl() }}'" @else disabled @endif
-                    aria-label="Next">
-                    <span>Next</span>
-                    <svg aria-hidden="true" class="hidden shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg"
-                        width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="m9 18 6-6-6-6"></path>
-                    </svg>
-                </button>
-            </nav>
-        </div>
-
-    </div> --}}
+            <!-- Next Button -->
+            <button type="button"
+                class="min-h-[38px] min-w-[38px] py-2 px-2.5 inline-flex justify-center items-center gap-x-1.5 text-sm rounded-lg text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:bg-primary dark:hover:bg-tertiary dark:focus:bg-tertiary"
+                @if ($listPengajuan->hasMorePages()) onclick="window.location='{{ $listPengajuan->nextPageUrl() }}'" @else disabled @endif
+                aria-label="Next">
+                <span>Next</span>
+                <svg aria-hidden="true" class="hidden shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg"
+                    width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m9 18 6-6-6-6"></path>
+                </svg>
+            </button>
+        </nav>
+    </div>
 </x-app-layout>
