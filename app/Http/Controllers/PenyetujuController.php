@@ -14,7 +14,7 @@ class PenyetujuController extends Controller
 
     public function daftarCuti()
     {
-        $listPengajuan = ProsesCuti::paginate(4);
+        $listPengajuan = ProsesCuti::get();
         return view('penyetuju.daftar-cuti', compact('listPengajuan'));
     }
 }

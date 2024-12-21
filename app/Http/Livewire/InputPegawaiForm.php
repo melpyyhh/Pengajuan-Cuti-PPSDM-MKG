@@ -85,7 +85,7 @@ class InputPegawaiForm extends Component
             }
 
             // Notifikasi sukses
-            $this->dispatch('alert', type: 'success', title: 'Tambah Pegawai Berhasil', position: 'center', timer: 1500);
+            $this->dispatch('custom-alert', type: 'success', title: 'Tambah Pegawai Berhasil', position: 'center', timer: 1500);
             // Reset form setelah sukses submit
             $this->reset([
                 'namaPegawai',
@@ -101,7 +101,7 @@ class InputPegawaiForm extends Component
             ]);
             $this->dispatch('refreshPage');
         } catch (\Exception $e) {
-            $this->dispatch('alert', type: 'error', title: 'Terjadi Kesalahan', position: 'center', timer: 1500);
+            $this->dispatch('custom-alert', type: 'error', title: 'Terjadi Kesalahan', position: 'center', timer: 1500);
         }
     }
 

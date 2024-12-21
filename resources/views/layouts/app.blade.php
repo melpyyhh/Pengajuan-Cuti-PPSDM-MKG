@@ -17,15 +17,15 @@
 </head>
 
 <body class="font-sans antialiased">
-    <div class="min-h-screen  bg-secondary flex">
-        <div class="flex-none basis-64">
+    <div class="flex min-h-screen bg-secondary">
+        <div class="flex-1 py-4 basis-64">
             @include('layouts.navigation')
         </div>
 
         <!-- Page Content -->
-        <div class="flex-1 p-6 max-w-screen-xl">
+        {{-- <div class="flex-1 max-w-screen-xl px-6 py-12">
             {{ $slot }}
-        </div>
+        </div> --}}
     </div>
     @livewire('livewire-ui-modal')
     @livewireScripts

@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Log;
 
 class Pengajuan extends Model
 {
@@ -68,5 +70,44 @@ class Pengajuan extends Model
             'tanggal_akhir' => $pengajuan->tanggal_akhir
         ]);
         return $pengajuan;
+    }
+
+    public static function updateStatus($data)
+    {
+        try {
+            $pengajuan = Pengajuan::find($data['id']);
+            if (!$pengajuan) {
+                throw new \Exception('Pengajuan tidak ditemukan.');
+            }
+            $updatedProses = ProsesCuti::where('pengajuan_id', $pengajuan->id)
+                ->update(['status_ajuan' => $data['status']]);
+            Log::info('ProsesCuti updated rows:', ['updated' => $updatedProses]);
+
+            $updatedRiwayat = RiwayatCuti::where('pengajuan_id', $pengajuan->id)
+                ->update(['status_ajuan' => $data['status']]);
+            Log::info('RiwayatCuti updated rows:', ['updated' => $updatedRiwayat]);
+        } catch (\Throwable $e) { {
+                throw $e;
+            }
+        }
+    }
+
+    public static function deletePengajuan($idRiwayat)
+    {
+        try {
+            $riwayatCuti = RiwayatCuti::find($idRiwayat);
+            if ($riwayatCuti && $riwayatCuti->status_ajuan === "diproses") {
+                $pengajuan = self::find($riwayatCuti->pengajuan_id);
+
+                if ($pengajuan) {
+                    $pengajuan->delete();
+                    return true; // Penghapusan berhasil
+                }
+            }
+            return false; // Data tidak valid
+        } catch (\Throwable $e) {
+            // Return exception jika terjadi error
+            throw $e;
+        }
     }
 }
