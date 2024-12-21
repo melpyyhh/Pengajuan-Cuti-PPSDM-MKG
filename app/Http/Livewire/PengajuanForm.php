@@ -24,19 +24,19 @@ class PengajuanForm extends Component
     public $alasan;
     public $durasiCuti;
     public $jenisCutiList; // Untuk data dropdown
-    public $selectedJenisCuti; // Untuk nilai yang dipilih pengguna
+    public $jenisCutiTerpilih; // Untuk nilai yang dipilih pengguna
 
 
     public $pages = [
-        1 => ['heading' => 'Jenis Cuti', 'subheading' => 'Pilih jenis cuti.'],
-        2 => ['heading' => 'Tanggal Cuti', 'subheading' => 'Masukkan tanggal mulai dan selesai cuti.'],
-        3 => ['heading' => 'Unggah Dokumen', 'subheading' => 'Unggah informasi tambahan melalui dokumen (jika ada).'],
-        4 => ['heading' => 'Crosscheck', 'subheading' => 'Periksa kembali form pengajuan cuti anda.'],
+        1 => ['heading' => 'Jenis Cuti', 'subheading' => 'Pilih jenis cuti anda'],
+        2 => ['heading' => 'Tanggal Cuti', 'subheading' => 'Masukkan tanggal mulai dan selesai cuti'],
+        3 => ['heading' => 'Unggah Dokumen', 'subheading' => 'Unggah informasi tambahan melalui dokumen (jika ada)'],
+        4 => ['heading' => 'Crosscheck', 'subheading' => 'Periksa kembali form pengajuan cuti anda'],
     ];
 
     // inin validasinya baru ngetes doang bang, nanti tambahin lagi ajaa
     protected $validationRules = [
-        1 => ['selectedJenisCuti' => 'required'],
+        1 => ['jenisCutiTerpilih' => 'required'],
         2 => [
             'tanggalMulai' => 'required|date',
         ],
@@ -50,10 +50,10 @@ class PengajuanForm extends Component
     {
         if ($this->currentPage === 1) {
             $this->validate([
-                'selectedJenisCuti' => 'required',
+                'jenisCutiTerpilih' => 'required',
             ]);
             $data = [
-                'cuti_id' => intval($this->selectedJenisCuti),
+                'cuti_id' => intval($this->jenisCutiTerpilih),
                 'pegawai_id' => Auth::user()->pegawai->id,
             ];
             // Jika cekKetersediaanCuti mengembalikan false, hentikan proses
@@ -89,7 +89,7 @@ class PengajuanForm extends Component
             Pengajuan::ajukanCuti([
                 'pengaju_id' => Auth::user()->pegawai->id,
                 'penyetuju_id' => 2,
-                'cuti_id' => $this->selectedJenisCuti,
+                'cuti_id' => $this->jenisCutiTerpilih,
                 'tanggal_awal' => $this->tanggalMulai,
                 'selama' => $this->durasiCuti,
                 'alasan' => $this->alasan,
@@ -99,7 +99,7 @@ class PengajuanForm extends Component
             ]);
             // Contoh: Simpan ke database atau proses lainnya
             $this->dispatch('custom-alert', type: 'success', title: 'Pengajuan Berhasil', position: 'center', timer: 1500);
-            $this->reset(['selectedJenisCuti', 'tanggalMulai', 'alasan', 'durasiCuti', 'alamatCuti', 'nomorHp', 'currentPage']);
+            $this->reset(['jenisCutiTerpilih', 'tanggalMulai', 'alasan', 'durasiCuti', 'alamatCuti', 'nomorHp', 'currentPage']);
         } catch (\Throwable $e) {
             $this->dispatch('custom-alert', type: 'error', title: 'Terjadi Kesalahan', position: 'center', timer: 1500);
         }
