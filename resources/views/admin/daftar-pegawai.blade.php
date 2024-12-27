@@ -1,73 +1,73 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="text-xl font-semibold leading-tight text-gray-800">
             {{ __('Daftar Pegawai') }}
         </h2>
     </x-slot>
 
-    <!-- Content -->
+    <!--Main Content -->
     <div class="flex flex-col w-full">
         <!-- Title above the table -->
         <div class="px-4 py-4 mx-1">
-            <h3 class="text-3xl font-bold text-black">Daftar Pegawai</h3>
+            <h3 class="text-3xl font-bold tracking-wider text-black">Daftar Pegawai</h3>
         </div>
 
         <div class="w-full -m-1.5 overflow-hidden mx-auto block max-md:hidden">
-            <div class="p-1 w-full inline-block align-middle">
+            <div class="inline-block w-full p-1 align-middle">
                 <!-- Pencarian dan Tombol Input Data Pegawai -->
-                <div class="flex items-center mb-5 px-4 space-x-4">
+                <div class="flex items-center px-4 mb-5 space-x-4">
                     <!-- Input Search -->
                     <div class="flex items-center flex-1">
                         <input type="text" placeholder="Search ..."
                             class="flex-1 px-4 py-2 border rounded-l-md focus:outline-none max-w-[300px]">
-                        <button class="bg-yellow-500 text-white px-4 py-2 rounded-r-md">
+                        <button class="px-4 py-2 text-white bg-yellow-500 rounded-r-md">
                             🔍
                         </button>
                     </div>
 
                     <!-- Tombol Input Data Pegawai -->
-                    <a href="{{ route('admin.input-pegawai') }}" class="bg-tertiary text-white px-6 py-2 rounded-md">
+                    <a href="{{ route('admin.input-pegawai') }}" class="px-6 py-2 text-white rounded-md bg-tertiary">
                         Input Data Pegawai
                     </a>
                 </div>
 
 
                 <div class="overflow-x-hidden border border-gray-200">
-                    <div class="overflow-hidden rounded-xl shadow">
-                        <table class="w-full table-auto divide-y divide-gray-200 mx-auto ">
+                    <div class="overflow-hidden shadow rounded-xl">
+                        <table class="w-full mx-auto divide-y divide-gray-200 table-auto ">
                             <thead class="bg-gray-50">
                                 <tr>
                                     <th scope="col"
-                                        class="px-16 py-10 text-xs text-center font-bold text-black uppercase tracking-widest">
+                                        class="px-16 py-10 text-xs font-bold tracking-widest text-center text-black uppercase">
                                         No</th>
                                     <th scope="col"
-                                        class="px-16 py-10 text-xs text-center font-bold text-black uppercase tracking-widest">
+                                        class="px-16 py-10 text-xs font-bold tracking-widest text-center text-black uppercase">
                                         Nama</th>
                                     <th scope="col"
-                                        class="px-16 py-10 text-xs text-center font-bold text-black uppercase tracking-widest">
+                                        class="px-16 py-10 text-xs font-bold tracking-widest text-center text-black uppercase">
                                         NIP</th>
                                     <th scope="col"
-                                        class="px-16 py-10 text-xs text-center font-bold text-black uppercase tracking-widest">
+                                        class="px-16 py-10 text-xs font-bold tracking-widest text-center text-black uppercase">
                                         Jabatan</th>
                                     <th scope="col"
-                                        class="px-16 py-10 text-xs text-center font-bold text-black uppercase tracking-widest">
+                                        class="px-16 py-10 text-xs font-bold tracking-widest text-center text-black uppercase">
                                         Unit Kerja</th>
                                     <th scope="col"
-                                        class="px-16 py-10 text-xs text-center font-bold text-black uppercase tracking-widest">
+                                        class="px-16 py-10 text-xs font-bold tracking-widest text-center text-black uppercase">
                                         Detail</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($listPegawai as $data)
                                     <tr class="odd:bg-white even:bg-gray-100 hover:bg-gray-100">
-                                        <td class="px-16 py-10 text-s text-gray-800">{{ $loop->iteration }}</td>
-                                        <td class="px-16 py-10 text-s text-gray-800">{{ $data->nama }}</td>
-                                        <td class="px-16 py-10 text-s text-gray-800">{{ $data->nip }}</td>
-                                        <td class="px-16 py-10 text-s text-gray-800">{{ $data->jabatan }}</td>
-                                        <td class="px-16 py-10 text-s text-gray-800">{{ $data->unitKerja }}</td>
-                                        <td class="px-16 py-10 text-s text-gray-800">
+                                        <td class="px-16 py-10 text-gray-800 text-s">{{ $loop->iteration }}</td>
+                                        <td class="px-16 py-10 text-gray-800 text-s">{{ $data->nama }}</td>
+                                        <td class="px-16 py-10 text-gray-800 text-s">{{ $data->nip }}</td>
+                                        <td class="px-16 py-10 text-gray-800 text-s">{{ $data->jabatan }}</td>
+                                        <td class="px-16 py-10 text-gray-800 text-s">{{ $data->unitKerja }}</td>
+                                        <td class="px-16 py-10 text-gray-800 text-s">
                                             <button type="button"
-                                                class="text-s font-semibold text-blue-600 hover:text-blue-800 focus:outline-none">Detail</button>
+                                                class="font-semibold text-blue-600 text-s hover:text-blue-800 focus:outline-none">Detail</button>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -124,7 +124,7 @@
         </div>
         <div class="grid grid-cols-1 gap-4 md:hidden">
             @foreach ($listPegawai as $data)
-                <div class="bg-white space-y-3 p-4 rounded-lg shadow">
+                <div class="p-4 space-y-3 bg-white rounded-lg shadow">
                     <!-- Nama -->
                     <div class="text-sm text-gray-600">
                         Nama : {{ $data->nama }}

@@ -71,12 +71,19 @@
             <!-- Button -->
             <div class="flex justify-center gap-4 mt-6">
                 <button type="button" wire:navigate href="/pengaju"
-                    class="px-4 py-2 text-white transition-colors shadow shadow-md bg-tertiary rounded-3xl hover:bg-orange-300">Kembali</button>
-                <button type="button" wire:click="buttonDelete"
-                    class="px-4 py-2 text-white transition-colors bg-red-500 shadow shadow-md rounded-3xl hover:bg-red-300">Batalkan</button>
+                    class="px-4 py-2 text-white transition-colors shadow shadow-md bg-tertiary rounded-3xl hover:bg-orange-300">
+                    Kembali
+                </button>
+                @if ($statusAjuan == 'diproses')
+                    <button type="button" wire:click="buttonDelete"
+                        class="px-4 py-2 text-white transition-colors bg-red-500 shadow shadow-md rounded-3xl hover:bg-red-300">
+                        Batalkan
+                    </button>
+                @endif
                 <button type="button" wire:click="#"
-                    class="px-4 py-2 text-white transition-colors bg-green-500 shadow shadow-md rounded-3xl hover:bg-green-300">Cetak
-                    PDF</button>
+                    class="px-4 py-2 text-white transition-colors bg-green-500 shadow shadow-md rounded-3xl hover:bg-green-300">
+                    Cetak PDF
+                </button>
             </div>
         </form>
     </div>
