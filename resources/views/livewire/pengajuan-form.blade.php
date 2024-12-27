@@ -29,18 +29,18 @@
                         <div>
                             <label for="alasan" class="block text-sm font-bold text-gray-700">Alasan Cuti</label>
                             <textarea wire:model="alasan" id="alasan" rows="6"
-                                class="mt-1 block w-full rounded-xl border border-[#0032CC]"></textarea>
+                                class="mt-1 block w-full rounded-xl border border-[#0032CC]" placeholder="Isikan dengan keterangan alasan cuti anda"></textarea>
                             @error('alasan')
-                                <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                            <p class="px-2 mt-2 text-sm text-red-600 bg-red-200 border border-red-600 rounded-xl">{{ $message }}</p>
                             @enderror
                         </div>
                         <div>
                             <label for="alamatCuti" class="block text-sm font-bold text-gray-700">Alamat Selama
                                 Cuti</label>
                             <textarea wire:model="alamatCuti" id="alamatCuti" rows="6"
-                                class="mt-1 block w-full rounded-xl border border-[#0032CC]"></textarea>
+                                class="mt-1 block w-full rounded-xl border border-[#0032CC]" placeholder="Isikan dengan alamat anda selama cuti"></textarea>
                             @error('alamatCuti')
-                                <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                                <p class="px-2 mt-2 text-sm text-red-600 bg-red-200 border border-red-600 rounded-xl">{{ $message }}</p>
                             @enderror
                         </div>
                     </div>
@@ -51,9 +51,9 @@
                             <label for="nomorHp" class="block text-sm font-bold text-gray-700">Nomor
                                 Handphone</label>
                             <input wire:model="nomorHp" type="text" id="nomorHp"
-                                class="mt-1 block w-full rounded-xl border border-[#0032CC]">
+                                class="mt-1 block w-full rounded-xl border border-[#0032CC]" placeholder="Isikan dengan format 08xx-xxxx-xxxx">
                             @error('nomorHp')
-                                <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                                <p class="px-2 mt-2 text-sm text-red-600 bg-red-200 border border-red-600 rounded-xl">{{ $message }}</p>
                             @enderror
                         </div>
                         <div>
@@ -62,15 +62,15 @@
                             <input wire:model="tanggalMulai" type="date" id="tanggalMulai"
                                 class="mt-1 block w-full rounded-xl border border-[#0032CC]">
                             @error('tanggalMulai')
-                                <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                                <p class="px-2 mt-2 text-sm text-red-600 bg-red-200 border border-red-600 rounded-xl">{{ $message }}</p>
                             @enderror
                         </div>
                         <div>
                             <label for="durasiCuti" class="block text-sm font-bold text-gray-700">Selama</label>
                             <input wire:model="durasiCuti" type="text" id="durasiCuti"
-                                class="mt-1 block w-full rounded-xl border border-[#0032CC]">
+                                class="mt-1 block w-full rounded-xl border border-[#0032CC]" placeholder="Isikan dengan angka durasi cuti (dalam satuan hari)">
                             @error('durasiCuti')
-                                <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                                <p class="px-2 mt-2 text-sm text-red-600 bg-red-200 border border-red-600 rounded-xl">{{ $message }}</p>
                             @enderror
                         </div>
                     </div>

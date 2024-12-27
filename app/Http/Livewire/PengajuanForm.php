@@ -42,7 +42,7 @@ class PengajuanForm extends Component
         2 => [
             'alasan' => 'required|string|max:255',
             'alamatCuti' => 'required|string',
-            'nomorHp' => 'required|string|regex:/^[0-9]+$/|min:10|max:15',
+            'nomorHp' => 'required|string|regex:/^08\d{2}-\d{4}-\d{4}$/|min:12|max:15',
             'tanggalMulai' => 'required|date',
             'durasiCuti' => 'required|integer|min:1',
         ],
@@ -50,22 +50,22 @@ class PengajuanForm extends Component
     ];
 
     protected $messages = [
-        'jenisCutiTerpilih.required' => 'Jenis cuti wajib dipilih.',
-        'tanggalMulai.required' => 'Tanggal mulai wajib diisi.',
-        'tanggalMulai.date' => 'Tanggal mulai harus dalam format yang benar.',
-        'alasan.required' => 'Alasan wajib diisi.',
-        'alasan.string' => 'Alasan harus berupa teks.',
-        'alasan.max' => 'Alasan tidak boleh lebih dari 255 karakter.',
-        'alamatCuti.required' => 'Alamat cuti wajib diisi.',
-        'alamatCuti.string' => 'Alamat cuti harus berupa teks.',
-        'nomorHp.required' => 'Nomor HP wajib diisi.',
-        'nomorHp.string' => 'Nomor HP harus berupa teks.',
-        'nomorHp.regex' => 'Nomor HP hanya boleh berisi angka.',
-        'nomorHp.min' => 'Nomor HP minimal terdiri dari 10 angka.',
-        'nomorHp.max' => 'Nomor HP maksimal terdiri dari 15 angka.',
-        'durasiCuti.required' => 'Durasi cuti wajib diisi.',
-        'durasiCuti.integer' => 'Durasi cuti harus berupa angka.',
-        'durasiCuti.min' => 'Durasi cuti minimal 1 hari.'
+        'jenisCutiTerpilih.required' => 'Jenis cuti wajib dipilih!',
+        'tanggalMulai.required' => 'Tanggal mulai wajib diisi!',
+        'tanggalMulai.date' => 'Tanggal mulai harus dalam format yang benar!',
+        'alasan.required' => 'Alasan wajib diisi!',
+        'alasan.string' => 'Alasan harus berupa teks!',
+        'alasan.max' => 'Alasan tidak boleh lebih dari 255 karakter!',
+        'alamatCuti.required' => 'Alamat cuti wajib diisi!',
+        'alamatCuti.string' => 'Alamat cuti harus berupa teks!',
+        'nomorHp.required' => 'Nomor HP wajib diisi!',
+        'nomorHp.string' => 'Nomor HP harus berupa teks!',
+        'nomorHp.regex' => 'Nomor HP tidak sesuai format!',
+        'nomorHp.min' => 'Nomor HP minimal terdiri dari 10 angka!',
+        'nomorHp.max' => 'Nomor HP maksimal terdiri dari 15 angka!',
+        'durasiCuti.required' => 'Durasi cuti wajib diisi!',
+        'durasiCuti.integer' => 'Durasi cuti harus berupa angka!',
+        'durasiCuti.min' => 'Durasi cuti minimal 1 hari!'
     ];
 
     public function goToNextPage()
