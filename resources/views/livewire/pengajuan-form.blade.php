@@ -29,13 +29,19 @@
                         <div>
                             <label for="alasan" class="block text-sm font-bold text-gray-700">Alasan Cuti</label>
                             <textarea wire:model="alasan" id="alasan" rows="6"
-                                class="mt-1 block w-full rounded-xl border border-[#0032CC]"></textarea>
+                                class="mt-1 block w-full rounded-xl border border-[#0032CC]" placeholder="Isikan dengan keterangan alasan cuti anda"></textarea>
+                            @error('alasan')
+                            <p class="px-2 mt-2 text-sm text-red-600 bg-red-200 border border-red-600 rounded-xl">{{ $message }}</p>
+                            @enderror
                         </div>
                         <div>
                             <label for="alamatCuti" class="block text-sm font-bold text-gray-700">Alamat Selama
                                 Cuti</label>
                             <textarea wire:model="alamatCuti" id="alamatCuti" rows="6"
-                                class="mt-1 block w-full rounded-xl border border-[#0032CC]"></textarea>
+                                class="mt-1 block w-full rounded-xl border border-[#0032CC]" placeholder="Isikan dengan alamat anda selama cuti"></textarea>
+                            @error('alamatCuti')
+                                <p class="px-2 mt-2 text-sm text-red-600 bg-red-200 border border-red-600 rounded-xl">{{ $message }}</p>
+                            @enderror
                         </div>
                     </div>
 
@@ -45,18 +51,27 @@
                             <label for="nomorHp" class="block text-sm font-bold text-gray-700">Nomor
                                 Handphone</label>
                             <input wire:model="nomorHp" type="text" id="nomorHp"
-                                class="mt-1 block w-full rounded-xl border border-[#0032CC]">
+                                class="mt-1 block w-full rounded-xl border border-[#0032CC]" placeholder="Isikan dengan format 08xx-xxxx-xxxx">
+                            @error('nomorHp')
+                                <p class="px-2 mt-2 text-sm text-red-600 bg-red-200 border border-red-600 rounded-xl">{{ $message }}</p>
+                            @enderror
                         </div>
                         <div>
                             <label for="tanggalMulai" class="block text-sm font-bold text-gray-700">Tanggal
                                 Mulai</label>
                             <input wire:model="tanggalMulai" type="date" id="tanggalMulai"
                                 class="mt-1 block w-full rounded-xl border border-[#0032CC]">
+                            @error('tanggalMulai')
+                                <p class="px-2 mt-2 text-sm text-red-600 bg-red-200 border border-red-600 rounded-xl">{{ $message }}</p>
+                            @enderror
                         </div>
                         <div>
                             <label for="durasiCuti" class="block text-sm font-bold text-gray-700">Selama</label>
                             <input wire:model="durasiCuti" type="text" id="durasiCuti"
-                                class="mt-1 block w-full rounded-xl border border-[#0032CC]">
+                                class="mt-1 block w-full rounded-xl border border-[#0032CC]" placeholder="Isikan dengan angka durasi cuti (dalam satuan hari)">
+                            @error('durasiCuti')
+                                <p class="px-2 mt-2 text-sm text-red-600 bg-red-200 border border-red-600 rounded-xl">{{ $message }}</p>
+                            @enderror
                         </div>
                     </div>
                 </div>
@@ -64,16 +79,56 @@
                 <!-- Form Upload Dokumen -->
                 <div class="mt-4">
                     <label for="dokumen" class="block text-sm font-bold text-gray-700">Dokumen Pendukung</label>
-                    <input wire:model="dokumen" type="file" id="dokumen"
-                        class="mt-1 block w-full rounded-xl border border-[#0032CC]">
+
+                    <!-- Drag-and-Drop Zone -->
+                    <div x-data="{ isDragging: false }" @dragover.prevent="isDragging = true" @dragleave="isDragging = false"
+                        @drop.prevent="
+                            isDragging = false;
+                            const files = $event.dataTransfer.files;
+                            if (files.length) {
+                                $refs.fileInput.files = files;
+                                $dispatch('input', files);
+                            }
+                        "
+                        :class="isDragging ? 'border-dashed border-2 border-[#0032CC] bg-blue-50' : 'border border-[#0032CC]'"
+                        class="flex items-center justify-center w-full h-32 mt-1 transition-all cursor-pointer rounded-xl">
+                        <p class="text-sm text-gray-500">Seret file ke sini atau klik tombol di bawah ini</p>
+                    </div>
+
+                    <!-- Hidden File Input -->
+                    <input wire:model="dokumen" type="file" id="dokumen" x-ref="fileInput" class="hidden" />
+
+                    <!-- Custom Label -->
+                    <label for="dokumen"
+                        class="mt-4 flex items-center justify-center px-4 py-2 border border-[#0032CC] rounded-xl text-[#0032CC] bg-white hover:bg-[#0032CC] hover:text-white cursor-pointer">
+                        Pilih File
+                    </label>
+
+                    @error('dokumen')
+                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                    @enderror
+
                     @if ($dokumen)
                         <p class="mt-2 text-sm text-gray-500">File yang dipilih: {{ $dokumen->getClientOriginalName() }}
                         </p>
                     @endif
+
+                    <!-- Progress Bar -->
+                    <div x-data="{ progress: @entangle('progress') }" class="mt-4">
+                        <div class="w-full h-4 bg-gray-200 rounded-full">
+                            <div :style="{ width: `${progress}%` }" class="h-4 transition-all bg-blue-500 rounded-full">
+                            </div>
+                        </div>
+                        <p x-text="`${progress}% Terupload`" class="mt-2 text-sm text-gray-700"></p>
+                    </div>
+
+                    <!-- Jumlah File Terupload -->
+                    <p class="mt-2 text-sm text-gray-500">
+                        File yang sudah diupload: {{ $uploadedFilesCount }}
+                    </p>
                 </div>
             @elseif ($currentPage === 4)
                 <!-- Form Konfirmasi Pengajuan -->
-                <!-- ini belum diatur get dari page 2 nya dit -->
                 <div class="grid grid-cols-2 gap-8">
                     <!-- Kolom Kiri -->
                     <div class="space-y-4">

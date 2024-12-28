@@ -7,12 +7,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="//unpkg.com/alpinejs" defer></script>
+    <script>
+        Livewire.on('uploadProgress', (progress) => {
+            document.querySelector('[x-data]').__x.$data.progress = progress;
+        });
+    </script>
+
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <!-- Alpine -->
-    <script src="https://cdn.jsdelivr.net/npm/@alpinejs/focus@2.0.0/dist/cdn.min.js"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/@alpinejs/focus@2.0.0/dist/cdn.min.js"></script> --}}
     <!-- Flowbite -->
     <script src="https://cdn.jsdelivr.net/npm/flowbite@1.6.0/dist/flowbite.min.js"></script>
     @livewireStyles

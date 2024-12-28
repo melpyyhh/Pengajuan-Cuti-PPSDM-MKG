@@ -1,11 +1,11 @@
 <div wire:poll.1s>
-    <h1 class="py-2 font-bold text-3xl text-gray-800 tracking-wider">
+    <h3 class="py-2 text-3xl font-bold tracking-wider text-gray-800">
         Data Pegawai
-    </h1>
+    </h3>
     <p class="mb-4">{{ $pages[$currentPage]['subheading'] }}</p>
 
     <!-- Form -->
-    <div class="w-max-full mx-auto shadow sm:rounded-md sm:overflow-hidden h-auto overflow-y-hidden">
+    <div class="h-auto mx-auto overflow-y-hidden shadow w-max-full sm:rounded-md sm:overflow-hidden">
         <div class="px-8 py-8 bg-[#F4F7FE] space-y-8 sm:p-8">
             @if ($currentPage === 1)
                 <!-- Form Data Pegawai -->
@@ -59,7 +59,7 @@
                 <!-- Daftar Jenis Cuti -->
                 <div>
                     @foreach ($jenisCutiFields as $index => $field)
-                        <div class="flex space-x-4 mt-4" wire:key="jenisCutiField-{{ $index }}">
+                        <div class="flex mt-4 space-x-4" wire:key="jenisCutiField-{{ $index }}">
                             <!-- Dropdown Jenis Cuti -->
                             <div class="w-1/2">
                                 <label for="jenisCuti{{ $index }}"
@@ -85,12 +85,12 @@
                     @endforeach
 
                     <!-- Tombol Tambah dan Hapus -->
-                    <div class="mt-4 flex justify-end space-x-4">
+                    <div class="flex justify-end mt-4 space-x-4">
                         <button type="button" wire:click="addJenisCuti"
-                            class="bg-tertiary text-white py-2 px-4 rounded-3xl">Tambah</button>
+                            class="px-4 py-2 text-white bg-tertiary rounded-3xl">Tambah</button>
                         @if (count($jenisCutiFields) > 1)
                             <button type="button" wire:click="removeJenisCuti"
-                                class="bg-red-500 text-white py-2 px-4 rounded-3xl">Hapus</button>
+                                class="px-4 py-2 text-white bg-red-500 rounded-3xl">Hapus</button>
                         @endif
                     </div>
                 </div>
@@ -101,16 +101,16 @@
         <div class="px-4 py-2 bg-[#F4F7FE] flex justify-center sm:px-6 space-x-6">
             @if ($currentPage > 1)
                 <button type="button" wire:click="goToPreviousPage"
-                    class="bg-tertiary text-white py-2 px-7 rounded-2xl">Sebelumnya</button>
+                    class="py-2 text-white bg-tertiary px-7 rounded-2xl">Sebelumnya</button>
             @endif
             @if ($currentPage < count($pages))
                 <button type="button" wire:click="goToNextPage"
-                    class="bg-tertiary text-white py-2 px-6 rounded-2xl">Selanjutnya</button>
+                    class="px-6 py-2 text-white bg-tertiary rounded-2xl">Selanjutnya</button>
             @endif
             @if ($currentPage === count($pages))
                 <!-- Cek jika sudah di halaman terakhir -->
                 <button type="submit" wire:click="submitForm"
-                    class="bg-tertiary text-white py-2 px-6 rounded-2xl">Submit</button>
+                    class="px-6 py-2 text-white bg-tertiary rounded-2xl">Submit</button>
             @endif
         </div>
     </div>

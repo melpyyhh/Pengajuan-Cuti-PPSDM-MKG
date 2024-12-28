@@ -17,7 +17,8 @@
                     <img src="https://upload.wikimedia.org/wikipedia/commons/1/12/Logo_BMKG_%282010%29.png"
                         class="h-8 me-3" alt="FlowBite Logo" />
                     <span
-                        class="self-center text-xl font-semibold tracking-wide sm:text-2xl whitespace-nowrap dark:text-white">SIPETI PPSDM BMKG</span>
+                        class="self-center text-xl font-semibold tracking-wide sm:text-2xl whitespace-nowrap dark:text-white">SIPETI
+                        PPSDM BMKG</span>
                 </a>
             </div>
             <div class="flex items-center">
@@ -42,13 +43,15 @@
                         id="dropdown-user">
                         <div class="px-4 py-3" role="none">
                             <p class="text-sm font-semibold text-secondary">{{ auth()->user()->pegawai->nama }}</p>
-                            <p class="text-sm font-medium text-gray-900 truncate dark:text-gray-300" role="none">{{auth()->user()->email}}</p>
+                            <p class="text-sm font-medium text-gray-900 truncate dark:text-gray-300" role="none">
+                                {{ auth()->user()->email }}</p>
                         </div>
                         <ul class="py-1" role="none">
                             <li>
-                                <a href="#"
+                                <a href="/profile"
                                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                                    role="menuitem">Profile</a>
+                                    role="menuitem" title="">Profile</a>
+
                             </li>
                             <li>
                                 <a onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
@@ -151,7 +154,7 @@
 
                 <a href="/penyetuju"
                     class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group
-        {{ request()->is('penyetuju') || request()->is('penyetuju/penyetuju-detail/') ? 'bg-tertiary text-white font-semibold rounded-lg' : 'rounded-lg hover:shadow' }}">
+                    {{ request()->is('penyetuju') || request()->is('penyetuju/penyetuju-detail/*') ? 'bg-tertiary text-white font-semibold rounded-lg' : 'rounded-lg hover:shadow' }}">
                     <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                         <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -230,7 +233,7 @@
                                 </path>
                             </g>
                         </svg>
-                        <span class="ms-3">Daftar Pengajuan</span>
+                        <span class="ms-3">Daftar Pengaduan</span>
                     </a>
 
                     <a href="/daftar-pegawai"

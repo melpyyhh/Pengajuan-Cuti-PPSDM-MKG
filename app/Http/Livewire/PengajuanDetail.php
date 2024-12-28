@@ -18,6 +18,8 @@ class PengajuanDetail extends Component
     public $dokumen;
     public $idPengajuan;
     public $idRiwayat;
+    public $statusAjuan;
+
 
     public $pages = [
         1 => ['heading' => 'Detail Cuti', 'subheading' => 'Berikut adalah detail cuti yang telah anda ajukan.'],
@@ -29,7 +31,11 @@ class PengajuanDetail extends Component
 
         $pengajuan = Pengajuan::find($idPengajuan);
         $riwayat = RiwayatCuti::getByPengajuanId($idPengajuan)->first();
-        $this->idRiwayat = $riwayat->id;
+        if ($riwayat) {
+            $this->statusAjuan = strtolower($riwayat->status_ajuan); // Simpan status pengajuan (lowercase untuk konsistensi)
+            $this->idRiwayat = $riwayat->id;
+        }
+
         if ($pengajuan) {
             $this->jenisCuti = $pengajuan->cuti->jenis_cuti;
             $this->alasanCuti = $pengajuan->alasan;
@@ -46,6 +52,7 @@ class PengajuanDetail extends Component
             ]);
         }
     }
+
 
     public function render()
     {

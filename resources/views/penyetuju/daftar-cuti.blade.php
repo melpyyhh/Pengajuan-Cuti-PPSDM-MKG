@@ -31,41 +31,41 @@
                             <thead class="bg-gray-50">
                                 <tr>
                                     <th scope="col"
-                                        class="px-16 py-10 text-xs font-bold tracking-widest text-center text-black uppercase">
+                                        class="px-16 py-10 text-xs font-bold tracking-widest text-black uppercase">
                                         No</th>
                                     <th scope="col"
-                                        class="px-16 py-10 text-xs font-bold tracking-widest text-center text-black uppercase">
+                                        class="px-16 py-10 text-xs font-bold tracking-widest text-black uppercase">
                                         Nama Pegawai</th>
                                     <th scope="col"
-                                        class="px-16 py-10 text-xs font-bold tracking-widest text-center text-black uppercase">
+                                        class="px-16 py-10 text-xs font-bold tracking-widest text-black uppercase">
                                         Unit Kerja</th>
                                     <th scope="col"
-                                        class="px-16 py-10 text-xs font-bold tracking-widest text-center text-black uppercase">
+                                        class="px-16 py-10 text-xs font-bold tracking-widest text-black uppercase">
                                         Jabatan</th>
                                     <th scope="col"
-                                        class="px-16 py-10 text-xs font-bold tracking-widest text-center text-black uppercase">
+                                        class="px-16 py-10 text-xs font-bold tracking-widest text-black uppercase">
                                         Status Pemeriksaan</th>
                                     <th scope="col"
-                                        class="px-16 py-10 text-xs font-bold tracking-widest text-center text-black uppercase">
+                                        class="px-16 py-10 text-xs font-bold tracking-widest text-black uppercase">
                                         Detail</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($listPengajuan as $data)
                                     <tr class="odd:bg-white even:bg-gray-100 hover:bg-gray-100">
-                                        <td class="px-16 py-10 text-gray-800 text-s">
+                                        <td class="px-16 py-10 text-center text-gray-800 text-s">
                                             {{ ($listPengajuan->currentPage() - 1) * $listPengajuan->perPage() + $loop->iteration }}
                                         </td>
-                                        <td class="px-16 py-10 text-gray-800 text-s">
+                                        <td class="px-16 py-10 text-center text-gray-800 text-s">
                                             {{ $data->pegawai->nama }}
                                         </td>
-                                        <td class="px-16 py-10 text-gray-800 text-s">
+                                        <td class="px-16 py-10 text-center text-gray-800 text-s">
                                             {{ $data->pegawai->unitKerja }}
                                         </td>
-                                        <td class="px-16 py-10 text-gray-800 text-s">
+                                        <td class="px-16 py-10 text-center text-gray-800 text-s">
                                             {{ $data->pegawai->jabatan }}
                                         </td>
-                                        <td class="px-16 py-10 text-xs text-gray-800">
+                                        <td class="px-16 py-10 text-xs text-center text-gray-800">
                                             <span
                                                 class="
                                                     @if (strtolower($data->status_ajuan) == 'diproses') p-1.5 bg-yellow-200 text-yellow-700 uppercase font-bold text-wider rounded-xl
@@ -79,7 +79,7 @@
                                                 {{ ucfirst($data->status_ajuan) }}
                                             </span>
                                         </td>
-                                        <td class="px-16 py-10 text-gray-800 text-s">
+                                        <td class="px-16 py-10 text-center text-gray-800 text-s">
                                             <a href="/penyetuju/penyetuju-detail/{{ $data->pengajuan->id }}"
                                                 class="font-semibold text-blue-600 text-s hover:text-blue-800 focus:outline-none">
                                                 Detail
