@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="text-xl font-semibold leading-tight text-gray-800">
+        <h2 class="py-2 text-4xl font-bold tracking-wider text-gray-800">
             {{ __('Riwayat Cuti') }}
         </h2>
     </x-slot>
@@ -9,9 +9,9 @@
     <div class="flex flex-col w-full">
         <!-- Title above the table -->
         <div>
-            <h3 class="py-2 text-3xl font-bold text-gray-800 tracking wider">
+            <h1 class="py-2 text-4xl font-bold tracking-wider text-gray-800">
                 Riwayat Cuti
-            </h3>
+            </h1>
         </div>
 
         <div class="w-full -m-1.5 overflow-hidden mx-auto block max-md:hidden">
