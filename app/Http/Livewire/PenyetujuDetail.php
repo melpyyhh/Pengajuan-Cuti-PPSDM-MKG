@@ -2,8 +2,10 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\DataCuti;
 use App\Models\Pengajuan;
 use App\Models\RiwayatCuti;
+use Carbon\Carbon;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Log;
@@ -101,6 +103,14 @@ class PenyetujuDetail extends Component
                 'status' => 'disetujui'
             ];
             Pengajuan::updateStatus($data);
+            $pengajuan = Pengajuan::find($this->idPengajuan);
+            $updatedData = [
+                'pegawai_id' => $pengajuan->pengaju_id,
+                'cuti_id' => $pengajuan->cuti_id,
+                'selama' => $pengajuan->selama,
+                'tahun' => Carbon::now()->year
+            ];
+            DataCuti::updateDataCuti($updatedData);
             $this->dispatch(
                 'custom-alert',
                 type: 'success',
