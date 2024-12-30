@@ -28,10 +28,11 @@
                     <div class="space-y-4">
                         <div>
                             <label for="alasan" class="block text-sm font-bold text-gray-700">Alasan Cuti</label>
-                            <textarea wire:model="alasan" id="alasan" rows="6"
-                                class="mt-1 block w-full rounded-xl border border-[#0032CC]" placeholder="Isikan dengan keterangan alasan cuti anda"></textarea>
+                            <textarea wire:model="alasan" id="alasan" rows="6" class="mt-1 block w-full rounded-xl border border-[#0032CC]"
+                                placeholder="Isikan dengan keterangan alasan cuti anda"></textarea>
                             @error('alasan')
-                            <p class="px-2 mt-2 text-sm text-red-600 bg-red-200 border border-red-600 rounded-xl">{{ $message }}</p>
+                                <p class="px-2 mt-2 text-sm text-red-600 bg-red-200 border border-red-600 rounded-xl">
+                                    {{ $message }}</p>
                             @enderror
                         </div>
                         <div>
@@ -40,7 +41,8 @@
                             <textarea wire:model="alamatCuti" id="alamatCuti" rows="6"
                                 class="mt-1 block w-full rounded-xl border border-[#0032CC]" placeholder="Isikan dengan alamat anda selama cuti"></textarea>
                             @error('alamatCuti')
-                                <p class="px-2 mt-2 text-sm text-red-600 bg-red-200 border border-red-600 rounded-xl">{{ $message }}</p>
+                                <p class="px-2 mt-2 text-sm text-red-600 bg-red-200 border border-red-600 rounded-xl">
+                                    {{ $message }}</p>
                             @enderror
                         </div>
                     </div>
@@ -51,9 +53,11 @@
                             <label for="nomorHp" class="block text-sm font-bold text-gray-700">Nomor
                                 Handphone</label>
                             <input wire:model="nomorHp" type="text" id="nomorHp"
-                                class="mt-1 block w-full rounded-xl border border-[#0032CC]" placeholder="Isikan dengan format 08xx-xxxx-xxxx">
+                                class="mt-1 block w-full rounded-xl border border-[#0032CC]"
+                                placeholder="Isikan dengan format 08xxxxxxxxxx">
                             @error('nomorHp')
-                                <p class="px-2 mt-2 text-sm text-red-600 bg-red-200 border border-red-600 rounded-xl">{{ $message }}</p>
+                                <p class="px-2 mt-2 text-sm text-red-600 bg-red-200 border border-red-600 rounded-xl">
+                                    {{ $message }}</p>
                             @enderror
                         </div>
                         <div>
@@ -62,17 +66,30 @@
                             <input wire:model="tanggalMulai" type="date" id="tanggalMulai"
                                 class="mt-1 block w-full rounded-xl border border-[#0032CC]">
                             @error('tanggalMulai')
-                                <p class="px-2 mt-2 text-sm text-red-600 bg-red-200 border border-red-600 rounded-xl">{{ $message }}</p>
+                                <p class="px-2 mt-2 text-sm text-red-600 bg-red-200 border border-red-600 rounded-xl">
+                                    {{ $message }}</p>
                             @enderror
                         </div>
                         <div>
                             <label for="durasiCuti" class="block text-sm font-bold text-gray-700">Selama</label>
                             <input wire:model="durasiCuti" type="text" id="durasiCuti"
-                                class="mt-1 block w-full rounded-xl border border-[#0032CC]" placeholder="Isikan dengan angka durasi cuti (dalam satuan hari)">
+                                class="mt-1 block w-full rounded-xl border border-[#0032CC]"
+                                placeholder="Isikan dengan angka durasi cuti (dalam satuan hari)">
                             @error('durasiCuti')
-                                <p class="px-2 mt-2 text-sm text-red-600 bg-red-200 border border-red-600 rounded-xl">{{ $message }}</p>
+                                <p class="px-2 mt-2 text-sm text-red-600 bg-red-200 border border-red-600 rounded-xl">
+                                    {{ $message }}</p>
                             @enderror
                         </div>
+                        {{-- <div>
+                            @foreach ($sisaCuti as $cuti)
+                                <div class="mb-4">
+                                    <label for="sisaCuti_{{ $cuti['tahun'] }}"
+                                        class="block text-sm font-bold text-gray-700">Sisa Cuti Tahun
+                                        {{ $cuti['tahun'] }}
+                                    </label>
+                                </div>
+                            @endforeach
+                        </div> --}}
                     </div>
                 </div>
             @elseif ($currentPage === 3)
@@ -109,7 +126,8 @@
                     @enderror
 
                     @if ($dokumen)
-                        <p class="mt-2 text-sm text-gray-500">File yang dipilih: {{ $dokumen->getClientOriginalName() }}
+                        <p class="mt-2 text-sm text-gray-500">File yang dipilih:
+                            {{ $dokumen->getClientOriginalName() }}
                         </p>
                     @endif
 
@@ -180,7 +198,8 @@
                 <button type="button" wire:click="goToNextPage"
                     class="px-4 py-2 text-white transition-colors shadow rounded-xl bg-tertiary hover:bg-orange-300">Selanjutnya</button>
             @endif
-            @if ($currentPage === count($pages)) <!-- Cek jika sudah di halaman terakhir -->
+            @if ($currentPage === count($pages))
+                <!-- Cek jika sudah di halaman terakhir -->
                 <!-- Tombol Submit -->
                 <button type="submit" wire:click="submitForm"
                     class="px-4 py-2 text-white transition-colors shadow rounded-xl bg-tertiary hover:bg-orange-300">Submit</button>
