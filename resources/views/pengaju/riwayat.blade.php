@@ -38,11 +38,11 @@
                                         Lama Cuti
                                     </th>
                                     <th scope="col"
-                                        class="px-16 py-10 text-xs font-bold tracking-widest text-black uppercase">
+                                        class="px-10 py-10 text-xs font-bold tracking-widest text-black uppercase px-1-">
                                         Status
                                     </th>
                                     <th scope="col"
-                                        class="px-16 py-10 text-xs font-bold tracking-widest text-black uppercase">
+                                        class="px-10 py-10 text-xs font-bold tracking-widest text-black uppercase">
                                         Detail
                                     </th>
                                 </tr>
