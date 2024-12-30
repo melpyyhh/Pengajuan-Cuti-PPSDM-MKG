@@ -48,10 +48,10 @@
             <!-- Button-->
             <div class="flex justify-between mt-6">
                 <button type="button" wire:click="goBack"
-                    class="px-4 py-2 text-white transition-colors rounded-md shadow bg-tertiary hover:bg-orange-300">Kembali</button>
+                    class="px-4 py-2 text-white transition-colors shadow rounded-xl bg-tertiary hover:bg-orange-300">Kembali</button>
                     <!-- ini blm ada method submitnya bang -->
                 <button type="submit"
-                    class="px-4 py-2 text-white transition-colors rounded-md shadow bg-tertiary hover:bg-orange-300">Kirim Pengaduan</button>
+                    class="px-4 py-2 text-white transition-colors shadow rounded-xl bg-tertiary hover:bg-orange-300">Kirim Pengaduan</button>
             </div>
         </form>
     </div>

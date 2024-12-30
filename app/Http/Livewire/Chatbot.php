@@ -27,15 +27,12 @@ class Chatbot extends Component
 
     public function ask()
     {
-        // Pastikan ada pertanyaan yang dikirim
         if ($this->question) {
-            // Menambahkan chat user
             $this->chats[] = [
                 'sender' => 'user',
                 'message' => $this->question,
             ];
 
-            // Response rule-based chatbot
             $response = 'Maaf, saya tidak mengerti pertanyaan Anda. Silakan coba lagi.';
             if (stripos($this->question, 'cuti') !== false) {
                 $response = 'Informasi tentang cuti: Anda dapat mengajukan cuti melalui HRD atau aplikasi.';
@@ -43,14 +40,15 @@ class Chatbot extends Component
                 $response = 'Jadwal kerja: Senin-Jumat, 08:00-17:00.';
             }
 
-            // Menambahkan respons chatbot
             $this->chats[] = [
                 'sender' => 'bot',
                 'message' => $response,
             ];
 
-            // Kosongkan pertanyaan setelah dikirim
-            $this->question = '';  // Mengosongkan textarea
+            $this->reset('question'); // Reset input
+
+            // Kirim event untuk trigger scroll
+            $this->dispatch('chats-updated');
         }
     }
 

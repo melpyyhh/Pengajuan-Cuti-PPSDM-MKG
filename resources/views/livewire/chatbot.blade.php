@@ -19,7 +19,7 @@
             </div>
 
             <!-- Area Percakapan -->
-            <div class="flex-1 p-4 overflow-y-auto bg-primary" style="max-height: 300px;">
+            <div class="flex-1 p-4 overflow-y-scroll scrollbar-hide chat_container bg-primary" style="max-height: 300px;">
                 @foreach ($chats as $chat)
                     @if ($chat['sender'] === 'bot')
                         <!-- Pesan dari Bot -->
@@ -39,16 +39,42 @@
                 @endforeach
             </div>
 
+
             <!-- Input Pesan -->
             <div class="flex items-center px-4 py-2 border-t">
-                <textarea wire:model.defer="question" rows="1" @keydown.enter.prevent="$wire.ask()"
+                <!-- Textarea input dengan wire:model.defer -->
+                <textarea wire:model.defer="question" rows="1"
+                    @keydown.enter.prevent="$wire.ask(); $nextTick(() => { $refs.textarea.value = ''; $refs.textarea.focus(); })"
                     class="flex-1 p-2 text-sm border border-[#0032CC] rounded-lg resize-none focus:ring-orange-500 focus:border-orange-500"
-                    placeholder="Tulis pesan Anda..."></textarea>
+                    placeholder="Tulis pesan Anda..." x-ref="textarea"></textarea>
+
+                <!-- Tombol Kirim -->
                 <button wire:click="ask"
-                    class="p-2 ml-2 text-white rounded-full bg-tertiary hover:bg-orange-800 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-50">
+                    class="p-2 ml-2 text-white rounded-full bg-tertiary hover:bg-orange-800 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-50"
+                    @click="$nextTick(() => { $refs.textarea.value = ''; $refs.textarea.focus(); })">
                     ➤
                 </button>
             </div>
         </div>
     @endif
 </div>
+
+<script>
+    function scrollToBottom() {
+        var ChatDiv = $('.chat_container');
+        setTimeout(() => {
+            var height = ChatDiv[0].scrollHeight;
+            ChatDiv.scrollTop(height);
+        }, 50); // Penundaan 50ms
+    }
+
+    // Trigger scrollToBottom setiap kali Livewire memperbarui konten
+    window.addEventListener('chats-updated', () => {
+        scrollToBottom();
+    });
+
+    // Inisialisasi awal ketika halaman pertama kali dimuat
+    $(document).ready(() => {
+        scrollToBottom();
+    });
+</script>
