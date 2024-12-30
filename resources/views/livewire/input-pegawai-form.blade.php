@@ -1,7 +1,7 @@
 <div wire:poll.1s>
-    <h3 class="py-2 text-3xl font-bold tracking-wider text-gray-800">
+    <h1 class="py-2 text-4xl font-bold tracking-wider text-gray-800">
         Data Pegawai
-    </h3>
+    </h1>
     <p class="mb-4">{{ $pages[$currentPage]['subheading'] }}</p>
 
     <!-- Form -->

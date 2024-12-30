@@ -1,5 +1,5 @@
 <div>
-    <h1 class="py-2 text-4xl font-semibold leading-tight text-gray-800">
+    <h1 class="py-2 text-4xl font-bold tracking-wider text-gray-800">
         {{ $pages[$currentPage]['heading'] }}
     </h1>
     <p class="mb-4">{{ $pages[$currentPage]['subheading'] }}</p>

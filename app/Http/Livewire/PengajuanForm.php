@@ -44,7 +44,7 @@ class PengajuanForm extends Component
         2 => [
             'alasan' => 'required|string|max:255',
             'alamatCuti' => 'required|string',
-            'nomorHp' => 'required|string|regex:/^08\d{2}-\d{4}-\d{4}$/|min:12|max:15',
+            'nomorHp' => 'required|string|regex:/^08\d{8,12}$/|min:10|max:14',
             'tanggalMulai' => 'required|date',
             'durasiCuti' => 'required|integer|min:1',
         ],

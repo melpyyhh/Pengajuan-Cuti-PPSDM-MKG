@@ -29,6 +29,7 @@
     <div class="flex min-h-screen bg-secondary">
         <div class="flex-1 py-4 basis-64">
             @include('layouts.navigation')
+            @livewire('chatbot')
         </div>
 
         <!-- Page Content -->
