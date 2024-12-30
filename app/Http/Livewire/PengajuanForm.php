@@ -29,6 +29,8 @@ class PengajuanForm extends Component
     public $durasiCuti;
     public $jenisCutiList; // Untuk data dropdown
     public $jenisCutiTerpilih; // Untuk nilai yang dipilih pengguna
+    public $sisaCuti;
+    public $pegawaiId;
 
     public $pages = [
         1 => ['heading' => 'Jenis Cuti', 'subheading' => 'Pilih jenis cuti anda'],
@@ -71,6 +73,7 @@ class PengajuanForm extends Component
     public function goToNextPage()
     {
         // Validasi berdasarkan halaman saat ini
+        $this->pegawaiId = Auth::user()->pegawai->id;
         if (isset($this->validationRules[$this->currentPage])) {
             $this->validate($this->validationRules[$this->currentPage], $this->messages);
         }
@@ -79,7 +82,7 @@ class PengajuanForm extends Component
         if ($this->currentPage === 1) {
             $data = [
                 'cuti_id' => intval($this->jenisCutiTerpilih),
-                'pegawai_id' => Auth::user()->pegawai->id,
+                'pegawai_id' => $this->pegawaiId,
             ];
 
             // Jika cekKetersediaanCuti mengembalikan false, hentikan proses
@@ -93,6 +96,10 @@ class PengajuanForm extends Component
                 );
                 return;
             }
+            $this->sisaCuti = DataCuti::where('pegawais_id', $this->pegawaiId)
+                ->where('jenis_cuti_id', intval($this->jenisCutiTerpilih))
+                ->orderBy('tahun', 'desc') // Urutkan berdasarkan tahun
+                ->get(['tahun', 'sisa_cuti']); // Hanya ambil kolom tertentu
         }
 
         // Proses khusus untuk halaman 3 (Unggah Dokumen)

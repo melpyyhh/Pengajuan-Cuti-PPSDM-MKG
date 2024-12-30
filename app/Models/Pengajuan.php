@@ -79,13 +79,10 @@ class Pengajuan extends Model
             if (!$pengajuan) {
                 throw new \Exception('Pengajuan tidak ditemukan.');
             }
-            $updatedProses = ProsesCuti::where('pengajuan_id', $pengajuan->id)
+            ProsesCuti::where('pengajuan_id', $pengajuan->id)
                 ->update(['status_ajuan' => $data['status']]);
-            Log::info('ProsesCuti updated rows:', ['updated' => $updatedProses]);
-
-            $updatedRiwayat = RiwayatCuti::where('pengajuan_id', $pengajuan->id)
+            RiwayatCuti::where('pengajuan_id', $pengajuan->id)
                 ->update(['status_ajuan' => $data['status']]);
-            Log::info('RiwayatCuti updated rows:', ['updated' => $updatedRiwayat]);
         } catch (\Throwable $e) { {
                 throw $e;
             }
