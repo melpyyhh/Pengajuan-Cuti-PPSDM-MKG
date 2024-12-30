@@ -80,16 +80,17 @@
                                     {{ $message }}</p>
                             @enderror
                         </div>
-                        {{-- <div>
+                        <div>
                             @foreach ($sisaCuti as $cuti)
                                 <div class="mb-4">
                                     <label for="sisaCuti_{{ $cuti['tahun'] }}"
                                         class="block text-sm font-bold text-gray-700">Sisa Cuti Tahun
                                         {{ $cuti['tahun'] }}
                                     </label>
+                                    <input type="text" id="sisaCuti_{{ $cuti['tahun'] }}" value="{{ $cuti['sisa_cuti'] }}" readonly class="mt-1 block w-full rounded-xl border border-[#0032CC]">
                                 </div>
                             @endforeach
-                        </div> --}}
+                        </div>
                     </div>
                 </div>
             @elseif ($currentPage === 3)
