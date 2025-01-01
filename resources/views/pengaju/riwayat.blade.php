@@ -115,10 +115,12 @@
 
         <div class="grid flex-1 grid-cols-1 gap-4 md:hidden">
             @foreach ($listRiwayat as $cuti)
-                <div class="p-4 space-y-3 bg-white rounded-lg shadow">
+                <div class="p-4 space-y-3 bg-[#F4F7FE] rounded-lg shadow">
                     <!-- Nomor -->
                     <div class="text-sm font-semibold text-gray-800">
-                        {{ ($listRiwayat->currentPage() - 1) * $listRiwayat->perPage() + $loop->iteration }}
+                        <p>Ajuan Cuti ke :
+                            {{ ($listRiwayat->currentPage() - 1) * $listRiwayat->perPage() + $loop->iteration }}
+                        </p>
                     </div>
                     <!-- Tanggal Pengajuan -->
                     <div class="text-sm text-gray-600">
@@ -126,7 +128,7 @@
                     </div>
                     <!-- Jenis Cuti -->
                     <div class="text-sm text-gray-600">
-                        Jenis Cuti: {{ $cuti->cuti->name ?? '-' }}
+                        Jenis Cuti: {{ $cuti->pengajuan->cuti->jenis_cuti ?? '-' }}
                     </div>
                     <!-- Lama Cuti -->
                     <div class="text-sm text-gray-600">
@@ -149,9 +151,12 @@
                     </div>
                     <!-- Detail -->
                     <div>
-                        <a href="/pengaju/pengajuan-detail/{{ $cuti->pengajuan->id }}"
-                            class="text-xs font-semibold text-blue-600 hover:text-blue-800 focus:outline-none">Detail</a>
+                        <button wire:navigate href="/pengaju/pengajuan-detail/{{$cuti->pengajuan->id}}"
+                            class="px-2 text-sm font-semibold text-white transition-colors shadow rounded-xl bg-tertiary hover:bg-orange-300">
+                            Detail
+                        </button>
                     </div>
+
                 </div>
             @endforeach
         </div>
