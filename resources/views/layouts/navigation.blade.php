@@ -39,7 +39,7 @@
                             </svg>
                         </button>
                     </div>
-                    <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600"
+                    <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-primary dark:divide-gray-500"
                         id="dropdown-user">
                         <div class="px-4 py-3" role="none">
                             <p class="text-sm font-semibold text-secondary">{{ auth()->user()->pegawai->nama }}</p>

@@ -1,21 +1,14 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h1 class="py-2 text-4xl font-bold tracking-widest text-gray-800">
-            {{ __('Daftar Pengajuan Cuti') }}
-        </h1>
-    </x-slot>
+    <h1 class="py-2 text-4xl font-bold tracking-widest text-gray-800">
+        {{ __('Daftar Pengajuan Cuti') }}
+    </h1>
 
     <!-- Content -->
     <div class="flex flex-col w-full">
-        <!-- Title above the table -->
-        <div class="px-4 py-4 mx-1">
-            <h1 class="py-2 text-4xl font-bold tracking-wider text-gray-800">Daftar Pengajuan Cuti</h1>
-        </div>
-
         <div class="w-full -m-1.5 overflow-hidden mx-auto block max-md:hidden">
             <div class="inline-block w-full p-1 align-middle">
-                <!-- Pencarian dan Tombol Input Data Pegawai -->
-                <div class="flex items-center px-4 mb-5 space-x-4">
+                <!-- Pencarian -->
+                <div class="flex items-center py-2 mb-5 space-x-4">
                     <!-- Input Search -->
                     <div class="flex items-center flex-1">
                         <input type="text" placeholder="Cari..."
@@ -25,9 +18,11 @@
                         </button>
                     </div>
                 </div>
-                <div class="overflow-x-hidden border border-gray-200">
+
+                <!-- Tabel -->
+                <div class="overflow-hidden border border-gray-200 rounded-lg shadow">
                     <div class="overflow-hidden shadow rounded-xl">
-                        <table class="w-full mx-auto divide-y divide-gray-200 table-auto ">
+                        <table class="w-full mx-auto divide-y divide-gray-200 rounded-lg table-auto">
                             <thead class="bg-gray-50">
                                 <tr>
                                     <th scope="col"
@@ -119,10 +114,12 @@
                 </div>
             </div>
         </div>
+
+        <!-- Mobile View -->
         <div class="grid flex-1 grid-cols-1 gap-4 md:hidden">
             <div class="grid flex-1 grid-cols-1 gap-4 md:hidden">
                 @foreach ($listPengajuan as $data)
-                    <div class="p-4 space-y-3 bg-white rounded-lg shadow">
+                    <div class="p-4 space-y-3 bg-[#F4F7FE] rounded-lg shadow-md">
                         <!-- Nomor -->
                         <div class="text-sm font-semibold text-gray-800">
                             {{ ($listPengajuan->currentPage() - 1) * $listPengajuan->perPage() + $loop->iteration }}
@@ -154,15 +151,19 @@
                                 {{ ucfirst($data->status_ajuan) }}
                             </span>
                         </div>
-                        <!-- Detail -->
+                        <!-- Detail Button -->
                         <div>
-                            <a href="/penyetuju/penyetuju-detail/{{ $data->pengajuan->id }}"
-                                class="text-xs font-semibold text-blue-600 hover:text-blue-800 focus:outline-none">Detail</a>
+                            <button wire:navigate href="/penyetuju/penyetuju-detail/{{ $data->pengajuan->id }}"
+                                class="px-2 text-sm font-semibold text-white transition-colors shadow rounded-xl bg-tertiary hover:bg-orange-300">
+                                Detail
+                            </button>
                         </div>
                     </div>
                 @endforeach
             </div>
         </div>
+
+        <!-- Pagination -->
         <nav class="flex items-center py-3 gap-x-1" aria-label="Pagination">
             <!-- Previous Button -->
             <button type="button"

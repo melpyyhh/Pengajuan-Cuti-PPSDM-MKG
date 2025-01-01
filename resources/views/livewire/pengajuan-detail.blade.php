@@ -1,3 +1,4 @@
+{{-- Header --}}
 <div>
     <h1 class="py-2 text-4xl font-semibold leading-tight text-gray-800">
         {{ $pages[$currentPage]['heading'] }}

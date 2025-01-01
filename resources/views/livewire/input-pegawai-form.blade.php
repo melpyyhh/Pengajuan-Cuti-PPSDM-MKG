@@ -1,3 +1,4 @@
+{{-- Header --}}
 <div wire:poll.1s>
     <h1 class="py-2 text-4xl font-bold tracking-wider text-gray-800">
         Data Pegawai

@@ -7,13 +7,14 @@
 
     <!-- Content -->
     <div class="flex flex-col w-full">
-        <!-- Title above the table -->
+        <!-- Title -->
         <div>
             <h1 class="py-2 text-4xl font-bold tracking-wider text-gray-800">
                 Riwayat Cuti
             </h1>
         </div>
 
+        <!-- Tabel  -->
         <div class="w-full -m-1.5 overflow-hidden mx-auto block max-md:hidden">
             <div class="inline-block w-full p-1 align-middle">
                 <div class="overflow-hidden border border-gray-200 rounded-lg shadow">
@@ -113,9 +114,10 @@
             </div>
         </div>
 
+        <!-- Mobile View-->
         <div class="grid flex-1 grid-cols-1 gap-4 md:hidden">
             @foreach ($listRiwayat as $cuti)
-                <div class="p-4 space-y-3 bg-[#F4F7FE] rounded-lg shadow">
+                <div class="p-4 space-y-3 bg-[#F4F7FE] rounded-lg shadow-md">
                     <!-- Nomor -->
                     <div class="text-sm font-semibold text-gray-800">
                         <p>Ajuan Cuti ke :
@@ -149,17 +151,18 @@
                             {{ ucfirst($cuti->status_ajuan) }}
                         </span>
                     </div>
-                    <!-- Detail -->
+                    <!-- Detail Button -->
                     <div>
                         <button wire:navigate href="/pengaju/pengajuan-detail/{{$cuti->pengajuan->id}}"
                             class="px-2 text-sm font-semibold text-white transition-colors shadow rounded-xl bg-tertiary hover:bg-orange-300">
                             Detail
                         </button>
                     </div>
-
                 </div>
             @endforeach
         </div>
+
+        <!-- Pagination-->
         <nav class="flex items-center py-3 gap-x-1" aria-label="Pagination">
             <!-- Previous Button -->
             <button type="button"

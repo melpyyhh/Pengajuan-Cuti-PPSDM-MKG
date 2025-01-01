@@ -59,6 +59,7 @@
     @endif
 </div>
 
+{{-- Script Auto Scroll ke Chat Terakhir --}}
 <script>
     function scrollToBottom() {
         var ChatDiv = $('.chat_container');
