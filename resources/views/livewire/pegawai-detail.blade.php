@@ -127,18 +127,12 @@
 
         <!-- Buttons -->
         <div class="px-4 py-2 bg-[#F4F7FE] flex justify-center sm:px-6 space-x-6">
-            @if ($currentPage > 1)
-                <button type="button" wire:click="goToPreviousPage"
-                    class="py-2 text-white bg-tertiary px-7 rounded-2xl">Sebelumnya</button>
-            @endif
-            @if ($currentPage < count($pages))
-                <button type="button" wire:click="goToNextPage"
-                    class="px-6 py-2 text-white bg-tertiary rounded-2xl">Selanjutnya</button>
-            @endif
             @if ($currentPage === count($pages))
                 <!-- Cek jika sudah di halaman terakhir -->
-                <button type="submit" wire:click="submitForm"
+                <button type="submit" wire:click="updatePegawai"
                     class="px-6 py-2 text-white bg-tertiary rounded-2xl">Submit</button>
+                <button type="button" wire:click="deletePegawai"
+                    class="px-6 py-2 text-white bg-red-500 rounded-2xl">Hapus</button>
             @endif
         </div>
     </div>

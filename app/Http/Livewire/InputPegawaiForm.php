@@ -42,11 +42,6 @@ class InputPegawaiForm extends Component
         }
     }
 
-    public function render()
-    {
-        return view('livewire.input-pegawai-form');
-    }
-
     protected $validationRules = [
         1 => ['namaPegawai' => 'required|string'],
         2 => ['NIP' => 'required|string'],
@@ -105,8 +100,22 @@ class InputPegawaiForm extends Component
         }
     }
 
+    public function render()
+    {
+        return view('livewire.input-pegawai-form');
+    }
+
     public function mount()
     {
-        $this->jenisCuti = JenisCuti::getAllCuti();
+        // Asumsi kolom 'nama' memiliki nilai 'Cuti Tahunan' dan 'Cuti Besar'
+        $this->jenisCuti = JenisCuti::whereIn('jenis_cuti', ['Cuti Tahunan', 'Cuti Besar'])->get()->toArray();
+
+        // Jika 'Cuti Tahunan' memiliki tahun dinamis
+        foreach ($this->jenisCuti as &$cuti) {
+            if ($cuti['jenis_cuti'] === 'Cuti Tahunan') {
+                $currentYear = now()->year;
+                $cuti['tahun'] = range($currentYear - 3, $currentYear); // 3 tahun ke belakang + tahun sekarang
+            }
+        }
     }
 }

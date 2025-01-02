@@ -1,10 +1,19 @@
 <x-app-layout>
-    <h1 class="py-2 text-4xl font-bold tracking-widest text-gray-800">
-        {{ __('Daftar Pengajuan Cuti') }}
-    </h1>
+    <x-slot name="header">
+        <h2 class="py-2 text-4xl font-bold tracking-wider text-gray-800">
+            {{ __('Daftar Cuti') }}
+        </h2>
+    </x-slot>
 
     <!-- Content -->
     <div class="flex flex-col w-full">
+        <!-- Title -->
+        <div>
+            <h1 class="py-2 text-4xl font-bold tracking-wider text-gray-800">
+                Daftar Cuti
+            </h1>
+        </div>
+
         <div class="w-full -m-1.5 overflow-hidden mx-auto block max-md:hidden">
             <div class="inline-block w-full p-1 align-middle">
                 <!-- Pencarian -->

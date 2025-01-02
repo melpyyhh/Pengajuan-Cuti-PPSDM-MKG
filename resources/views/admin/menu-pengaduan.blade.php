@@ -34,6 +34,8 @@
             </button>
         </div>
 
+        @livewire('chatbot')
+
         <!-- Daftar Pengaduan -->
         <div class="px-4">
             @foreach ($pengaduans as $pengaduan)
