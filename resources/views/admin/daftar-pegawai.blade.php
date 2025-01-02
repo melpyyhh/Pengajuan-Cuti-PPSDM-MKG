@@ -74,7 +74,7 @@
                                     <td class="px-4 py-10 text-center text-gray-800 text-s">{{ $data->unitKerja }}</td>
                                     <td class="px-10 py-10 text-center text-gray-800 text-s">
                                         <div class="flex items-center justify-center">
-                                            <button onclick="window.location.href='#'"
+                                            <button onclick="window.location.href='/detail-pegawai'"
                                                 class="flex items-center justify-center w-12 h-12 text-gray-800 rounded-full bg-tertiary hover:bg-orange-300 focus:outline-none">
                                                 <svg fill="#08244B" viewBox="0 0 64 64" version="1.1"
                                                     xmlns="http://www.w3.org/2000/svg"
@@ -136,7 +136,7 @@
                     </div>
                     <!-- Detail Button -->
                     <div>
-                        <button wire:navigate href="#"
+                        <button wire:navigate href="/detail-pegawai"
                             class="px-2 text-sm font-semibold text-white transition-colors shadow rounded-xl bg-tertiary hover:bg-orange-300">
                             Detail
                         </button>

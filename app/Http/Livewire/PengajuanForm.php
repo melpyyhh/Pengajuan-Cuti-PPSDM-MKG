@@ -47,6 +47,7 @@ class PengajuanForm extends Component
             'nomorHp' => 'required|string|regex:/^08\d{8,12}$/|min:10|max:14',
             'tanggalMulai' => 'required|date',
             'durasiCuti' => 'required|integer|min:1',
+            'sisaCuti' => 'required',
         ],
         3 => ['dokumen' => 'nullable|file|max:2048'],
     ];
@@ -67,7 +68,8 @@ class PengajuanForm extends Component
         'nomorHp.max' => 'Nomor HP maksimal terdiri dari 15 angka!',
         'durasiCuti.required' => 'Durasi cuti wajib diisi!',
         'durasiCuti.integer' => 'Durasi cuti harus berupa angka!',
-        'durasiCuti.min' => 'Durasi cuti minimal 1 hari!'
+        'durasiCuti.min' => 'Durasi cuti minimal 1 hari!',
+        'sisaCuti.required' => 'Sisa Cuti wajib ada!'
     ];
 
     public function goToNextPage()
@@ -96,10 +98,6 @@ class PengajuanForm extends Component
                 );
                 return;
             }
-            $this->sisaCuti = DataCuti::where('pegawais_id', $this->pegawaiId)
-                ->where('jenis_cuti_id', intval($this->jenisCutiTerpilih))
-                ->orderBy('tahun', 'desc') // Urutkan berdasarkan tahun
-                ->get(['tahun', 'sisa_cuti']); // Hanya ambil kolom tertentu
         }
 
         // Proses khusus untuk halaman 3 (Unggah Dokumen)
@@ -172,8 +170,33 @@ class PengajuanForm extends Component
 
     public function mount()
     {
+        $this->pegawaiId = Auth::user()->pegawai->id;
+
         $this->jenisCutiList = JenisCuti::getAllCuti();
+
+        if ($this->jenisCutiTerpilih) {
+            $this->loadSisaCuti();
+        }
     }
+
+
+    public function loadSisaCuti()
+    {
+        if (!$this->pegawaiId || !$this->jenisCutiTerpilih) {
+            return;
+        }
+
+        $this->sisaCuti = DataCuti::where('pegawais_id', $this->pegawaiId)
+            ->where('jenis_cuti_id', intval($this->jenisCutiTerpilih))
+            ->orderBy('tahun', 'desc')
+            ->get(['tahun', 'sisa_cuti']);
+    }
+
+    public function updatedJenisCutiTerpilih()
+    {
+        $this->loadSisaCuti();
+    }
+
 
     private function hitungTanggalAkhir($tanggalMulai, $durasiCuti)
     {
