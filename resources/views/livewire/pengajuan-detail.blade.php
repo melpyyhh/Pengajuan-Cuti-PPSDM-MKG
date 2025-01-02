@@ -1,3 +1,4 @@
+{{-- Header --}}
 <div>
     <h1 class="py-2 text-4xl font-semibold leading-tight text-gray-800">
         {{ $pages[$currentPage]['heading'] }}
@@ -70,7 +71,7 @@
 
             <!-- Button -->
             <div class="flex justify-center gap-4 mt-6">
-                <button type="button" wire:navigate href="/pengaju"
+                <button type="button" onclick="window.location.href='/pengaju'"
                     class="px-4 py-2 text-white transition-colors shadow shadow-md bg-tertiary rounded-3xl hover:bg-orange-300">
                     Kembali
                 </button>

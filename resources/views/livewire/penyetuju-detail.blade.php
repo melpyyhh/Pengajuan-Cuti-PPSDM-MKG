@@ -1,3 +1,4 @@
+{{-- Header --}}
 <div>
     <h1 class="py-2 text-4xl font-bold tracking-wider text-gray-800">
         {{ $pages[$currentPage]['heading'] }}
@@ -63,7 +64,7 @@
                 </div>
             @else
                 <div class="flex justify-center gap-4 mt-6">
-                    <button type="button" wire:navigate href="/penyetuju"
+                    <button type="button" onclick="window.location.href='/penyetuju'"
                         class="px-4 py-2 text-white transition-colors shadow shadow-md bg-tertiary rounded-3xl hover:bg-orange-300">
                         Kembali
                     </button>

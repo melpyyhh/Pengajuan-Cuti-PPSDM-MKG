@@ -1,3 +1,4 @@
+{{-- Header --}}
 <div>
     <h1 class="py-2 text-4xl font-bold tracking-wider text-gray-800">
         Pengajuan
@@ -81,15 +82,19 @@
                             @enderror
                         </div>
                         <div>
-                            @foreach ($sisaCuti as $cuti)
-                                <div class="mb-4">
+                            @if ($sisaCuti && $sisaCuti->isNotEmpty())
+                                @foreach ($sisaCuti as $cuti)
                                     <label for="sisaCuti_{{ $cuti['tahun'] }}"
                                         class="block text-sm font-bold text-gray-700">Sisa Cuti Tahun
                                         {{ $cuti['tahun'] }}
                                     </label>
-                                    <input type="text" id="sisaCuti_{{ $cuti['tahun'] }}" value="{{ $cuti['sisa_cuti'] }}" readonly class="mt-1 block w-full rounded-xl border border-[#0032CC]">
-                                </div>
-                            @endforeach
+                                    <input type="text" id="sisaCuti_{{ $cuti['tahun'] }}"
+                                        value="{{ $cuti['sisa_cuti'] }}" readonly
+                                        class="mt-1 block w-full rounded-xl border border-[#0032CC]">
+                                @endforeach
+                            @else
+                                <p class="text-sm text-gray-500">Tidak ada data sisa cuti untuk jenis cuti ini.</p>
+                            @endif
                         </div>
                     </div>
                 </div>
