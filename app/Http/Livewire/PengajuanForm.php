@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\DataCuti;
 use App\Models\JenisCuti;
 use App\Models\Pengajuan;
+use App\Models\RiwayatCuti;
 use Dflydev\DotAccessData\Data;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -30,6 +31,7 @@ class PengajuanForm extends Component
     public $jenisCutiList; // Untuk data dropdown
     public $jenisCutiTerpilih; // Untuk nilai yang dipilih pengguna
     public $sisaCuti;
+    public $statusCutiBesar;
     public $pegawaiId;
 
     public $pages = [
@@ -87,16 +89,55 @@ class PengajuanForm extends Component
                 'pegawai_id' => $this->pegawaiId,
             ];
 
-            // Jika cekKetersediaanCuti mengembalikan false, hentikan proses
-            if (!$this->cekKetersediaanCuti($data)) {
+            $result = $this->cekKetersediaanCuti($data);
+
+            if (!$result['status']) {
                 $this->dispatch(
                     'custom-alert',
                     type: 'error',
-                    title: 'Cuti Tahunan Habis',
+                    title: $result['message'],
                     position: 'center',
                     timer: 3000,
                 );
                 return;
+            }
+
+            $this->sisaCuti = DataCuti::where('pegawais_id', $this->pegawaiId)
+                ->where('jenis_cuti_id', intval($this->jenisCutiTerpilih))
+                ->orderBy('tahun', 'desc') // Urutkan berdasarkan tahun
+                ->take(3) // Ambil hanya 3 data teratas
+                ->get(['tahun', 'sisa_cuti']);
+        }
+
+        if ($this->currentPage === 2) {
+            $tahunan = DataCuti::cekCutiTahunan($this->pegawaiId);
+            // Validasi untuk jenis cuti tahunan
+            if ($this->jenisCutiTerpilih === "1") {
+                if ($this->durasiCuti > $tahunan['sisa_cuti']) {
+                    $this->dispatch(
+                        'custom-alert',
+                        type: 'error',
+                        title: 'Durasi cuti melebihi total sisa cuti tahunan.',
+                        position: 'center',
+                        timer: 3000,
+                    );
+                    return;
+                }
+            }
+
+            // Validasi untuk jenis cuti lainnya
+            if ($this->jenisCutiTerpilih === "4") {
+                $batasMaksimumCuti = 90; // Batas maksimum durasi cuti jenis 3
+                if ($this->durasiCuti > $batasMaksimumCuti) {
+                    $this->dispatch(
+                        'custom-alert',
+                        type: 'error',
+                        title: 'Durasi cuti melebihi batas maksimum untuk cuti ini.',
+                        position: 'center',
+                        timer: 3000,
+                    );
+                    return;
+                }
             }
         }
 
@@ -107,12 +148,13 @@ class PengajuanForm extends Component
             ]);
 
             if ($this->dokumen) {
-                $this->dispatch('custom-alert', [
-                    'type' => 'success',
-                    'title' => 'Dokumen valid!',
-                    'position' => 'center',
-                    'timer' => 3000,
-                ]);
+                $this->dispatch(
+                    'custom-alert',
+                    type: 'success',
+                    title: 'Dokumen valid!',
+                    position: 'center',
+                    timer: 3000,
+                );
             }
         }
 
@@ -215,9 +257,23 @@ class PengajuanForm extends Component
 
     public function cekKetersediaanCuti($data)
     {
-        if ($data["cuti_id"] === 1 && !DataCuti::cekDataCuti($data["pegawai_id"])) {
-            return false; // Tidak tersedia
+        $tahunan = DataCuti::cekCutiTahunan($data["pegawai_id"]);
+        if ($data["cuti_id"] === 1 && !$tahunan['status']) {
+            return [
+                'status' => false,
+                'message' => 'Cuti Tahunan Habis', // Pesan khusus untuk cuti tahunan
+            ]; // Tidak tersedia
         }
-        return true; // Tersedia
+        if ($data['cuti_id'] === 4 && !RiwayatCuti::cekCutiBesar($data["pegawai_id"])) {
+            return [
+                'status' => false,
+                'message' => 'Cuti Besar tidak dapat diajukan karena pernah mengajukan sebelumnya dalam 5 tahun terakhir', // Pesan khusus untuk cuti besar
+            ]; // Tidak tersedia
+        }
+
+        return [
+            'status' => true,
+            'message' => 'Cuti tersedia', // Optional jika diperlukan
+        ]; // Tersedia
     }
 }

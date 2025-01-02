@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class DataCuti extends Model
@@ -29,9 +30,30 @@ class DataCuti extends Model
         ]);
     }
 
-    public static function cekDataCuti($idPegawai)
+    public static function cekCutiTahunan($idPegawai)
     {
-        return DataCuti::where('pegawais_id', $idPegawai)->exists();
+        $tahunSekarang = Carbon::now()->year;
+        $totalSisaCuti = 0;
+
+        for ($i = 0; $i <= 2; $i++) {
+            $tahun = $tahunSekarang - $i;
+            $cuti = self::where("pegawais_id", $idPegawai)
+                ->where('tahun', $tahun)
+                ->first();
+            if ($cuti) {
+                $totalSisaCuti += $cuti->sisa_cuti;
+            }
+        }
+        if ($totalSisaCuti > 0) {
+            return [
+                'status' => true,
+                'sisa_cuti' => $totalSisaCuti
+            ];
+        }
+        return [
+            'status' => false,
+            'sisa_cuti' => 0
+        ];
     }
 
     public static function updateDataCuti($data)
@@ -43,7 +65,6 @@ class DataCuti extends Model
         $durasiCuti = $data['selama'];
         if ($data['cuti_id'] == 1) { // Cuti tahunan
             $tahunSebelumnya = [$data['tahun'] - 2, $data['tahun'] - 1]; // Tahun 2 tahun sebelumnya dan 1 tahun sebelumnya
-
             // Prefetch data untuk efisiensi
             $cutiSebelumnya = self::where('pegawais_id', $data['pegawai_id'])
                 ->where('jenis_cuti_id', $data['cuti_id'])
