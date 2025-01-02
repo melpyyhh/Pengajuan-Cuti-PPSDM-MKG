@@ -35,7 +35,7 @@ class DataCuti extends Model
         $tahunSekarang = Carbon::now()->year;
         $totalSisaCuti = 0;
 
-        for ($i = 1; $i <= 3; $i++) {
+        for ($i = 0; $i <= 2; $i++) {
             $tahun = $tahunSekarang - $i;
             $cuti = self::where("pegawais_id", $idPegawai)
                 ->where('tahun', $tahun)
