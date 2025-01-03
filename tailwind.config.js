@@ -18,12 +18,15 @@ export default {
                 sans: ["Poppins", "sans-serif"],
             },
             colors: {
-                primary: "#08244B",
+                primary: "#020632",
                 secondary: "#FFFFFF",
                 tertiary: "#E99A20",
             },
         },
     },
 
-    plugins: [forms],
+    plugins: [
+        forms,
+        require("tailwind-scrollbar-hide"), // Tambahkan plugin di sini
+    ],
 };

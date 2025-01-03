@@ -32,6 +32,16 @@ class LoginRequest extends FormRequest
         ];
     }
 
+    public function messages(): array
+    {
+        return [
+            'email.required'=> 'Email tidak boleh kosong!',
+            'email.email'=> 'Email tidak valid!',
+            'password.required'=>'Password tidak boleh kosong!'
+        ];
+    }
+
+
     /**
      * Attempt to authenticate the request's credentials.
      *
@@ -45,7 +55,7 @@ class LoginRequest extends FormRequest
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
-                'email' => trans('auth.failed'),
+                'email' => 'Email atau Password tidak sesuai!',
             ]);
         }
 

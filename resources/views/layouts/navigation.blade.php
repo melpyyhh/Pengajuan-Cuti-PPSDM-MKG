@@ -39,34 +39,22 @@
                             </svg>
                         </button>
                     </div>
-                    <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600"
+                    <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-primary dark:divide-gray-500"
                         id="dropdown-user">
                         <div class="px-4 py-3" role="none">
-                            <p class="text-sm text-gray-900 dark:text-white" role="none">
-                                Dummy
-                            </p>
+                            <p class="text-sm font-semibold text-secondary">{{ auth()->user()->pegawai->nama }}</p>
                             <p class="text-sm font-medium text-gray-900 truncate dark:text-gray-300" role="none">
-                                dummy@ppsdm.com
-                            </p>
+                                {{ auth()->user()->email }}</p>
                         </div>
                         <ul class="py-1" role="none">
                             <li>
-                                <a href="#"
+                                <a href="/profile"
                                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                                    role="menuitem">Dashboard</a>
+                                    role="menuitem" title="">Profile</a>
+
                             </li>
                             <li>
-                                <a href="#"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                                    role="menuitem">Settings</a>
-                            </li>
-                            <li>
-                                <a href="#"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                                    role="menuitem">Earnings</a>
-                            </li>
-                            <li>
-                                <a href="#"
+                                <a onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
                                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                                     role="menuitem">Sign out</a>
                             </li>
@@ -91,7 +79,7 @@
                 <div class="my-2 border-t border-secondary"></div>
                 <a href="/pengaju"
                     class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group
-                {{ request()->is('pengaju') || request()->is('pengajuan/pengajuan-detail/') ? 'bg-tertiary text-white font-semibold rounded-lg' : 'rounded-lg hover:shadow' }}">
+                {{ request()->is('pengaju') || request()->is('pengaju/pengajuan-detail/*') ? 'bg-tertiary text-white font-semibold rounded-lg' : 'rounded-lg hover:shadow' }}">
                     <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                         <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -166,7 +154,7 @@
 
                 <a href="/penyetuju"
                     class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group
-        {{ request()->is('penyetuju') || request()->is('penyetuju/penyetuju-detail/') ? 'bg-tertiary text-white font-semibold rounded-lg' : 'rounded-lg hover:shadow' }}">
+                    {{ request()->is('penyetuju') || request()->is('penyetuju/penyetuju-detail/*') ? 'bg-tertiary text-white font-semibold rounded-lg' : 'rounded-lg hover:shadow' }}">
                     <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                         <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -245,7 +233,7 @@
                                 </path>
                             </g>
                         </svg>
-                        <span class="ms-3">Daftar Pengajuan</span>
+                        <span class="ms-3">Daftar Pengaduan</span>
                     </a>
 
                     <a href="/daftar-pegawai"
@@ -317,5 +305,6 @@
 </aside>
 
 <div class="px-6 py-14 sm:ml-64">
+
     {{ $slot }}
 </div>

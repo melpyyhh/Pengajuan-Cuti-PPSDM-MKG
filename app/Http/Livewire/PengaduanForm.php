@@ -11,6 +11,8 @@ class PengaduanForm extends Component
     public $currentPage = 1;
     public $subjek;
     public $isi;
+    public $nama;
+    public $email;
 
     public function goBack()
     {
@@ -31,6 +33,12 @@ class PengaduanForm extends Component
         return view('livewire.pengaduan-form');
     }
 
+    public function mount()
+    {
+        // Mendapatkan nama pengguna dari user yang sedang login
+        $this->nama = Auth::user()->name;
+        $this->email = Auth::user()->email;
+    }
     public function submit()
     {
         // belum ada isinya bang
