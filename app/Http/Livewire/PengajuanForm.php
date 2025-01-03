@@ -49,7 +49,6 @@ class PengajuanForm extends Component
             'nomorHp' => 'required|string|regex:/^08\d{8,12}$/|min:10|max:14',
             'tanggalMulai' => 'required|date',
             'durasiCuti' => 'required|integer|min:1',
-            'sisaCuti' => 'required',
         ],
         3 => ['dokumen' => 'nullable|file|max:2048'],
     ];
@@ -71,7 +70,6 @@ class PengajuanForm extends Component
         'durasiCuti.required' => 'Durasi cuti wajib diisi!',
         'durasiCuti.integer' => 'Durasi cuti harus berupa angka!',
         'durasiCuti.min' => 'Durasi cuti minimal 1 hari!',
-        'sisaCuti.required' => 'Sisa Cuti wajib ada!'
     ];
 
     public function goToNextPage()
@@ -165,6 +163,10 @@ class PengajuanForm extends Component
 
     public function goToPreviousPage()
     {
+        if ($this->currentPage === 2) {
+            $this->loadSisaCuti();
+        }
+
         $this->currentPage--;
     }
 
@@ -207,6 +209,9 @@ class PengajuanForm extends Component
 
     public function render()
     {
+        if ($this->jenisCutiTerpilih) {
+            $this->loadSisaCuti();
+        }
         return view('livewire.pengajuan-form');
     }
 
@@ -215,10 +220,6 @@ class PengajuanForm extends Component
         $this->pegawaiId = Auth::user()->pegawai->id;
 
         $this->jenisCutiList = JenisCuti::getAllCuti();
-
-        if ($this->jenisCutiTerpilih) {
-            $this->loadSisaCuti();
-        }
     }
 
 
