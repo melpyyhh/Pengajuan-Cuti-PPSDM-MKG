@@ -44,8 +44,6 @@ Route::middleware(['auth', 'penyetujuMiddleware'])->group(function () {
     Route::get('/penyetuju', [PenyetujuController::class, 'daftarCuti'])->name('penyetuju.daftar-cuti');
     Route::get('/penyetuju/penyetuju-detail/{idPengajuan}', PenyetujuDetail::class)->name('penyetuju.penyetuju-detail');
     Route::get('/penyetuju/pengaduan-form', PengaduanForm::class)->name('penyetuju.pengaduan.form');
-    Route::get('/penyetuju-dashboard', [PenyetujuController::class, 'dashboard'])->name('penyetuju.penyetuju-dashboard');
-    Route::get('/pengajuan-form', PengajuanForm::class)->name('pengajuan.form');
 });
 // Admin
 Route::middleware(['auth', 'adminMiddleware'])->group(function () {
