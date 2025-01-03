@@ -179,7 +179,7 @@
         <nav class="flex items-center py-3 gap-x-1" aria-label="Pagination">
             <!-- Previous Button -->
             <button type="button"
-                class="min-h-[38px] min-w-[38px] py-2 px-2.5 inline-flex justify-center items-center gap-x-1.5 text-sm rounded-lg text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:bg-primary dark:hover:bg-tertiary dark:focus:bg-tertiary"
+                class="min-h-[38px] min-w-[38px] py-2 px-2.5 inline-flex justify-center items-center gap-x-1.5 text-sm rounded-lg text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none bg-primary text-white hover:bg-tertiary focus:bg-tertiary dark:text-white dark:bg-primary dark:hover:bg-tertiary dark:focus:bg-tertiary"
                 @if ($listPengajuan->onFirstPage()) disabled @endif aria-label="Previous"
                 onclick="window.location='{{ $listPengajuan->previousPageUrl() }}'">
                 <svg aria-hidden="true" class="hidden shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg"
@@ -196,7 +196,7 @@
                     @if (is_array($page))
                         @foreach ($page as $num => $url)
                             <button type="button"
-                                class="min-h-[38px] min-w-[38px] flex justify-center items-center text-gray-800 hover:bg-blue-500 hover:text-white py-2 px-3 text-sm rounded-lg focus:outline-none focus:bg-blue-600 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:bg-primary dark:hover:bg-tertiary dark:focus:bg-tertiary"
+                                class="min-h-[38px] min-w-[38px] flex justify-center items-center text-gray-800 hover:bg-blue-500 hover:text-white py-2 px-3 text-sm rounded-lg focus:outline-none focus:bg-blue-600 disabled:opacity-50 disabled:pointer-events-none bg-primary text-white hover:bg-tertiary focus:bg-tertiary dark:text-white dark:bg-primary dark:hover:bg-tertiary dark:focus:bg-tertiary"
                                 @if ($num == $listPengajuan->currentPage()) style="background-color: #E99A20; color: white;" @endif
                                 onclick="window.location='{{ $url }}'">
                                 {{ $num }}
@@ -208,7 +208,7 @@
 
             <!-- Next Button -->
             <button type="button"
-                class="min-h-[38px] min-w-[38px] py-2 px-2.5 inline-flex justify-center items-center gap-x-1.5 text-sm rounded-lg text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:bg-primary dark:hover:bg-tertiary dark:focus:bg-tertiary"
+                class="min-h-[38px] min-w-[38px] py-2 px-2.5 inline-flex justify-center items-center gap-x-1.5 text-sm rounded-lg text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none bg-primary text-white hover:bg-tertiary focus:bg-tertiary dark:text-white dark:bg-primary dark:hover:bg-tertiary dark:focus:bg-tertiary"
                 @if ($listPengajuan->hasMorePages()) onclick="window.location='{{ $listPengajuan->nextPageUrl() }}'" @else disabled @endif
                 aria-label="Next">
                 <span>Next</span>
