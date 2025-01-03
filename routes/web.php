@@ -14,6 +14,7 @@ use App\Http\Livewire\InputPegawaiForm;
 use App\Http\Livewire\PengaduanForm;
 use App\Http\Livewire\PenyetujuDetail;
 use App\Http\Livewire\PengajuanDetail;
+use App\Http\Livewire\PegawaiDetail;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 Route::middleware('guest')->group(function () {
@@ -51,4 +52,5 @@ Route::middleware(['auth', 'adminMiddleware'])->group(function () {
     Route::get('/admin', [AdminController::class, 'menuPengaduan'])->name('admin.menu-pengaduan');
     Route::get('/daftar-pegawai', [AdminController::class, 'daftarPegawai'])->name('admin.daftar-pegawai');
     Route::get('/input-pegawai', InputPegawaiForm::class)->name('admin.input-pegawai');
+    Route::get('/detail-pegawai', PegawaiDetail::class)->name('admin.detail-pegawai');
 });

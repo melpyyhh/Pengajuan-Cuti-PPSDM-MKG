@@ -6,16 +6,31 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <script>
+        Livewire.on('uploadProgress', (progress) => {
+            document.querySelector('[x-data]').__x.$data.progress = progress;
+        });
+    </script>
     <!-- Alpine -->
+<<<<<<< HEAD
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.x.x/dist/alpine.js" defer></script>
 
     <!-- Chart JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js" integrity="sha512-L0Shl7nXXzIlBSUUPpxrokqq4ojqgZFQczTYlGjzONGTDAcLremjwaWv5A+EDLnxhQzY5xUZPWLOLqYRkY0Cbw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+=======
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="//unpkg.com/alpinejs" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@alpinejs/focus@2.0.0/dist/cdn.min.js"></script>
+    <!-- Flowbite -->
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@1.6.0/dist/flowbite.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+>>>>>>> bcd81d582fa0502ebb4f1bdba2df71cde67037b7
     @livewireStyles
     @stack('css')
 </head>
@@ -24,6 +39,7 @@
     <div class="flex min-h-screen bg-secondary">
         <div class="flex-1 py-4 basis-64">
             @include('layouts.navigation')
+            @livewire('chatbot')
         </div>
 
         <!-- Page Content -->
