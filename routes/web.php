@@ -16,13 +16,15 @@ use App\Http\Livewire\PenyetujuDetail;
 use App\Http\Livewire\PengajuanDetail;
 use App\Http\Livewire\PegawaiDetail;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\HomeController;
+
+Route::get('/', [HomeController::class, 'index']);
 
 Route::middleware('guest')->group(function () {
     Route::get('login', [AuthenticatedSessionController::class, 'create'])
         ->name('login');
 
     Route::post('login', [AuthenticatedSessionController::class, 'store']);
-    Route::redirect('/', '/login');
 });
 
 Route::middleware('auth')->group(function () {
