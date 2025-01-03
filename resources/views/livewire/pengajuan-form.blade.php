@@ -188,6 +188,21 @@
                             <input wire:model="durasiCuti" type="text" id="durasiCuti"
                                 class="mt-1 block w-full rounded-xl border border-[#0032CC]" disabled>
                         </div>
+                        <div>
+                            @if ($sisaCuti && $sisaCuti->isNotEmpty())
+                                @foreach ($sisaCuti as $cuti)
+                                    <label for="sisaCuti_{{ $cuti['tahun'] }}"
+                                        class="block text-sm font-bold text-gray-700">Sisa Cuti Tahun
+                                        {{ $cuti['tahun'] }}
+                                    </label>
+                                    <input type="text" id="sisaCuti_{{ $cuti['tahun'] }}"
+                                        value="{{ $cuti['sisa_cuti'] }}" readonly
+                                        class="mt-1 block w-full rounded-xl border border-[#0032CC]">
+                                @endforeach
+                            @else
+                                <p class="text-sm text-gray-500">Tidak ada data sisa cuti untuk jenis cuti ini.</p>
+                            @endif
+                        </div>
                     </div>
                 </div>
             @endif
