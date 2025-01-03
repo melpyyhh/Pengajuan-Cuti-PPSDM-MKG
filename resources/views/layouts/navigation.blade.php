@@ -1,10 +1,10 @@
-<nav class="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-primary dark:border-gray-700">
+<nav class="fixed top-0 z-50 w-full border-b border-gray-700 bg-primary dark:bg-primary dark:border-gray-700">
     <div class="px-3 py-3 lg:px-5 lg:pl-3">
         <div class="flex items-center justify-between">
             <div class="flex items-center justify-start rtl:justify-end">
                 <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar"
                     type="button"
-                    class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
+                    class="inline-flex items-center p-2 text-sm text-gray-400 rounded-lg sm:hidden hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
                     <span class="sr-only">Open sidebar</span>
                     <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg">
@@ -17,7 +17,7 @@
                     <img src="https://upload.wikimedia.org/wikipedia/commons/1/12/Logo_BMKG_%282010%29.png"
                         class="h-8 me-3" alt="FlowBite Logo" />
                     <span
-                        class="self-center text-xl font-semibold tracking-wide sm:text-2xl whitespace-nowrap dark:text-white">SIPETI
+                        class="self-center text-xl font-semibold tracking-wide text-white sm:text-2xl whitespace-nowrap dark:text-white">SIPETI
                         PPSDM BMKG</span>
                 </a>
             </div>
@@ -25,7 +25,7 @@
                 <div class="flex items-center ms-3">
                     <div>
                         <button type="button"
-                            class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+                            class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-600 dark:focus:ring-gray-600"
                             aria-expanded="false" data-dropdown-toggle="dropdown-user">
                             <span class="sr-only">Open user menu</span>
                             <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -39,22 +39,22 @@
                             </svg>
                         </button>
                     </div>
-                    <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-primary dark:divide-gray-500"
+                    <div class="z-50 hidden my-4 text-base list-none border-gray-700 divide-y divide-gray-500 rounded shadow bg-primary dark:bg-primary dark:divide-gray-500"
                         id="dropdown-user">
                         <div class="px-4 py-3" role="none">
                             <p class="text-sm font-semibold text-secondary">{{ auth()->user()->pegawai->nama }}</p>
-                            <p class="text-sm font-medium text-gray-900 truncate dark:text-gray-300" role="none">
+                            <p class="text-sm font-medium text-gray-300 truncate dark:text-gray-300" role="none">
                                 {{ auth()->user()->email }}</p>
                         </div>
                         <ul class="py-1" role="none">
                             <li>
                                 <a href="/profile"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                                    class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                                     role="menuitem">Profile</a>
                             </li>
                             <li>
                                 <a onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                                    class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                                     role="menuitem">Sign out</a>
                             </li>
                         </ul>
@@ -66,9 +66,9 @@
 </nav>
 
 <aside id="logo-sidebar"
-    class="fixed top-0 left-0 z-40 w-64 h-full pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-primary dark:border-gray-700"
+    class="fixed top-0 left-0 z-40 w-64 h-full pt-20 transition-transform -translate-x-full border-r border-gray-700 bg-primary sm:translate-x-0 dark:bg-primary dark:border-gray-700"
     aria-label="Sidebar">
-    <div class="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-primary">
+    <div class="h-full px-3 pb-4 overflow-y-auto border-gray-700 bg-primary">
         <ul class="space-y-2 font-medium">
             {{-- Menu Pengaju --}}
             @if (Auth::user()->hasRole('pengaju'))
@@ -77,7 +77,7 @@
                 </div>
                 <div class="my-2 border-t border-secondary"></div>
                 <a href="/pengaju"
-                    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group
+                    class="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-gray-700 dark:hover:bg-gray-700 group
                 {{ request()->is('pengaju') || request()->is('pengaju/pengajuan-detail/*') ? 'bg-tertiary text-white font-semibold rounded-lg' : 'rounded-lg hover:shadow' }}">
                     <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -94,7 +94,7 @@
                 </a>
 
                 <a href="/pengajuan-form"
-                    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group
+                    class="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-gray-700 dark:hover:bg-gray-700 group
                 {{ request()->is('pengajuan-form') ? 'bg-tertiary text-white font-semibold rounded-lg' : 'rounded-lg hover:shadow' }}">
                     <svg class="w-5 h-5" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg"
                         xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -120,7 +120,7 @@
                 </a>
 
                 <a href="{{ route('pengaju.pengaduan.form') }}"
-                    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group
+                    class="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-gray-700 dark:hover:bg-gray-700 group
                 {{ request()->is('pengaju/pengaduan-form') ? 'bg-tertiary text-white font-semibold rounded-lg' : 'rounded-lg hover:shadow' }}">
                     <svg class="w-5 h-5" height="200px" width="200px" version="1.1" id="_x32_"
                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -152,7 +152,7 @@
                 <div class="my-2 border-t border-secondary"></div>
 
                 <a href="/penyetuju"
-                    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group
+                    class="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-gray-700 dark:hover:bg-gray-700 group
         {{ request()->is('penyetuju') || request()->is('penyetuju/penyetuju-detail/') ? 'bg-tertiary text-white font-semibold rounded-lg' : 'rounded-lg hover:shadow' }}">
                     <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -167,7 +167,7 @@
                     <span class="ms-3">Daftar Ajuan Cuti Pegawai</span>
                 </a>
                 <a href="{{ route('penyetuju.penyetuju-dashboard') }}"
-                    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 {{ request()->is('penyetuju-dashboard') ? 'bg-tertiary text-white font-semibold rounded-lg' : 'rounded-lg hover:shadow' }}">
+                    class="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-gray-700 dark:hover:bg-gray-700 {{ request()->is('penyetuju-dashboard') ? 'bg-tertiary text-white font-semibold rounded-lg' : 'rounded-lg hover:shadow' }}">
                     <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                         <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -183,7 +183,7 @@
                     <span class="ms-3">Dashboard Cuti Pegawai</span>
                 </a>
                 <a href="{{ route('penyetuju.pengaduan.form') }}"
-                    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group
+                    class="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-gray-700 dark:hover:bg-gray-700 group
         {{ request()->is('penyetuju/pengaduan-form') ? 'bg-tertiary text-white font-semibold rounded-lg' : 'rounded-lg hover:shadow' }}">
                     <svg class="w-5 h-5" height="200px" width="200px" version="1.1" id="_x32_"
                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -217,7 +217,7 @@
                     <div class="my-2 border-t border-secondary"></div>
 
                     <a href="/admin"
-                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group
+                        class="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-gray-700 dark:hover:bg-gray-700 group
         {{ request()->is('admin') || request()->is('admin/*') ? 'bg-tertiary text-white font-semibold rounded-lg' : 'rounded-lg hover:shadow' }}">
                         <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -245,7 +245,7 @@
                     <span class="ms-3">Daftar Pengaduan</span>
                     </a>
                     <a href="/daftar-pegawai"
-                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group
+                        class="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-gray-700 dark:hover:bg-gray-700 group
         {{ request()->is('daftar-pegawai') ? 'bg-tertiary text-white font-semibold rounded-lg' : 'rounded-lg hover:shadow' }}">
                         <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -262,7 +262,7 @@
                     </a>
 
                     <a href="/input-pegawai"
-                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group
+                        class="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-gray-700 dark:hover:bg-gray-700 group
         {{ request()->is('input-pegawai') ? 'bg-tertiary text-white font-semibold rounded-lg' : 'rounded-lg hover:shadow' }}">
                         <svg class="w-5 h-5" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg"
                             xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -294,9 +294,9 @@
 
         {{-- Log Out Button --}}
         <a onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-            class="flex items-center px-2 py-4 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group
+            class="flex items-center px-2 py-4 text-white rounded-lg dark:text-white hover:bg-gray-700 dark:hover:bg-gray-700 group
         {{ request()->is('') ? 'bg-tertiary text-white font-semibold rounded-lg' : 'rounded-lg hover:shadow' }}">
-            <svg class="w-5 h-5 text-white transition duration-75 dark:text-white group-hover:text-gray-900 dark:group-hover:text-white"
+            <svg class="w-5 h-5 text-white transition duration-75 dark:text-white group-hover:text-white dark:group-hover:text-white"
                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round"
