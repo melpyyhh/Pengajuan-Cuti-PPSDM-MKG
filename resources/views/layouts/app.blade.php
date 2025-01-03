@@ -25,6 +25,7 @@
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     @livewireStyles
+    @stack('css')
 </head>
 
 <body class="font-sans antialiased">
@@ -37,10 +38,12 @@
         <!-- Page Content -->
         {{-- <div class="flex-1 max-w-screen-xl px-6 py-12">
             {{ $slot }}
-        </div> --}}
+    </div> --}}
     </div>
     @livewire('livewire-ui-modal')
     @livewireScripts
+    <script src="/livewire/livewire.js"></script>
+    @stack('js')
 </body>
 
 </html>
