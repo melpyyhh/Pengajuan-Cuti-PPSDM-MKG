@@ -11,19 +11,19 @@
             <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
                 <div>
                     <label for="namaPegawai" class="block text-sm font-medium text-gray-700">Nama :</label>
-                    <input type="text" id="namaPegawai" disabled value="{{ $nama }}"
+                    <input type="text" id="namaPegawai" disabled value="{{ $dataPegawai['nama'] }}"
                         class="mt-1 block w-full rounded-md focus:border-blue-500 focus:ring-blue-500 border border-[#0032CC]">
                 </div>
                 <div>
                     <!-- divisinya tar dibuat getdivisibyid yah bang, kan blm ada tuh di tabel -->
-                    <label for="divisiPegawai" class="block text-sm font-medium text-gray-700">Divisi :</label>
+                    <label for="unitKerjaPegawai" class="block text-sm font-medium text-gray-700">Unit Kerja :</label>
                     {{-- ini divisinya masih dummy --}}
-                    <input type="text" id="divisiPegawai" disabled value="IT Support"
+                    <input type="text" id="unitKerjaPegawai" disabled value="{{$dataPegawai['unitKerja']}}"
                         class="mt-1 block w-full rounded-md focus:border-blue-500 focus:ring-blue-500 border border-[#0032CC]">
                 </div>
                 <div>
-                    <label for="gmailPegawai" class="block text-sm font-medium text-gray-700">Gmail :</label>
-                    <input type="text" id="gmailPegawai" disabled value="{{ $email }}"
+                    <label for="emailPegawai" class="block text-sm font-medium text-gray-700">Email :</label>
+                    <input type="text" id="emailPegawai" disabled value="{{ $dataPegawai['email'] }}"
                         class="mt-1 block w-full rounded-md focus:border-blue-500 focus:ring-blue-500 border border-[#0032CC]">
                 </div>
             </div>
@@ -51,7 +51,7 @@
                 <button type="button" wire:click="goBack"
                     class="px-4 py-2 text-white transition-colors shadow rounded-xl bg-tertiary hover:bg-orange-300">Kembali</button>
                     <!-- ini blm ada method submitnya bang -->
-                <button type="submit"
+                <button type="submit" wire:click="submitPengaduan"
                     class="px-4 py-2 text-white transition-colors shadow rounded-xl bg-tertiary hover:bg-orange-300">Kirim Pengaduan</button>
             </div>
         </form>
