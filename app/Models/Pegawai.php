@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pegawai extends Model
 {
-    protected $fillable = ['nip', 'nama', 'unitKerja', 'masaKerja', 'jabatan'];
+    protected $fillable = ['nip', 'nama', 'unitKerja', 'masaKerja', 'jabatan', 'email'];
 
     public function user()
     {
@@ -34,9 +34,10 @@ class Pegawai extends Model
     }
 
     public function dataCuti()
-    {
-        return $this->hasMany(DataCuti::class);
-    }
+{
+    return $this->hasMany(DataCuti::class, 'pegawais_id');
+}
+
 
     public function riwayatCuti()
     {
@@ -51,6 +52,7 @@ class Pegawai extends Model
             'jabatan' => $data['jabatan'],
             'unitKerja' => $data['unitKerja'],
             'masaKerja' => $data['masaKerja'],
+            'email' => $data['email']
         ]);
     }
 }

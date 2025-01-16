@@ -107,15 +107,15 @@ class InputPegawaiForm extends Component
 
     public function mount()
     {
-        // Asumsi kolom 'nama' memiliki nilai 'Cuti Tahunan' dan 'Cuti Besar'
-        $this->jenisCuti = JenisCuti::whereIn('jenis_cuti', ['Cuti Tahunan', 'Cuti Besar'])->get()->toArray();
+        $this->jenisCuti = JenisCuti::all()->toArray();
+
 
         // Jika 'Cuti Tahunan' memiliki tahun dinamis
         foreach ($this->jenisCuti as &$cuti) {
             if ($cuti['jenis_cuti'] === 'Cuti Tahunan') {
-                $currentYear = now()->year;
-                $cuti['tahun'] = range($currentYear - 3, $currentYear); // 3 tahun ke belakang + tahun sekarang
+                $cuti['tahun'] = [now()->year]; // Hanya tahun sekarang
             }
+            
         }
     }
 }
