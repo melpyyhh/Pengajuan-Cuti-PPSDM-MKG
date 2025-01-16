@@ -208,7 +208,7 @@
 
             <!-- Next Button -->
             <button type="button"
-                class="min-h-[38px] min-w-[38px] py-2 px-2.5 inline-flex justify-center items-center gap-x-1.5 text-sm rounded-lg text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none bg-primary text-white hover:bg-tertiary focus:bg-tertiary= dark:text-white dark:bg-primary dark:hover:bg-tertiary dark:focus:bg-tertiary"
+                class="min-h-[38px] min-w-[38px] py-2 px-2.5 inline-flex justify-center items-center gap-x-1.5 text-sm rounded-lg text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none bg-primary text-white hover:bg-tertiary focus:bg-tertiary dark:text-white dark:bg-primary dark:hover:bg-tertiary dark:focus:bg-tertiary"
                 @if ($listPengajuan->hasMorePages()) onclick="window.location='{{ $listPengajuan->nextPageUrl() }}'" @else disabled @endif
                 aria-label="Next">
                 <span>Next</span>
