@@ -34,6 +34,11 @@
             @include('layouts.navigation')
             @livewire('chatbot')
         </div>
+
+        <!-- Page Content -->
+        {{-- <div class="flex-1 max-w-screen-xl px-6 py-12">
+            {{ $slot }}
+    </div> --}}
     </div>
     @livewire('livewire-ui-modal')
     @livewireScripts
