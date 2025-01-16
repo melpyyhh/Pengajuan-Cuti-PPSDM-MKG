@@ -32,7 +32,9 @@
     <div class="flex min-h-screen bg-secondary">
         <div class="flex-1 py-4 basis-64">
             @include('layouts.navigation')
-            @livewire('chatbot')
+            @if (Auth::user()->hasRole('pengaju') || Auth::user()->hasRole('penyetuju'))
+                @livewire('chatbot')
+            @endif
         </div>
 
         <!-- Page Content -->
