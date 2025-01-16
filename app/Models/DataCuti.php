@@ -8,8 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class DataCuti extends Model
 {
     protected $table = 'data_cutis';
-    protected $fillable = ['pegawais_id', 'jenis_cuti_id', 'jumlah_cuti', 'sisa_cuti', 'tahun'];
-
+    protected $fillable = ['pegawais_id', 'jenis_cuti_id', 'jumlah_cuti', 'sisa_cuti'];
 
     public function pegawai()
     {
@@ -18,7 +17,7 @@ class DataCuti extends Model
 
     public function jenisCuti()
     {
-        return $this->belongsTo(JenisCuti::class, 'jenis_cuti_id'); // Relasi ke jenis_cuti
+        return $this->belongsTo(JenisCuti::class);
     }
 
     public static function tambahDataCuti($data)
@@ -28,10 +27,8 @@ class DataCuti extends Model
             'jenis_cuti_id' => $data['jenis_cuti_id'],
             'jumlah_cuti' => $data['jumlah_cuti'],
             'sisa_cuti' => $data['sisa_cuti'],
-            'tahun' => now()->year, // Menambahkan tahun saat ini
         ]);
     }
-    
 
     public static function cekCutiTahunan($idPegawai)
     {

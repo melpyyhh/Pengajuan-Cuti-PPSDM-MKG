@@ -2,15 +2,11 @@
 
 namespace App\Http\Livewire;
 
-use App\Mail\PengajuanDisetujuiMail;
 use App\Models\DataCuti;
 use App\Models\JenisCuti;
 use App\Models\Pengajuan;
 use App\Models\RiwayatCuti;
-use App\Models\User;
 use Dflydev\DotAccessData\Data;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -52,7 +48,7 @@ class PengajuanForm extends Component
             'alamatCuti' => 'required|string',
             'nomorHp' => 'required|string|regex:/^08\d{8,12}$/|min:10|max:14',
             'tanggalMulai' => 'required|date',
-            'durasiCuti' => 'required|integer|min:1|max:90', // Tambahkan max untuk cuti bersalin
+            'durasiCuti' => 'required|integer|min:1',
         ],
         3 => ['dokumen' => 'nullable|file|max:2048'],
     ];
@@ -74,13 +70,10 @@ class PengajuanForm extends Component
         'durasiCuti.required' => 'Durasi cuti wajib diisi!',
         'durasiCuti.integer' => 'Durasi cuti harus berupa angka!',
         'durasiCuti.min' => 'Durasi cuti minimal 1 hari!',
-        'durasiCuti.max' => 'Anda hanya dapat mengajukan cuti bersalin maksimal 90 hari.',
     ];
 
     public function goToNextPage()
     {
-
-        
         // Validasi berdasarkan halaman saat ini
         $this->pegawaiId = Auth::user()->pegawai->id;
         if (isset($this->validationRules[$this->currentPage])) {
@@ -97,13 +90,13 @@ class PengajuanForm extends Component
             $result = $this->cekKetersediaanCuti($data);
 
             if (!$result['status']) {
-                $this->dispatch('custom-alert', [
-                    'type' => 'error',
-                    'title' => $result['message'],
-                    'position' => 'center',
-                    'timer' => 3000,
-                ]);
-                
+                $this->dispatch(
+                    'custom-alert',
+                    type: 'error',
+                    title: $result['message'],
+                    position: 'center',
+                    timer: 3000,
+                );
                 return;
             }
 
@@ -123,20 +116,6 @@ class PengajuanForm extends Component
                         'custom-alert',
                         type: 'error',
                         title: 'Durasi cuti melebihi total sisa cuti tahunan.',
-                        position: 'center',
-                        timer: 3000,
-                    );
-                    return;
-                }
-            }
-
-            if ($this->jenisCutiTerpilih === "3") {
-                $maksimumCutiBersalin = 90; // Misalnya, 90 hari
-                if ($this->durasiCuti > $maksimumCutiBersalin) {
-                    $this->dispatch(
-                        'custom-alert',
-                        type: 'error',
-                        title: 'Durasi cuti bersalin melebihi batas maksimum.',
                         position: 'center',
                         timer: 3000,
                     );
@@ -194,10 +173,12 @@ class PengajuanForm extends Component
     // Atur lagi aja bang ini submit"annya, ini cuman sementara karena viewnya gabisa dinext kalo gaada submit
     public function submitForm()
     {
-        try {    
+        try {
+            // Validasi akhir
+            $this->validate(array_merge(...array_values($this->validationRules)));
             // Logika pengajuan cuti
             $tanggalAkhir = $this->hitungTanggalAkhir($this->tanggalMulai, $this->durasiCuti);
-            $pengajuan = Pengajuan::ajukanCuti([
+            Pengajuan::ajukanCuti([
                 'pengaju_id' => Auth::user()->pegawai->id,
                 'penyetuju_id' => 2,
                 'cuti_id' => $this->jenisCutiTerpilih,
@@ -208,42 +189,17 @@ class PengajuanForm extends Component
                 'nomorHp' => $this->nomorHp,
                 'tanggal_akhir' => $tanggalAkhir,
             ]);
-    
-            // Use $pengajuan->id instead of undefined $id
-            $pengajuan = Pengajuan::with(['pengaju', 'penyetuju', 'cuti'])->findOrFail($pengajuan->id);
-         
-            // Kirim email ke semua pengguna dengan role "penyetuju"
-            $penyetujuUsers = User::where('role', 'penyetuju')->get();
-            $penyetujuUsersEmail = $penyetujuUsers->pluck('email');
-            
-            foreach ($penyetujuUsersEmail as $email) {
-                try {
-                    Mail::to($email)->send(new PengajuanDisetujuiMail($pengajuan));
-                } catch (\Throwable $e) {
-                    Log::error("Gagal mengirim email ke {$email}: " . $e->getMessage());
-                }
-            }            
-                
             // Dispatch alert untuk sukses
             $this->dispatch('custom-alert', type: 'success', title: 'Pengajuan Berhasil', position: 'center', timer: 3000);
-         
             // Reset form
             $this->reset(['jenisCutiTerpilih', 'tanggalMulai', 'alasan', 'durasiCuti', 'alamatCuti', 'nomorHp', 'currentPage']);
-         
             // Redirect ke route pengaju.riwayat
             return redirect()->route('pengaju.riwayat');
-    
         } catch (\Throwable $e) {
-            // Log the error message for debugging
-            Log::error('Error in submitForm: ' . $e->getMessage());
-            Log::error($e->getTraceAsString());
-    
             // Dispatch alert untuk error
             $this->dispatch('custom-alert', type: 'error', title: 'Terjadi Kesalahan', position: 'center', timer: 3000);
         }
     }
-    
-    
 
 
     public function resetSuccess()
