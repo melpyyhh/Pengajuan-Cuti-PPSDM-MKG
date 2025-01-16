@@ -2,45 +2,53 @@
 
 namespace App\Models;
 
-
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
 
 class Pengajuan extends Model
 {
-    /** @use HasFactory<\Database\Factories\PengajuanFactory> */
     use HasFactory;
 
-    protected $fillable = ['pengaju_id', 'penyetuju_id', 'cuti_id', 'alasan', 'tanggal_awal', 'tanggal_akhir', 'alamatCuti', 'nomorHp', 'selama'];
+    protected $fillable = [
+        'pengaju_id', 'penyetuju_id', 'cuti_id', 'alasan', 'tanggal_awal',
+        'tanggal_akhir', 'alamatCuti', 'nomorHp', 'selama'
+    ];
 
+    // Define the relationship with Pegawai (pengaju)
     public function pengaju()
     {
         return $this->belongsTo(Pegawai::class, 'pengaju_id');
     }
 
+    // Define the relationship with Pegawai (penyetuju)
     public function penyetuju()
     {
         return $this->belongsTo(Pegawai::class, 'penyetuju_id');
     }
 
+    // Define the relationship with JenisCuti
     public function cuti()
     {
         return $this->belongsTo(JenisCuti::class, 'cuti_id');
     }
 
+    // Define relationship with RiwayatCuti
     public function riwayatCuti()
     {
         return $this->hasOne(RiwayatCuti::class);
     }
 
+    // Define relationship with ProsesCuti
     public function prosesCuti()
     {
         return $this->hasOne(ProsesCuti::class);
     }
 
+    // Method to handle pengajuan cuti creation
     public static function ajukanCuti($data)
     {
+        // Create Pengajuan
         $pengajuan = self::create([
             'pengaju_id' => $data['pengaju_id'],
             'penyetuju_id' => $data['penyetuju_id'],
@@ -53,6 +61,7 @@ class Pengajuan extends Model
             'alamatCuti' => $data['alamat'],
         ]);
 
+        // Create ProsesCuti entry
         ProsesCuti::create([
             'pengajuan_id' => $pengajuan->id,
             'cuti_id' => $pengajuan->cuti_id,
@@ -60,6 +69,7 @@ class Pengajuan extends Model
             'status_ajuan' => 'diproses', // Status 'diproses' saat pengajuan dibuat
         ]);
 
+        // Create RiwayatCuti entry
         RiwayatCuti::create([
             'pengajuan_id' => $pengajuan->id,
             'cuti_id' => $pengajuan->cuti_id,
@@ -69,33 +79,38 @@ class Pengajuan extends Model
             'tanggal_awal' => $pengajuan->tanggal_awal,
             'tanggal_akhir' => $pengajuan->tanggal_akhir
         ]);
+        
         return $pengajuan;
     }
 
+    // Method to update the status of the Pengajuan
     public static function updateStatus($data)
     {
         try {
-            $pengajuan = Pengajuan::find($data['id']);
+            $pengajuan = self::find($data['id']);
             if (!$pengajuan) {
                 throw new \Exception('Pengajuan tidak ditemukan.');
             }
+            
+            // Update status in ProsesCuti
             ProsesCuti::where('pengajuan_id', $pengajuan->id)
                 ->update(['status_ajuan' => $data['status']]);
+            
+            // Update status in RiwayatCuti
             RiwayatCuti::where('pengajuan_id', $pengajuan->id)
                 ->update(['status_ajuan' => $data['status']]);
-        } catch (\Throwable $e) { {
-                throw $e;
-            }
+        } catch (\Throwable $e) {
+            throw $e;
         }
     }
 
+    // Method to delete a Pengajuan record
     public static function deletePengajuan($idRiwayat)
     {
         try {
             $riwayatCuti = RiwayatCuti::find($idRiwayat);
             if ($riwayatCuti && $riwayatCuti->status_ajuan === "diproses") {
                 $pengajuan = self::find($riwayatCuti->pengajuan_id);
-
                 if ($pengajuan) {
                     $pengajuan->delete();
                     return true; // Penghapusan berhasil
@@ -103,7 +118,6 @@ class Pengajuan extends Model
             }
             return false; // Data tidak valid
         } catch (\Throwable $e) {
-            // Return exception jika terjadi error
             throw $e;
         }
     }

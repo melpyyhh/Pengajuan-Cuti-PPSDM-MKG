@@ -1,143 +1,123 @@
-{{-- Header --}}
-<div wire:poll.1s>
-    <h1 class="py-2 text-4xl font-bold tracking-wider text-gray-800">
-        Data Pegawai
-    </h1>
-    <p class="mb-4">{{ $pages[$currentPage]['subheading'] }}</p>
+<div class="bg-white min-h-screen flex flex-col items-center">
+    <div class="text-left w-full max-w-5xl mt-4">
+        <h2 class="text-3xl font-bold text-gray-900">Data Pegawai</h2>
+    </div>
 
-    <!-- Form -->
-    <div class="h-auto mx-auto overflow-y-hidden shadow w-max-full sm:rounded-md sm:overflow-hidden">
-        <div class="px-8 py-8 bg-[#F4F7FE] space-y-8 sm:p-8">
-            @if ($currentPage === 1)
-                <!-- Form Data Pegawai -->
-                <div class="space-y-4">
-                    <!-- Nama Pegawai dan NIP -->
-                    <div class="flex space-x-4">
-                        <div class="w-1/2">
-                            <label for="namaPegawai" class="block text-sm font-medium text-gray-700">Nama Pegawai:</label>
-                            <input wire:model="namaPegawai" type="text" id="namaPegawai"
-                                class="mt-1 block w-full rounded-2xl border border-[#0032CC] focus:ring-[#0032CC] focus:border-[#0032CC]">
-                        </div>
-                        <div class="w-1/2">
-                            <label for="NIP" class="block text-sm font-medium text-gray-700">NIP:</label>
-                            <input wire:model="NIP" type="text" id="NIP"
-                                class="mt-1 block w-full rounded-2xl border border-[#0032CC] focus:ring-[#0032CC] focus:border-[#0032CC]">
-                        </div>
-                    </div>
-
-                    <!-- Unit Kerja Pegawai dan Jabatan -->
-                    <div class="flex space-x-4">
-                        <div class="w-1/2">
-                            <label for="unitKerjaPegawai" class="block text-sm font-medium text-gray-700">Unit
-                                Kerja:</label>
-                            <input wire:model="unitKerjaPegawai" type="text" id="unitKerjaPegawai"
-                                class="mt-1 block w-full rounded-2xl border border-[#0032CC] focus:ring-[#0032CC] focus:border-[#0032CC]">
-                        </div>
-                        <div class="w-1/2">
-                            <label for="jabatanPegawai" class="block text-sm font-medium text-gray-700">Jabatan:</label>
-                            <input wire:model="jabatanPegawai" type="text" id="jabatanPegawai"
-                                class="mt-1 block w-full rounded-2xl border border-[#0032CC] focus:ring-[#0032CC] focus:border-[#0032CC]">
-                        </div>
-                    </div>
-
-                    <!-- Masa Kerja dan Tanggal Input Pegawai -->
-                    <div class="flex space-x-4">
-                        <div class="w-1/2">
-                            <label for="masaKerjaPegawai" class="block text-sm font-medium text-gray-700">Masa
-                                Kerja:</label>
-                            <input wire:model="masaKerjaPegawai" type="text" id="masaKerjaPegawai"
-                                class="mt-1 block w-full rounded-2xl border border-[#0032CC] focus:ring-[#0032CC] focus:border-[#0032CC]">
-                        </div>
-                        <div class="w-1/2">
-                            <label for="tanggalInputPegawai" class="block text-sm font-medium text-gray-700">Tanggal
-                                Input:</label>
-                            <input wire:model="tanggalInputPegawai" type="date" id="tanggalInputPegawai"
-                                class="mt-1 block w-full rounded-2xl border border-[#0032CC] focus:ring-[#0032CC] focus:border-[#0032CC]">
-                        </div>
-                    </div>
+    <div class="bg-blue-50 p-6 rounded-xl shadow-xl max-w-5xl w-full mt-6" style="max-height: 700px; overflow-y: auto;">
+        <div class="grid grid-cols-2 gap-8">
+            <!-- Bagian Kiri -->
+            <div>
+                <h3 class="text-lg font-semibold text-blue-900 mb-4">🧑‍💼 Informasi Pegawai</h3>
+                <div class="mb-4">
+                    <label for="namaPegawai" class="block text-md text-gray-700 font-medium mb-2">Nama Pegawai</label>
+                    <input id="namaPegawai" type="text" class="w-full border border-gray-300 rounded-lg p-2 text-md" wire:model="namaPegawai">
+                    @error('namaPegawai') <span class="text-red-500">{{ $message }}</span> @enderror
                 </div>
-
-                <!-- Daftar Jenis Cuti -->
+                <div class="mb-4">
+                    <label for="NIP" class="block text-md text-gray-700 font-medium mb-2">NIP</label>
+                    <input id="NIP" type="text" class="w-full border border-gray-300 rounded-lg p-2 text-md" wire:model="NIP">
+                    @error('NIP') <span class="text-red-500">{{ $message }}</span> @enderror
+                </div>
+                <div class="mb-4">
+                    <label for="unitKerjaPegawai" class="block text-md text-gray-700 font-medium mb-2">Unit Kerja</label>
+                    <input id="unitKerjaPegawai" type="text" class="w-full border border-gray-300 rounded-lg p-2 text-md" wire:model="unitKerjaPegawai">
+                    @error('unitKerjaPegawai') <span class="text-red-500">{{ $message }}</span> @enderror
+                </div>
+                <div class="mb-4">
+                    <label for="jabatanPegawai" class="block text-md text-gray-700 font-medium mb-2">Jabatan</label>
+                    <input id="jabatanPegawai" type="text" class="w-full border border-gray-300 rounded-lg p-2 text-md" wire:model="jabatanPegawai">
+                    @error('jabatanPegawai') <span class="text-red-500">{{ $message }}</span> @enderror
+                </div>
+                <div class="mb-4">
+                    <label for="masaKerjaPegawai" class="block text-md text-gray-700 font-medium mb-2">Masa Kerja</label>
+                    <input id="masaKerjaPegawai" type="number" class="w-full border border-gray-300 rounded-lg p-2 text-md" wire:model="masaKerjaPegawai">
+                    @error('masaKerjaPegawai') <span class="text-red-500">{{ $message }}</span> @enderror
+                </div>
                 <div>
-                    @foreach ($jenisCutiFields as $index => $field)
-                        <div class="flex space-x-4" wire:key="jenisCutiField-{{ $index }}">
-                            <!-- Dropdown Jenis Cuti -->
-                            <div class="w-1/2">
-                                <label for="jenisCuti{{ $index }}"
-                                    class="block text-sm font-medium text-gray-700">
-                                    Jenis Cuti:
+                    <label for="tanggalInputPegawai" class="block text-md text-gray-700 font-medium mb-2">Tanggal Input</label>
+                    <input id="tanggalInputPegawai" type="date" class="w-full border border-gray-300 rounded-lg p-2 text-md" wire:model="tanggalInputPegawai">
+                    @error('tanggalInputPegawai') <span class="text-red-500">{{ $message }}</span> @enderror
+                </div>
+            </div>
+
+            <!-- Bagian Kanan -->
+            <div>
+                <h3 class="text-lg font-semibold text-blue-900 mb-4">📋 Data Cuti Pegawai</h3>
+                @if (!empty($jenisCutiFields))
+                    @foreach ($jenisCutiFields as $fieldIndex)
+                        @if (!is_null($fieldIndex) && $fieldIndex !== 0)
+                            <div class="mb-4">
+                                <label for="jenisCuti-{{ $fieldIndex }}" 
+                                    class="block text-md text-gray-700 font-medium mb-2">
+                                    Jenis Cuti
                                 </label>
-                                <select wire:model="selectedJenisCuti.{{ $index }}"
-                                    id="jenisCuti{{ $index }}"
-                                    class="mt-1 block w-full rounded-2xl border border-[#0032CC] focus:ring-[#0032CC] focus:border-[#0032CC] tracking-widest">
-                                    <option value="" hidden selected>Pilih Jenis Cuti</option>
-                                    @foreach ($jenisCuti as $jenis)
-                                        <option value="{{ $jenis['id'] }}">{{ $jenis['jenis_cuti'] }}</option>
+                                <select id="jenisCuti-{{ $fieldIndex }}" 
+                                        class="w-full border border-gray-300 rounded-lg p-2 text-md" 
+                                        wire:model="jenisCutiFields.{{ $fieldIndex }}">
+                                    <option value="">Pilih Jenis Cuti</option>
+                                    @foreach ($selectedJenisCuti as $key => $label)
+                                        <option value="{{ $key }}">{{ $label }}</option>
                                     @endforeach
                                 </select>
+                                @error('jenisCutiFields.' . $fieldIndex) 
+                                    <span class="text-red-500">{{ $message }}</span> 
+                                @enderror
                             </div>
-
-                            <!-- Dropdown Tahun (Hanya untuk Cuti Tahunan) -->
-                            @if (isset($selectedJenisCuti[$index]) && $selectedJenisCuti[$index] == 1)
-                                <div class="w-1/2">
-                                    <label for="tahunCuti{{ $index }}"
-                                        class="block text-sm font-medium text-gray-700">
-                                        Tahun Cuti:
-                                    </label>
-                                    <select wire:model="selectedJenisCuti.{{ $index }}_tahun"
-                                        id="tahunCuti{{ $index }}"
-                                        class="mt-1 block w-full rounded-2xl border border-[#0032CC] focus:ring-[#0032CC] focus:border-[#0032CC] tracking-widest">
-                                        <option value="" disabled>Pilih Tahun</option>
-                                        @foreach ($jenisCuti[0]['tahun'] as $tahun)
-                                            <option value="{{ $tahun }}">{{ $tahun }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            @endif
-
-                            <!-- Input Sisa Cuti -->
-                            <div class="w-1/2">
-                                <label for="sisaCuti{{ $index }}"
-                                    class="block text-sm font-medium text-gray-700">
-                                    Sisa Cuti:
+                            <div class="mb-4">
+                                <label for="sisaCuti-{{ $fieldIndex }}" 
+                                    class="block text-md text-gray-700 font-medium mb-2">
+                                    Sisa Cuti
                                 </label>
-                                <input wire:model="sisaCuti.{{ $index }}" type="number"
-                                    id="sisaCuti{{ $index }}"
-                                    class="mt-1 block w-full rounded-2xl border border-[#0032CC] focus:ring-[#0032CC] focus:border-[#0032CC]">
+                                <input id="sisaCuti-{{ $fieldIndex }}" 
+                                    type="number" 
+                                    class="w-full border border-gray-300 rounded-lg p-2 text-md" 
+                                    wire:model="sisaCuti.{{ $fieldIndex }}"
+                                    min="0">
+                                @error('sisaCuti.' . $fieldIndex) 
+                                    <span class="text-red-500">{{ $message }}</span> 
+                                @enderror
                             </div>
-                        </div>
-                    @endforeach
-
-                    <!-- Tombol Tambah dan Hapus -->
-                    <div class="flex justify-end mt-4 space-x-4">
-                        <button type="button" wire:click="addJenisCuti"
-                            class="px-4 py-2 text-white bg-tertiary rounded-3xl">
-                            Tambah
-                        </button>
-                        @if (count($jenisCutiFields) > 1)
-                            <button type="button" wire:click="removeJenisCuti"
-                                class="px-4 py-2 text-white bg-red-500 rounded-3xl">
-                                Hapus
-                            </button>
                         @endif
-                    </div>
-                </div>
-            @endif
-        </div>
-
-        <!-- Buttons -->
-        <div class="px-4 py-2 bg-[#F4F7FE] flex justify-center sm:px-6 space-x-6">
-            @if ($currentPage === count($pages))
-                <!-- Cek jika sudah di halaman terakhir -->
-                <button type="submit" wire:click="updatePegawai"
-                    class="px-6 py-2 text-white bg-green-500 shadow shadow-md rounded-3xl">Submit</button>
-                <button type="button" wire:click="deletePegawai"
-                    class="px-6 py-2 text-white bg-red-500 shadow shadow-md rounded-3xl">Hapus</button>
-                <button type="button" onclick="window.location.href='/daftar-pegawai'"
-                    class="px-4 py-2 text-white transition-colors shadow shadow-md bg-tertiary rounded-3xl hover:bg-orange-300">
-                    Kembali
-                </button>
-            @endif
+                    @endforeach
+                @else
+                    <p class="text-gray-600">Tidak ada data cuti untuk ditampilkan.</p>
+                @endif
+            </div>             
         </div>
     </div>
+
+    <div class="flex justify-center gap-6 mt-6">
+        <button type="button" wire:click="goBack" class="bg-orange-500 text-white px-6 py-2 rounded-lg hover:bg-orange-600">
+            Kembali
+        </button>
+        <button type="button" wire:click="updatePegawai" class="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600">
+            Simpan
+        </button>
+        <button @click="confirmDelete(() => $wire.deletePegawai())" class="bg-red-500 text-white px-6 py-2 rounded-lg hover:bg-red-600">
+            Hapus Pegawai
+        </button>
+    </div>
 </div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/livewire-v2.x/livewire.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x/dist/cdn.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function confirmDelete(callback) {
+        Swal.fire({
+            title: 'Apakah Anda yakin?',
+            text: 'Data ini akan dihapus secara permanen!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Ya, hapus!',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                callback();
+            }
+        });
+    }
+</script>
