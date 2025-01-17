@@ -41,13 +41,13 @@
             @foreach ($pengaduans as $pengaduan)
                 <div class="flex items-center justify-between p-6 mb-2 bg-blue-100 rounded-md shadow-md">
                     <div>
-                        <div class="font-semibold">{{ $pengaduan->descriptions }}</div>
+                        <div class="font-semibold">{{ $pengaduan->title }}</div>
                         <div class="text-sm text-gray-600">{{ $pengaduan->pegawai->nama }} -
                             {{ $pengaduan->pegawai->unitKerja }}
                         </div>
-                        <div class="text-sm text-gray-600">Admin yang terhormat, ....</div>
+                        <div class="text-sm text-gray-600">{{ $pengaduan->descriptions }}</div>
                     </div>
-                    <button
+                    <button wire:click="showModal({{ $pengaduan->id }})"
                         class="flex items-center justify-center w-12 h-12 font-bold text-gray-800 rounded-full bg-tertiary hover:bg-orange-300">
                         <svg fill="#08244B" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg"
                             xmlns:xlink="http://www.w3.org/1999/xlink" stroke="#08244B" class="w-6 h-6">
@@ -76,5 +76,6 @@
                 </div>
             @endforeach
         </div>
+        @livewire('pengaduan-detail')
     </div>
 </x-app-layout>
