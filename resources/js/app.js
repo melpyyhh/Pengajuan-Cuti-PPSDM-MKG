@@ -1,10 +1,5 @@
 import "./bootstrap";
 
-import Alpine from "alpinejs";
-
-window.Alpine = Alpine;
-Alpine.start();
-
 import Swal from "sweetalert2";
 window.Swal = Swal;
 
@@ -22,4 +17,8 @@ window.addEventListener("custom-alert", (event) => {
 window.addEventListener("refreshPage", (event) => {
     // Melakukan refresh setelah notifikasi
     location.reload();
+});
+
+Livewire.on('uploadProgress', (progress) => {
+    document.querySelector('[x-data]').__x.$data.progress = progress;
 });
