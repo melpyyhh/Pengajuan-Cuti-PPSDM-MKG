@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Route;
 
 
 use Livewire\Livewire;
+use Barryvdh\DomPDF\Facade\Pdf;
+use App\Http\Controllers\PDFController;
 
 use App\Http\Livewire\PengajuanForm;
 use App\Http\Livewire\InputPegawaiForm;
@@ -59,3 +61,5 @@ Route::middleware(['auth', 'adminMiddleware'])->group(function () {
     Route::get('/input-pegawai', InputPegawaiForm::class)->name('admin.input-pegawai');
     Route::get('/detail-pegawai', PegawaiDetail::class)->name('admin.detail-pegawai');
 });
+//Cetak PDF
+Route::get('/export-pdf/{id}', [PDFController::class, 'exportPDF']);
