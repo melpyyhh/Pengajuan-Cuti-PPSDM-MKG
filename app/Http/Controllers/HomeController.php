@@ -15,7 +15,7 @@ class HomeController extends Controller
             } elseif (Auth::user()->role === 'penyetuju') {
                 return redirect()->route('penyetuju.daftar-cuti');
             } elseif (Auth::user()->role === 'admin') {
-                return redirect()->route('admin.menu-pengaduan');
+                return redirect()->route('admin.daftar-pengaduan');
             }
         }
         return redirect()->route('login');
