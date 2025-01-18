@@ -17,12 +17,7 @@ class AdminController extends Controller
 
     public function menuPengaduan()
     {
-        $pengaduans = Pengaduan::getAllWithRelations();
-        // Total pengaduan
-        $totalPengaduan = Pengaduan::count();
-        // Jumlah pengaduan berdasarkan status
-        $daftartungguCount = Pengaduan::countDaftarTunggu();
-        $ditanggapiCount = Pengaduan::countDitanggapi();
+        
         return view('admin.menu-pengaduan', compact('pengaduans', 'totalPengaduan', 'daftartungguCount', 'ditanggapiCount'));
     }
 
