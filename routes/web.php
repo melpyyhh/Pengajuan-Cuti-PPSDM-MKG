@@ -45,6 +45,10 @@ Route::middleware(['auth', 'pengajuMiddleware'])->group(function () {
     Route::get('/pengaju/pengajuan-detail/{idPengajuan}', PengajuanDetail::class)->name('pengaju.pengajuan-detail');
     Route::get('/pengaju/riwayat-pengaduan', RiwayatPengaduan::class)->name('pengaju.riwayat-pengaduan');
     Route::get('/pengaju/pengaduan-form', PengaduanForm::class)->name('pengaju.pengaduan.form');
+    // Cetak PDF
+    Route::get('/exportPdf/{idPengajuan}', [PDFController::class, 'exportPDF']);
+    //Route::get('/export-pdf/{idPengajuan}', [PDFController::class, 'exportPDF'])->name('pengaju.export-pdf');
+
 });
 // Penyetuju
 Route::middleware(['auth', 'penyetujuMiddleware'])->group(function () {
@@ -61,5 +65,3 @@ Route::middleware(['auth', 'adminMiddleware'])->group(function () {
     Route::get('/input-pegawai', InputPegawaiForm::class)->name('admin.input-pegawai');
     Route::get('/detail-pegawai', PegawaiDetail::class)->name('admin.detail-pegawai');
 });
-//Cetak PDF
-Route::get('/export-pdf/{id}', [PDFController::class, 'exportPDF']);
