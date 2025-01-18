@@ -76,17 +76,16 @@
                     Kembali
                 </button>
                 @if ($statusAjuan == 'diproses')
-                <button type="button" wire:click="buttonDelete"
-                    class="px-4 py-2 text-white transition-colors bg-red-500 shadow shadow-md rounded-3xl hover:bg-red-300">
-                    Batalkan
-                </button>
+                    <button type="button" wire:click="buttonDelete"
+                        class="px-4 py-2 text-white transition-colors bg-red-500 shadow shadow-md rounded-3xl hover:bg-red-300">
+                        Batalkan
+                    </button>
                 @endif
                 @if ($statusAjuan == 'disetujui')
-                <button type="button"
-                    onclick="window.location='{{ url('/exportdf/' . $idPengajuan) }}'"
-                    class="px-4 py-2 text-white transition-colors bg-green-500 shadow shadow-md rounded-3xl hover:bg-green-300">
-                    Cetak PDF
-                </button>
+                    <button type="button" onclick="window.location='{{ url('/exportPdf/' . $idPengajuan) }}'"
+                        class="px-4 py-2 text-white transition-colors bg-green-500 shadow shadow-md rounded-3xl hover:bg-green-300">
+                        Cetak PDF
+                    </button>
                 @endif
             </div>
         </form>

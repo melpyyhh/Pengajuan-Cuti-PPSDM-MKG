@@ -195,27 +195,28 @@
                 <tr>
                     <th>Tahun</th>
                     <th>Sisa</th>
-                    <th>Tahun</th>
+                    <th>Keterangan</th>
                     <td>3. CUTI SAKIT</td>
                 </tr>
-                <tr>
-                    <td>2022</td>
-                    <td>0</td>
-                    <td>-</td>
-                    <td>4. CUTI MELAHIRKAN</td>
-                </tr>
-                <tr>
-                    <td>2022</td>
-                    <td>0</td>
-                    <td>-</td>
-                    <td>5. CUTI KARENA ALASAN PENTING</td>
-                </tr>
-                <tr>
-                    <td>2022</td>
-                    <td>0</td>
-                    <td>-</td>
-                    <td>6. CUTI DI LUAR TANGGUNGAN NEGARA</td>
-                </tr>
+                @foreach ($sisaCuti as $index => $cuti)
+                    <tr>
+                        <td>{{ $cuti->tahun }}</td>
+                        <td>{{ $cuti->sisa_cuti }}</td>
+                        <td>{{ $cuti->tahun }}</td>
+                        <td>
+                            @if ($index == 0)
+                                4. CUTI MELAHIRKAN
+                            @elseif ($index == 1)
+                                5. CUTI KARENA ALASAN PENTING
+                            @elseif ($index == 2)
+                                6. CUTI DI LUAR TANGGUNGAN NEGARA
+                            @else
+                                -
+                            @endif
+                        </td>
+                    </tr>
+                @endforeach
+
             </table>
         </div>
 
@@ -239,13 +240,15 @@
                                 <td style="text-align: center; border: none;">Hormat saya,</td>
                             </tr>
                             <tr>
-                                <td style="text-align: center; border: none;"><img src="https://i.pinimg.com/736x/95/5d/ae/955dae94a3dc3a7928b57e860aed4d51.jpg" style="height: 50px; width: 50px; object-fit: contain;" alt="TTD1"></td>
+                                <td style="text-align: center; border: none;"><img
+                                        src="{{ public_path('img/dummy.jpg') }}"
+                                        style="height: 50px; width: 50px; object-fit: contain;" alt="TTD1"></td>
                             </tr>
                             <tr>
-                                <td style="text-align: center; border: none;">Septian Bagus Wibisono, S.Kom, M.T.I.</td>
+                                <td style="text-align: center; border: none;">{{ $pengajuan->nama_pengaju }}</td>
                             </tr>
                             <tr>
-                                <td style="text-align: center; border: none;">NIP.199009282015021003</td>
+                                <td style="text-align: center; border: none;">{{ $pengajuan->nip_pengaju }}</td>
                             </tr>
                         </table>
                     </td>
@@ -272,7 +275,21 @@
                     <td style="height: 10px;"></td>
                 </tr>
                 <tr>
-                    <td style="text-align: right; vertical-align: middle;" colspan="4"><img src="https://i.pinimg.com/736x/95/5d/ae/955dae94a3dc3a7928b57e860aed4d51.jpg" style="height: 50px; width: 50px; object-fit: contain;" alt="TTD1"></td>
+                    <table class="ttd1" style="border: none;">
+                        <tr>
+                            <td style="text-align: center; border: none;">Kepala Pusat Pendidikan dan Pelatihan</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center; border: none;"><img src="{{ $ttd }}"
+                                    style="height: 50px; width: 50px; object-fit: contain;" alt="TTD1"></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center; border: none;">{{ $pengajuan->nama_pengaju }}</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center; border: none;">{{ $pengajuan->nip_pengaju }}</td>
+                        </tr>
+                    </table>
                 </tr>
             </table>
         </div>
@@ -296,7 +313,9 @@
                     <td style="height: 10px;"></td>
                 </tr>
                 <tr>
-                    <td style="text-align: right; vertical-align: middle;" colspan="4"><img src="https://i.pinimg.com/736x/95/5d/ae/955dae94a3dc3a7928b57e860aed4d51.jpg" style="height: 50px; width: 50px; object-fit: contain;" alt="TTD1"></td>
+                    <td style="text-align: right; vertical-align: middle;" colspan="4"><img
+                            src="https://i.pinimg.com/736x/95/5d/ae/955dae94a3dc3a7928b57e860aed4d51.jpg"
+                            style="height: 50px; width: 50px; object-fit: contain;" alt="TTD1"></td>
                 </tr>
             </table>
         </div>

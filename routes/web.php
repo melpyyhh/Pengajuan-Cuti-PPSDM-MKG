@@ -47,8 +47,7 @@ Route::middleware(['auth', 'pengajuMiddleware'])->group(function () {
     Route::get('/pengaju/pengaduan-form', PengaduanForm::class)->name('pengaju.pengaduan.form');
     // Cetak PDF
     Route::get('/exportPdf/{idPengajuan}', [PDFController::class, 'exportPDF']);
-    //Route::get('/export-pdf/{idPengajuan}', [PDFController::class, 'exportPDF'])->name('pengaju.export-pdf');
-
+    // Route::get('/index/{idPengajuan}', [PDFController::class, 'index'])->name('pengaju.export-pdf');
 });
 // Penyetuju
 Route::middleware(['auth', 'penyetujuMiddleware'])->group(function () {
