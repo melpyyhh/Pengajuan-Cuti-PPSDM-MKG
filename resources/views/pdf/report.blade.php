@@ -8,14 +8,11 @@
     <style>
         @page {
             size: A4;
-            /* Ukuran tetap A4 */
-            margin: 10mm;
-            /* Kurangi margin agar lebih hemat ruang */
+            margin: 15mm;
         }
 
         body {
-            font-size: 11px;
-            /* Kurangi ukuran font */
+            font-size: 10px;
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
@@ -24,20 +21,28 @@
 
         table {
             width: 100%;
-            /* Pastikan tabel menggunakan seluruh lebar yang tersedia */
             border-collapse: collapse;
-            /* Hapus margin antar tabel */
+            table-layout: auto;
         }
 
         th,
         td {
-            padding: 5px;
-            /* Kurangi padding */
+            padding: 3px;
             text-align: left;
             border: 1px solid black;
-            /* Gunakan batas yang rapat */
             word-wrap: break-word;
-            /* Bungkus kata agar tidak melampaui kolom */
+            font-size: 10px;
+        }
+
+        tr {
+            height: auto;
+        }
+
+        table,
+        tr,
+        td,
+        th {
+            page-break-inside: avoid;
         }
 
         .isiSurat,
@@ -49,19 +54,14 @@
         .alamatCuti,
         .pertimbanganAtasan,
         .keputusanPejabat {
-            page-break-inside: avoid;
-            /* Hindari elemen memisahkan halaman */
             margin-bottom: 5px;
-            /* Kurangi jarak antar elemen */
         }
 
         .checkbox {
             width: 10px;
-            /* Perkecil ukuran */
             height: 10px;
             display: inline-block;
-            border: 1px solid black;
-            /* Sesuaikan ukuran kotak */
+            border: none;
             text-align: center;
             line-height: 10px;
             vertical-align: middle;
@@ -73,40 +73,36 @@
             margin-bottom: 10px;
         }
 
-        .checkbox {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: none;
-            text-align: center;
-            vertical-align: middle;
-        }
-
         .tanggalSurat p {
             margin: 0;
             padding: 5px 0;
-            /* Beri sedikit jarak antar paragraf */
             text-align: right;
-            /* Seluruh teks rata kanan */
             font-size: 12px;
-            /* Sesuaikan ukuran font */
+        }
+
+        h2 {
+            font-size: 14px;
+            margin: 0;
+            padding-bottom: 10px;
         }
     </style>
 </head>
 
 <body>
 
+    <!-- Tanggal Surat -->
     <div class="tanggalSurat">
-        <p style="text-align: right;">Jakarta, 24 Juni 2024</p>
-        <p style="text-align: right;">Kepada</p>
-        <p style="text-align: right;">Yth. Kepala Pusat Pendidikan dan Pelatihan</p>
-        <p style="text-align: right;">di</p>
-        <p style="text-align: right;">Tempat</p>
+        <p>{{ $pengajuan->tanggalDiajukanFormatted }}</p>
+        <p>Kepada</p>
+        <p>Yth. Kepala Pusat Pendidikan dan Pelatihan</p>
+        <p>di</p>
+        <p>Tempat</p>
     </div>
 
-
+    <!-- Isi Surat -->
     <div class="isiSurat">
         <h2 style="text-align: center;">FORMULIR PERMINTAAN DAN PEMBERIAN CUTI</h2>
+        <!-- Tabel I Data Pegawai -->
         <div class="dataPegawai">
             <table id="dataPegawai">
                 <tr>
@@ -129,35 +125,36 @@
                     <td colspan="3">{{ $pengajuan->unitKerja_pengaju }}</td>
                 </tr>
             </table>
-
         </div>
 
+        <!-- Tabel II Jenis Cuti -->
         <div class="jenisCuti">
             <table id="jenisCuti">
                 <tr>
-                    <th colspan="6">II. JENIS CUTI</th>
+                    <th colspan="4">II. JENIS CUTI</th>
                 </tr>
                 <tr>
-                    <td> 1.{{ $pengajuan->jenis_cuti }}</td>
+                    <td>1. {{ $pengajuan->jenis_cuti }}</td>
                     <td><span class="checkbox">✓</span></td>
-                    <td> 4. Cuti melahirkan</td>
-                    <td><span class="checkbox">✓</span></td>
+                    <td>4. Cuti melahirkan</td>
+                    <td><span class="checkbox"></span></td>
                 </tr>
                 <tr>
-                    <td> 2. Cuti besar</td>
-                    <td><span class="checkbox">✓</span></td>
-                    <td> 5. Cuti karena alasan penting</td>
-                    <td><span class="checkbox">✓</span></td>
+                    <td>2. Cuti besar</td>
+                    <td><span class="checkbox"></span></td>
+                    <td>5. Cuti karena alasan penting</td>
+                    <td><span class="checkbox"></span></td>
                 </tr>
                 <tr>
-                    <td> 3. Cuti sakit</td>
-                    <td><span class="checkbox">✓</span></td>
-                    <td> 6. Cuti diluar tanggungan negara</td>
-                    <td><span class="checkbox">✓</span></td>
+                    <td>3. Cuti sakit</td>
+                    <td><span class="checkbox"></span></td>
+                    <td>6. Cuti diluar tanggungan negara</td>
+                    <td><span class="checkbox"></span></td>
                 </tr>
             </table>
         </div>
 
+        <!-- Tabel III Alasan Cuti -->
         <div class="alasanCuti">
             <table>
                 <tr>
@@ -169,10 +166,11 @@
             </table>
         </div>
 
+        <!-- Tabel IV Lama Cuti -->
         <div class="lamaCuti">
             <table>
                 <tr>
-                    <th>IV. LAMA CUTI</th>
+                    <th colspan="4">IV. LAMA CUTI</th>
                 </tr>
                 <tr>
                     <td>Selama</td>
@@ -183,6 +181,8 @@
             </table>
         </div>
 
+        <!-- Tabel V Catatan Cuti -->
+        <!-- belum ngambil database -->
         <div class="catatanCuti">
             <table>
                 <tr>
@@ -192,7 +192,6 @@
                     <td colspan="3">1. CUTI TAHUNAN</td>
                     <td>2. CUTI BESAR</td>
                 </tr>
-                <tr>
                 <tr>
                     <th>Tahun</th>
                     <th>Sisa</th>
@@ -215,71 +214,93 @@
                     <td>2022</td>
                     <td>0</td>
                     <td>-</td>
-                    <td>6. CUTI DILUAR TANGGUNGAN NEGARA</td>
-                </tr>
+                    <td>6. CUTI DI LUAR TANGGUNGAN NEGARA</td>
                 </tr>
             </table>
         </div>
 
+        <!-- Tabel VI Alamat Cuti -->
         <div class="alamatCuti">
             <table>
                 <tr>
-                    <th colspan="4">VI. ALAMAT SELAMA MENJALANKAN CUTI</th>
+                    <th colspan="3">VI. ALAMAT SELAMA MENJALANKAN CUTI</th>
                 </tr>
                 <tr>
-                    <th colspan="4">Telepon</th>
+                    <th></th>
+                    <th>Telepon</th>
+                    <th></th>
                 </tr>
                 <tr>
                     <td>{{ $pengajuan->alamat_cuti }}</td>
                     <td>{{ $pengajuan->nomor_hp }}</td>
-                    <td>Ini TTD1</td>
+                    <td>
+                        <table class="ttd1" style="border: none;">
+                            <tr>
+                                <td style="text-align: center; border: none;">Hormat saya,</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center; border: none;"><img src="https://i.pinimg.com/736x/95/5d/ae/955dae94a3dc3a7928b57e860aed4d51.jpg" style="height: 50px; width: 50px; object-fit: contain;" alt="TTD1"></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center; border: none;">Septian Bagus Wibisono, S.Kom, M.T.I.</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center; border: none;">NIP.199009282015021003</td>
+                            </tr>
+                        </table>
+                    </td>
                 </tr>
             </table>
         </div>
 
+        <!-- Tabel VII Pertimbangan Atasan -->
         <div class="pertimbanganAtasan">
             <table>
                 <tr>
-                    <th colspan="4">VII. ALAMAT SELAMA MENJALANKAN CUTI</th>
+                    <th colspan="4">VII. PERTIMBANGAN ATASAN</th>
                 </tr>
                 <tr>
                     <td>Disetujui</td>
-                    <td>Perubahan****</td>
-                    <td>Ditangguhkan****</td>
-                    <td>Tidak Disetujui****</td>
+                    <td>Perubahan</td>
+                    <td>Ditangguhkan</td>
+                    <td>Tidak Disetujui</td>
                 </tr>
                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td style="height: 10px;"></td>
+                    <td style="height: 10px;"></td>
+                    <td style="height: 10px;"></td>
+                    <td style="height: 10px;"></td>
                 </tr>
                 <tr>
-                    <td colspan="4">Ini TTD2</td>
+                    <td style="text-align: right; vertical-align: middle;" colspan="4"><img src="https://i.pinimg.com/736x/95/5d/ae/955dae94a3dc3a7928b57e860aed4d51.jpg" style="height: 50px; width: 50px; object-fit: contain;" alt="TTD1"></td>
                 </tr>
             </table>
         </div>
 
+        <!-- Tabel VIII Keputusan Atasan -->
         <div class="keputusanPejabat">
             <table>
                 <tr>
-                    <th colspan="4">VIII. KEPUTUSAN PEJABAT YANG BERWENANG MEMBERIKAN CUTI**</th>
+                    <th colspan="4">VIII. KEPUTUSAN PEJABAT</th>
                 </tr>
                 <tr>
                     <td>Disetujui</td>
-                    <td>Perubahan****</td>
-                    <td>Ditangguhkan****</td>
-                    <td>Tidak Disetujui****</td>
+                    <td>Perubahan</td>
+                    <td>Ditangguhkan</td>
+                    <td>Tidak Disetujui</td>
                 </tr>
                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td style="height: 10px;"></td>
+                    <td style="height: 10px;"></td>
+                    <td style="height: 10px;"></td>
+                    <td style="height: 10px;"></td>
                 </tr>
                 <tr>
-                    <td colspan="4">Ini TTD3</td>
+                    <td style="text-align: right; vertical-align: middle;" colspan="4"><img src="https://i.pinimg.com/736x/95/5d/ae/955dae94a3dc3a7928b57e860aed4d51.jpg" style="height: 50px; width: 50px; object-fit: contain;" alt="TTD1"></td>
                 </tr>
             </table>
         </div>
+    </div>
 </body>
+
+</html>
