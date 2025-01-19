@@ -5,10 +5,14 @@ namespace App\Http\Livewire;
 use App\Models\DataCuti;
 use App\Models\Pengajuan;
 use App\Models\RiwayatCuti;
+use App\Models\Pegawai;
+use App\Mail\PenyetujuSetuju;
+use App\Mail\PenyetujuTolak;
 use Carbon\Carbon;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 use function PHPSTORM_META\type;
 
@@ -66,12 +70,26 @@ class PenyetujuDetail extends Component
     {
         // Lakukan aksi penolakan, misalnya simpan alasan penolakan
         try {
+            // Step 1: Retrieve the pengajuan data using id
+            $pengajuan = Pengajuan::findOrFail($this->idPengajuan);
+    
+            // Step 2: Update the status to 'ditolak'
             $data = [
                 'id' => $this->idPengajuan,
                 'status' => 'ditolak'
             ];
             Pengajuan::updateStatus($data);
-            $this->closeModal(); // Tutup modal setelah penolakan
+    
+            // Step 3: Get the email of the user who submitted the request
+            $email = Pegawai::findOrFail($pengajuan->pengaju_id)->user->email;
+    
+            // Step 4: Send the rejection email to the user
+            Mail::to($email)->send(new PenyetujuTolak($pengajuan));
+    
+            // Close the modal after rejection
+            $this->closeModal();
+    
+            // Dispatch a success alert
             $this->dispatch(
                 'custom-alert',
                 type: 'success',
@@ -80,6 +98,7 @@ class PenyetujuDetail extends Component
                 timer: 3000
             );
         } catch (\Throwable $th) {
+            // Dispatch an error alert if something goes wrong
             $this->dispatch(
                 'custom-alert',
                 type: 'error',
@@ -89,6 +108,7 @@ class PenyetujuDetail extends Component
             );
         }
     }
+    
 
     public function render()
     {
@@ -98,12 +118,17 @@ class PenyetujuDetail extends Component
     public function submitPenyetuju()
     {
         try {
+            // Step 1: Update status to 'disetujui'
             $data = [
                 'id' => $this->idPengajuan,
                 'status' => 'disetujui'
             ];
             Pengajuan::updateStatus($data);
+
+            // Step 2: Retrieve the pengajuan object after updating
             $pengajuan = Pengajuan::find($this->idPengajuan);
+
+            // Step 3: Update the DataCuti table with the approved data
             $updatedData = [
                 'pegawai_id' => $pengajuan->pengaju_id,
                 'cuti_id' => $pengajuan->cuti_id,
@@ -111,6 +136,14 @@ class PenyetujuDetail extends Component
                 'tahun' => Carbon::now()->year
             ];
             DataCuti::updateDataCuti($updatedData);
+
+            // Step 4: Get the email of the user who made the request (using pengaju_id)
+            $email = Pegawai::findOrFail($pengajuan->pengaju_id)->user->email;
+
+            // Step 5: Send the approval email to the user
+            Mail::to($email)->send(new PenyetujuSetuju($pengajuan));
+
+            // Step 6: Dispatch success alert
             $this->dispatch(
                 'custom-alert',
                 type: 'success',
@@ -120,6 +153,7 @@ class PenyetujuDetail extends Component
             );
             return redirect()->route('penyetuju.daftar-cuti');
         } catch (\Throwable $th) {
+            // Log error and dispatch error alert
             Log::error('Error saat menyetujui pengajuan: ' . $th->getMessage());
             $this->dispatch(
                 'custom-alert',

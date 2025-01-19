@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -27,9 +26,19 @@
     <div class="flex min-h-screen bg-secondary">
         <div class="flex-1 py-4 basis-64">
             @include('layouts.navigation')
-            @livewire('chatbot')
+        </div>
+
+        <div class="flex space-x-4 py-4 px-6">
+            <div>
+                @livewire('chatbot')
+            </div>
+            
+            <div>
+                @livewire('notifikasi')
+            </div>
         </div>
     </div>
+
     @livewire('livewire-ui-modal')
     <!-- <script src="/livewire/livewire.js"></script> -->
     <!-- @stack('js') -->
