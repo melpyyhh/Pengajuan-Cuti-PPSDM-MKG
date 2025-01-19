@@ -109,13 +109,12 @@ class InputPegawaiForm extends Component
     {
         $this->jenisCuti = JenisCuti::all()->toArray();
 
-
         // Jika 'Cuti Tahunan' memiliki tahun dinamis
         foreach ($this->jenisCuti as &$cuti) {
             if ($cuti['jenis_cuti'] === 'Cuti Tahunan') {
-                $cuti['tahun'] = [now()->year]; // Hanya tahun sekarang
+                $currentYear = now()->year;
+                $cuti['tahun'] = range($currentYear - 3, $currentYear); // 3 tahun ke belakang + tahun sekarang
             }
-            
         }
     }
 }

@@ -26,17 +26,14 @@
     <div class="flex min-h-screen bg-secondary">
         <div class="flex-1 py-4 basis-64">
             @include('layouts.navigation')
+            @livewire('chatbot')
         </div>
-
+{{--
         <div class="flex space-x-4 py-4 px-6">
-            <div>
-                @livewire('chatbot')
-            </div>
-            
             <div>
                 @livewire('notifikasi')
             </div>
-        </div>
+        </div> --}}
     </div>
 
     @livewire('livewire-ui-modal')
