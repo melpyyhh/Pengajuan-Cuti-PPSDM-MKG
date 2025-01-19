@@ -34,7 +34,7 @@ class Chatbot extends Component
                 'message' => $this->question,
             ];
 
-            $response = 'Maaf, saya tidak mengerti pertanyaan Anda. Silakan coba lagi.';
+            $response = 'Maaf, saya tidak mengerti pertanyaan Anda. Silakan ajukan pengaduan ke admin.';
 
             if (stripos($this->question, 'Prosedur Pengajuan') !== false || stripos($this->question, 'Prosedur Pengajuan Cuti') !== false) {
                 $response = 'Untuk mengajukan cuti, anda dapat klik menu Pengajuan -> Pilih Jenis Cuti -> Isi Form Cuti -> Tambahkan Dokumen (jika ada) -> Crosscheck Form -> Submit -> Selesai! Pengajuan anda telah sampai ke atasan.';
