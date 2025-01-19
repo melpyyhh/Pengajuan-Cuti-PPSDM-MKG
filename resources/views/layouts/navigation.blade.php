@@ -231,7 +231,7 @@
                             </g>
                         </svg>
 
-                        <span class="ms-3">Daftar Pengajuan</span>
+                        <span class="ms-3">Daftar Pengaduan</span>
                         <a href="/daftar-pegawai"
                             class="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-gray-700 dark:hover:bg-gray-700 group
         {{ request()->is('daftar-pegawai') ? 'bg-tertiary text-white font-semibold rounded-lg' : 'rounded-lg hover:shadow' }}">
