@@ -103,21 +103,6 @@
                 <div class="mt-4">
                     <label for="dokumen" class="block text-sm font-bold text-gray-700">Dokumen Pendukung</label>
 
-                    <!-- Drag-and-Drop Zone -->
-                    <div x-data="{ isDragging: false }" @dragover.prevent="isDragging = true" @dragleave="isDragging = false"
-                        @drop.prevent="
-                            isDragging = false;
-                            const files = $event.dataTransfer.files;
-                            if (files.length) {
-                                $refs.fileInput.files = files;
-                                $dispatch('input', files);
-                            }
-                        "
-                        :class="isDragging ? 'border-dashed border-2 border-[#0032CC] bg-blue-50' : 'border border-[#0032CC]'"
-                        class="flex items-center justify-center w-full h-32 mt-1 transition-all cursor-pointer rounded-xl">
-                        <p class="text-sm text-gray-500">Seret file ke sini atau klik tombol di bawah ini</p>
-                    </div>
-
                     <!-- Hidden File Input -->
                     <input wire:model="dokumen" type="file" id="dokumen" x-ref="fileInput" class="hidden" />
 
@@ -135,21 +120,16 @@
                         <p class="mt-2 text-sm text-gray-500">File yang dipilih:
                             {{ $dokumen->getClientOriginalName() }}
                         </p>
+
+                        <!-- Remove Button -->
+                        <button type="button" class="mt-2 text-sm text-red-600 hover:text-red-800"
+                            x-on:click="
+                        $refs.fileInput.value = '';
+                        @this.set('dokumen', null);  <!-- Update the Livewire model -->
+                        ">
+                            Batalkan Unggah Dokumen
+                        </button>
                     @endif
-
-                    <!-- Progress Bar -->
-                    <div x-data="{ progress: @entangle('progress') }" class="mt-4">
-                        <div class="w-full h-4 bg-gray-200 rounded-full">
-                            <div :style="{ width: `${progress}%` }" class="h-4 transition-all bg-blue-500 rounded-full">
-                            </div>
-                        </div>
-                        <p x-text="`${progress}% Terupload`" class="mt-2 text-sm text-gray-700"></p>
-                    </div>
-
-                    <!-- Jumlah File Terupload -->
-                    <p class="mt-2 text-sm text-gray-500">
-                        File yang sudah diupload: {{ $uploadedFilesCount }}
-                    </p>
                 </div>
             @elseif ($currentPage === 4)
                 <!-- Form Konfirmasi Pengajuan -->

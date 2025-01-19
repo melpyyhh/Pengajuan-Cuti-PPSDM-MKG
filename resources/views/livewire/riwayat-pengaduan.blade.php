@@ -12,28 +12,28 @@
     </div>
 
     <!-- Statistik Pengaduan -->
-    <div class="grid max-w-full grid-cols-3 gap-4 px-4 mb-6">
-        <div class="py-4 text-center text-white bg-tertiary rounded-2xl">
-            <div class="text-xl font-semibold">{{ $totalPengaduan }} Pengaduan</div>
+    <div class="grid grid-cols-1 gap-4 px-4 mb-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="py-4 text-center text-red-700 bg-red-300 rounded-2xl">
+            <div class="text-lg font-semibold">{{ $totalPengaduan }} Pengaduan</div>
         </div>
-        <div class="py-4 text-center text-white bg-tertiary rounded-2xl">
-            <div class="text-xl font-semibold">{{ $daftartungguCount }} Daftar Tunggu</div>
+        <div class="py-4 text-center text-gray-700 bg-gray-300 rounded-2xl">
+            <div class="text-lg font-semibold">{{ $daftartungguCount }} Daftar Tunggu</div>
         </div>
-        <div class="py-4 text-center text-white bg-tertiary rounded-2xl">
-            <div class="text-xl font-semibold">{{ $ditanggapiCount }} Ditanggapi</div>
+        <div
+            class="py-4 text-center rounded-2xl {{ $ditanggapiCount === 0 ? 'bg-red-300 text-red-700' : 'bg-green-300 text-green-700' }}">
+            <div class="text-lg font-semibold">{{ $ditanggapiCount }} Ditanggapi</div>
         </div>
     </div>
-
     <!-- Tombol Menuju Form Pengaduan -->
     <div class="px-4 mb-6">
         @if ($user->role === 'pengaju')
             <a wire:navigate href="/pengaju/pengaduan-form"
-            class="block text-center py-4 text-white bg-tertiary rounded-2xl dark:text-white hover:bg-gray-700 dark:hover:bg-gray-700">
+                class="block py-4 text-center text-white bg-tertiary rounded-2xl dark:text-white hover:bg-gray-700 dark:hover:bg-gray-700">
                 <span class="text-xl font-semibold">Buat Pengaduan</span>
             </a>
         @else
             <a wire:navigate href="/penyetuju/pengaduan-form"
-            class="block text-center py-4 text-white bg-tertiary rounded-2xl dark:text-white hover:bg-gray-700 dark:hover:bg-gray-700">
+                class="block py-4 text-center text-white bg-tertiary rounded-2xl dark:text-white hover:bg-gray-700 dark:hover:bg-gray-700">
                 <span class="text-xl font-semibold">Buat Pengaduan</span>
             </a>
         @endif
@@ -41,10 +41,18 @@
 
     <!-- Pencarian -->
     <div class="flex items-center px-4 mb-5">
-        <input type="text" placeholder="Search ..." class="flex-1 px-4 py-2 border rounded-l-md focus:outline-none"
-        wire:model.debounce.300ms="search">
+        <input type="text" placeholder="Cari Subjek Pengaduan ..."
+            class="flex-1 px-4 py-2 border rounded-l-md focus:outline-none" wire:model.debounce.300ms="search">
         <button class="px-4 py-2 text-white bg-yellow-500 rounded-r-md" wire:click="searchAction">
-            🔍
+            <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" fill="none" width="20" height="20">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                    <path fill="#000000" fill-rule="evenodd"
+                        d="M4 9a5 5 0 1110 0A5 5 0 014 9zm5-7a7 7 0 104.2 12.6.999.999 0 00.093.107l3 3a1 1 0 001.414-1.414l-3-3a.999.999 0 00-.107-.093A7 7 0 009 2z">
+                    </path>
+                </g>
+            </svg>
         </button>
     </div>
 
@@ -52,25 +60,24 @@
     <div class="px-4">
         @forelse ($pengaduans->sortBy(fn($item) => $item->status_pengaduan !== 'daftarTunggu') as $pengaduan)
             <div class="flex items-center justify-between p-6 mb-2 bg-blue-100 rounded-md shadow-md">
-            <div>
+                <div class="flex-1">
                     <div class="font-semibold">{{ $pengaduan->title }}</div>
                     <div class="text-sm text-gray-600">{{ $pengaduan->pegawai->nama }} -
-                        {{ $pengaduan->pegawai->unitKerja }}
-                    </div>
+                        {{ $pengaduan->pegawai->unitKerja }}</div>
                     <div class="text-sm text-gray-600">
                         {{ strlen($pengaduan->descriptions) > 25 ? substr($pengaduan->descriptions, 0, 25) . '...' : $pengaduan->descriptions }}
                     </div>
                 </div>
-                <div class="flex items-center gap-4 ml-auto mr-20">
-                    <span class="p-2 rounded-xl text-sm font-bold uppercase
-                        @if (strtolower($pengaduan->status_pengaduan) === 'daftartunggu') bg-gray-200 text-gray-700
-                        @elseif(strtolower($pengaduan->status_pengaduan) === 'ditanggapi') mr-4 bg-green-200 text-green-700
-                        @else bg-red-200 text-red-700 @endif">
+                <div class="flex items-center gap-4 ml-auto">
+                    <span
+                        class="p-2 rounded-xl text-sm font-bold uppercase
+                    @if (strtolower($pengaduan->status_pengaduan) === 'daftartunggu') bg-gray-200 text-gray-700
+                    @elseif(strtolower($pengaduan->status_pengaduan) === 'ditanggapi') mr-4 bg-green-200 text-green-700
+                    @else bg-red-200 text-red-700 @endif">
                         {{ ucfirst($pengaduan->status_pengaduan) }}
                     </span>
                 </div>
-                <button type="button" 
-                    wire:click="openModal({{ $pengaduan->id }})"
+                <button type="button" wire:click="openModal({{ $pengaduan->id }})"
                     class="flex items-center justify-center w-12 h-12 font-bold text-gray-800 rounded-full bg-tertiary hover:bg-orange-300">
                     <!-- Your SVG icon -->
                     <svg fill="#08244B" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg"
@@ -104,33 +111,32 @@
             </div>
         @endforelse
     </div>
+
     <!-- Modal -->
     @if ($isOpen)
-    <div class="fixed inset-0 z-50 flex items-center justify-center bg-gray-500 bg-opacity-75">
+        <div class="fixed inset-0 z-50 flex items-center justify-center bg-gray-500 bg-opacity-75">
             <div class="bg-gray-100 p-2 rounded-xl border-2 border-[#0032CC] shadow-lg md:w-3/4 lg:w-2/3">
                 <!-- Detail Pengaduan -->
                 <div class="flex-1 p-4 overflow-y-auto" style="max-height: 400px;">
-                    <div class="font-semibold text-xl">{{ $selectedPengaduan->pegawai->nama }}</div>
+                    <div class="text-xl font-semibold">{{ $selectedPengaduan->pegawai->nama }}</div>
                     <div class="text-sm italic">{{ $selectedPengaduan->pegawai->jabatan }}</div>
                     <div class="text-sm">{{ $selectedPengaduan->pegawai->user->email }}</div>
-                    <textarea class="w-full p-2 mt-2 border rounded-lg" rows="6"
-                        disabled value="">{{ $selectedPengaduan->descriptions }}</textarea>
+                    <textarea class="w-full p-2 mt-2 border rounded-lg" rows="6" disabled value="">{{ $selectedPengaduan->descriptions }}</textarea>
                     @if ($selectedPengaduan->status_pengaduan === 'daftarTunggu')
                         <div class="mt-4 text-center text-gray-600">
                             <span class="text-lg font-semibold">Belum ada tanggapan dari admin.</span>
                         </div>
                     @else
-                        <div class="font-semibold text-xl">{{ $dataPegawai['nama'] }}</div>
+                        <div class="text-xl font-semibold">{{ $dataPegawai['nama'] }}</div>
                         <div class="text-sm italic">{{ $dataPegawai['jabatan'] }}</div>
                         <div class="text-sm">{{ $dataPegawai['email'] }}</div>
-                        <textarea class="w-full p-2 mt-2 border rounded-lg" rows="6"
-                            disabled value="">{{ $selectedPengaduan->reply }}</textarea>
+                        <textarea class="w-full p-2 mt-2 border rounded-lg" rows="6" disabled value="">{{ $selectedPengaduan->reply }}</textarea>
                     @endif
                 </div>
-                <div class="flex justify-between gap-4 mt-4 px-8">
-                        <button wire:click="closeModal"
-                            class="px-4 py-2 text-white bg-red-500 rounded-xl bg-tertiary">Kembali</button>
+                <div class="flex justify-between gap-4 px-8 mt-4">
+                    <button wire:click="closeModal"
+                        class="px-4 py-2 text-white bg-red-500 rounded-xl bg-tertiary">Kembali</button>
+                </div>
             </div>
-        </div>
     @endif
 </div>

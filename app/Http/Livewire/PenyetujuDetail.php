@@ -118,6 +118,7 @@ class PenyetujuDetail extends Component
                 position: 'center',
                 timer: 3000
             );
+            return redirect()->route('penyetuju.daftar-cuti');
         } catch (\Throwable $th) {
             Log::error('Error saat menyetujui pengajuan: ' . $th->getMessage());
             $this->dispatch(
