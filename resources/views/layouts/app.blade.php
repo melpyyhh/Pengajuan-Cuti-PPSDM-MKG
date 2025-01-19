@@ -10,14 +10,9 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <script>
-        Livewire.on('uploadProgress', (progress) => {
-            document.querySelector('[x-data]').__x.$data.progress = progress;
-        });
-    </script>
     <!-- Alpine -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="//unpkg.com/alpinejs" defer></script>
+    <!-- <script src="//unpkg.com/alpinejs" defer></script> -->
     <script src="https://cdn.jsdelivr.net/npm/@alpinejs/focus@2.0.0/dist/cdn.min.js"></script>
     <!-- Flowbite -->
     <script src="https://cdn.jsdelivr.net/npm/flowbite@1.6.0/dist/flowbite.min.js"></script>
@@ -32,6 +27,7 @@
         <div class="flex-1 py-4 basis-64">
             @include('layouts.navigation')
         </div>
+
         <div class="flex space-x-4 py-4 px-6">
             <div>
                 @livewire('chatbot')
@@ -44,9 +40,9 @@
     </div>
 
     @livewire('livewire-ui-modal')
+    <!-- <script src="/livewire/livewire.js"></script> -->
+    <!-- @stack('js') -->
     @livewireScripts
-    <script src="/livewire/livewire.js"></script>
-    @stack('js')
 </body>
 
 </html>

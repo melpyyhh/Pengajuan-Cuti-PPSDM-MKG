@@ -81,10 +81,12 @@
                         Batalkan
                     </button>
                 @endif
-                <button type="button" wire:click="#"
-                    class="px-4 py-2 text-white transition-colors bg-green-500 shadow shadow-md rounded-3xl hover:bg-green-300">
-                    Cetak PDF
-                </button>
+                @if ($statusAjuan == 'disetujui')
+                    <button type="button" onclick="window.location='{{ url('/exportPdf/' . $idPengajuan) }}'"
+                        class="px-4 py-2 text-white transition-colors bg-green-500 shadow shadow-md rounded-3xl hover:bg-green-300">
+                        Cetak PDF
+                    </button>
+                @endif
             </div>
         </form>
     </div>

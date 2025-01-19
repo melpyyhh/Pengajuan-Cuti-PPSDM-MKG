@@ -23,7 +23,16 @@
                         <input type="text" placeholder="Cari..."
                             class="flex-1 px-4 py-2 border rounded-l-md focus:outline-none max-w-[300px]">
                         <button class="px-4 py-2 text-white bg-yellow-500 rounded-r-md">
-                            🔍
+                            <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" fill="none" width="20"
+                            height="20">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <path fill="#000000" fill-rule="evenodd"
+                                    d="M4 9a5 5 0 1110 0A5 5 0 014 9zm5-7a7 7 0 104.2 12.6.999.999 0 00.093.107l3 3a1 1 0 001.414-1.414l-3-3a.999.999 0 00-.107-.093A7 7 0 009 2z">
+                                </path>
+                            </g>
+                        </svg>
                         </button>
                     </div>
                 </div>
@@ -132,10 +141,12 @@
             <div class="grid flex-1 grid-cols-1 gap-4 md:hidden">
                 @foreach ($listPengajuan as $data)
                     <div class="p-4 space-y-3 bg-[#F4F7FE] rounded-lg shadow-md">
-                        <!-- Nomor -->
-                        <div class="text-sm font-semibold text-gray-800">
+                       <!-- Nomor -->
+                    <div class="text-sm font-semibold text-gray-800">
+                        <p>Ajuan Cuti ke :
                             {{ ($listPengajuan->currentPage() - 1) * $listPengajuan->perPage() + $loop->iteration }}
-                        </div>
+                        </p>
+                    </div>
                         <!-- Nama Pegawai -->
                         <div class="text-sm text-gray-600">
                             Nama Pegawai: {{ $data->pegawai->nama }}

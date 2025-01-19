@@ -40,7 +40,7 @@ class PengajuanForm extends Component
 
     public $pages = [
         1 => ['heading' => 'Jenis Cuti', 'subheading' => 'Pilih jenis cuti anda'],
-        2 => ['heading' => 'Tanggal Cuti', 'subheading' => 'Masukkan tanggal mulai dan selesai cuti'],
+        2 => ['heading' => 'Tanggal Cuti', 'subheading' => 'Masukkan detail pengajuan cuti anda'],
         3 => ['heading' => 'Unggah Dokumen', 'subheading' => 'Unggah informasi tambahan melalui dokumen (jika ada)'],
         4 => ['heading' => 'Crosscheck', 'subheading' => 'Periksa kembali form pengajuan cuti anda'],
     ];

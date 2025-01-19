@@ -8,7 +8,7 @@
             <p class="mt-4 text-base tracking-widest text-center md:text-lg">
                 Masukkan NIP atau email BMKG dan kata sandi Anda untuk mengakses.
             </p>
-            <img src="/path/to/mascot.png" alt="Maskot BMKG" class="w-24 mt-6 md:w-40">
+            <img src="img/mascot.png" alt="Maskot BMKG" class="mt-6 w-[200px] md:w-[300px]">
         </div>
 
         <!-- Bar Judul untuk ukuran kecil -->
