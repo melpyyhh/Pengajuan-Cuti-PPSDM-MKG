@@ -15,26 +15,42 @@ class DummyPegawaiSeeder extends Seeder
     {
         $pegawaiData = [
             [
-                'nip' => '1234',
+                'nip' => '1',
                 'jabatan' => 'Kepala Projek Cuti',
                 'nama' => 'Adit',
                 'unitKerja' => 'STIS',
                 'masaKerja' => 10,
             ],
             [
-                'nip' => '1224',
+                'nip' => '2',
                 'jabatan' => 'Wakil Kepala Projek Cuti',
                 'nama' => 'Jekiboi',
                 'unitKerja' => 'STIS',
                 'masaKerja' => 10,
             ],
             [
-                'nip' => '1232',
+                'nip' => '3',
                 'jabatan' => 'Kepala Developer',
                 'nama' => 'Syawal',
                 'unitKerja' => 'DevOps',
                 'masaKerja' => 10,
             ],
+            [
+                'nip' => '4',
+                'jabatan' => 'Anggota Developer',
+                'nama' => 'Alvin',
+                'unitKerja' => 'DevOps',
+                'masaKerja' => 10,
+            ],
+            [
+                'nip' => '5',
+                'jabatan' => 'Front End Developer',
+                'nama' => 'Sopia',
+                'unitKerja' => 'Front End Department',
+                'masaKerja' => 10,
+            ],
+
+
         ];
         foreach ($pegawaiData as $key => $var) {
             Pegawai::create($var);

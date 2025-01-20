@@ -115,7 +115,7 @@ class InputPegawaiForm extends Component
         foreach ($this->jenisCuti as &$cuti) {
             if ($cuti['jenis_cuti'] === 'Cuti Tahunan') {
                 $currentYear = now()->year;
-                $cuti['tahun'] = range($currentYear - 3, $currentYear); // 3 tahun ke belakang + tahun sekarang
+                $cuti['tahun'] = range($currentYear - 2, $currentYear); // 3 tahun ke belakang + tahun sekarang
             }
         }
     }

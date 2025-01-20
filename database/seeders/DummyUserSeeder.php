@@ -32,8 +32,9 @@ class DummyUserSeeder extends Seeder
                 'name' => 'Pengaju',
                 'pegawai_id' => 3,
                 'email' => 'pengaju@gmail.com',
-                'role' => 'pengaju',
+                'role' => 'dual_role',
                 'password' => bcrypt('pengaju'),
+                'atasan_id' => 2
             ]
         ];
 

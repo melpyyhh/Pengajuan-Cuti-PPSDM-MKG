@@ -20,6 +20,7 @@ class UserSeed extends Seeder
                 'email' => 'pengaju2@gmail.com',
                 'role' => 'pengaju',
                 'password' => bcrypt('pengaju2'),
+                'atasan_id' => 3
             ],
             [
                 'name' => 'Pengaju3',
@@ -27,6 +28,7 @@ class UserSeed extends Seeder
                 'email' => 'pengaju3@gmail.com',
                 'role' => 'pengaju',
                 'password' => bcrypt('pengaju3'),
+                'atasan_id' => 2
             ],
         ];
         foreach ($userData as $key => $var) {
