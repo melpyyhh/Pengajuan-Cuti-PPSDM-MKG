@@ -26,4 +26,15 @@ class ProsesCuti extends Model
     {
         return $this->belongsTo(Pegawai::class);
     }
+    public function scopeSearch($query, $search)
+    {
+        return $query->where(function($query) use ($search) {
+            $query->whereHas('pegawai', function ($query) use ($search) {
+                $query->where('nama', 'LIKE', "%{$search}%")
+                      ->orWhere('nip', 'LIKE', "%{$search}%")
+                      ->orWhere('unitKerja', 'LIKE', "%{$search}%");
+            })
+            ->orWhere('status_ajuan', 'LIKE', "%{$search}%");
+        });
+    }
 }
