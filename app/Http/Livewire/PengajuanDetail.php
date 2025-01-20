@@ -5,7 +5,9 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\Pengajuan;
 use App\Models\RiwayatCuti;
+use Livewire\Attributes\Title;
 
+#[Title('Detail Pengajuan')]
 class PengajuanDetail extends Component
 {
     public $currentPage = 1;

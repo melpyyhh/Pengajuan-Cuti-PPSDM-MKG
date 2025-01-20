@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Mail;
 
 use function PHPSTORM_META\type;
 
+use Livewire\Attributes\Title;
+
+#[Title('Detail Penyetuju')]
 class PenyetujuDetail extends Component
 {
 

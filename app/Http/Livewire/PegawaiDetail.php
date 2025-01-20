@@ -7,7 +7,9 @@ use App\Models\DataCuti;
 use App\Models\JenisCuti;
 use Illuminate\Support\Facades\Log;
 use Livewire\Component;
+use Livewire\Attributes\Title;
 
+#[Title('Detail Pegawai')]
 class PegawaiDetail extends Component
 {
     public $pegawaiId;
@@ -116,7 +118,7 @@ class PegawaiDetail extends Component
             if ($pegawai) {
                 $pegawai->dataCuti()->delete();
                 $pegawai->delete();
-    
+
                 session()->flash('success', 'Data pegawai berhasil dihapus!');
                 return redirect()->route('admin.daftar-pegawai');
             } else {
@@ -130,7 +132,7 @@ class PegawaiDetail extends Component
     {
         return redirect()->route('admin.daftar-pegawai');
     }
-    
+
     public function render()
     {
         // Normalize fields before rendering

@@ -7,7 +7,9 @@ use App\Models\JenisCuti;
 use App\Models\Pegawai;
 use Livewire\Component;
 use Illuminate\Support\Facades\Log;
+use Livewire\Attributes\Title;
 
+#[Title('Input Pegawai Form')]
 class InputPegawaiForm extends Component
 {
     public $currentPage = 1;

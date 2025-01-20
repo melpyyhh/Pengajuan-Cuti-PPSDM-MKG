@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ $title ?? config('app.name') }}</title>
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -28,7 +28,7 @@
             @include('layouts.navigation')
             @livewire('chatbot')
         </div>
-{{--
+        {{--
         <div class="flex space-x-4 py-4 px-6">
             <div>
                 @livewire('notifikasi')

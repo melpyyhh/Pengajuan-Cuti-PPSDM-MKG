@@ -6,10 +6,12 @@ use App\Models\Pengaduan;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use Livewire\Attributes\Title;
 
+#[Title('Daftar Pengaduan')]
 class DaftarPengaduan extends Component
 {
-    public $dataPegawai= [];
+    public $dataPegawai = [];
     public $pengaduans;
     public $search = '';
     public $totalPengaduan;
@@ -23,7 +25,7 @@ class DaftarPengaduan extends Component
 
     public function mount()
     {
-        $this->dataPegawai =[
+        $this->dataPegawai = [
             'nama' => Auth::user()->pegawai->nama,
             'email' => Auth::user()->email,
             'jabatan' => Auth::user()->pegawai->jabatan
@@ -87,7 +89,8 @@ class DaftarPengaduan extends Component
                 type: 'success',
                 title: 'Berhasil menanggapi',
                 position: 'center',
-                timer: 3000);
+                timer: 3000
+            );
         } catch (\Exception $e) {
             Log::error("Error saat membalas pengaduan dengan id: {$this->selectedPengaduan->id}");
             $this->dispatch(
@@ -114,5 +117,4 @@ class DaftarPengaduan extends Component
     {
         return view('livewire.daftar-pengaduan');
     }
-
 }

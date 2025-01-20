@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\DB;
 use App\Models\RiwayatCuti;
 use Carbon\carbon;
 
+use Livewire\Attributes\Title;
+
+#[Title('Dashboard')]
 class PenyetujuDashboard extends Component
 {
     public $barChartData = [];

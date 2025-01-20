@@ -6,7 +6,9 @@ use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use App\Models\Pengaduan;
+use Livewire\Attributes\Title;
 
+#[Title('Form Pengaduan')]
 class PengaduanForm extends Component
 {
     // Properti form

@@ -16,7 +16,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Livewire\Attributes\Title;
 
+#[Title('Form Pengajuan')]
 class PengajuanForm extends Component
 {
     use WithFileUploads;

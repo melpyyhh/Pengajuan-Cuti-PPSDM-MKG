@@ -7,9 +7,12 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 
+use Livewire\Attributes\Title;
+
+#[Title('Riwayat Pengaduan')]
 class RiwayatPengaduan extends Component
 {
-    public $dataPegawai= [];
+    public $dataPegawai = [];
     public $pengaduans;
     public $search = '';
     public $totalPengaduan;
