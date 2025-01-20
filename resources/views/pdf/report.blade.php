@@ -135,7 +135,7 @@
                 </tr>
                 <tr>
                     <td>1. {{ $pengajuan->jenis_cuti }}</td>
-                    <td><span class="checkbox">✓</span></td>
+                    <td><span class="checkbox">v</span></td>
                     <td>4. Cuti melahirkan</td>
                     <td><span class="checkbox"></span></td>
                 </tr>
@@ -153,6 +153,14 @@
                 </tr>
             </table>
         </div>
+
+        <style>
+            #jenisCuti td {
+                width: 25%;
+                text-align: left;
+                padding: 2px;
+            }
+        </style>
 
         <!-- Tabel III Alasan Cuti -->
         <div class="alasanCuti">
@@ -274,8 +282,7 @@
                     <td style="height: 10px;"></td>
                     <td style="height: 10px;"></td>
                 </tr>
-                <tr>
-                    <table class="ttd1" style="border: none;">
+                {{-- <table class="ttd1" style="border: none;">
                         <tr>
                             <td style="text-align: center; border: none;">Kepala Pusat Pendidikan dan Pelatihan</td>
                         </tr>
@@ -289,7 +296,26 @@
                         <tr>
                             <td style="text-align: center; border: none;">{{ $pengajuan->nip_pengaju }}</td>
                         </tr>
-                    </table>
+                    </table> - --}}
+                <tr>
+                    <td style="text-align: right; vertical-align: middle; padding-right: 10px;" colspan="4">
+                        <div style="display: flex; flex-direction: column; align-items: center;">
+                            <span style="vertical-align: text-top; padding-right: 5px; font-size: 10px;">Kepala
+                                PPSDM</span>
+                            <br>
+                            <img src="{{ public_path('img/dummy.jpg') }}"
+                                style="height: 50px; width: 50px; object-fit: contain;" alt="TTD1">
+                            <br>
+                            <span
+                                style="vertical-align: text-bottom; padding-right: 5px; font-size:10px; text-decoration:underline;">
+                                Penyetuju
+                            </span>
+                            <br>
+                            <span style="vertical-align: text-bottom; padding-right: 5px; font-size:10px;">
+                                NIP.
+                            </span>
+                        </div>
+                    </td>
                 </tr>
             </table>
         </div>
@@ -313,9 +339,24 @@
                     <td style="height: 10px;"></td>
                 </tr>
                 <tr>
-                    <td style="text-align: right; vertical-align: middle;" colspan="4"><img
-                            src="https://i.pinimg.com/736x/95/5d/ae/955dae94a3dc3a7928b57e860aed4d51.jpg"
-                            style="height: 50px; width: 50px; object-fit: contain;" alt="TTD1"></td>
+                    <td style="text-align: right; vertical-align: middle; padding-right: 10px;" colspan="4">
+                        <div style="display: flex; flex-direction: column; align-items: center;">
+                            <span style="vertical-align: text-top; padding-right: 5px; font-size: 10px;">Kepala
+                                PPSDM</span>
+                            <br>
+                            <img src="{{ public_path('img/dummy.jpg') }}"
+                                style="height: 50px; width: 50px; object-fit: contain;" alt="TTD1">
+                            <br>
+                            <span
+                                style="vertical-align: text-bottom; padding-right: 5px; font-size:10px; text-decoration:underline;">
+                                Penyetuju
+                            </span>
+                            <br>
+                            <span style="vertical-align: text-bottom; padding-right: 5px; font-size:10px;">
+                                NIP.
+                            </span>
+                        </div>
+                    </td>
                 </tr>
             </table>
         </div>
