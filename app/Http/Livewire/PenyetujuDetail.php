@@ -23,7 +23,7 @@ class PenyetujuDetail extends Component
     public $tanggalMulai;
     public $tanggalSelesai;
     public $alasan;
-    public $dokumen;
+    public $dokumenPath;
     public $isOpen = false; // Status modal
     public $modalAlasan = ''; // Alasan untuk penolakan
     public $idPengajuan;
@@ -44,6 +44,7 @@ class PenyetujuDetail extends Component
             $this->tanggalMulai = $pengajuan->tanggal_awal ? \Carbon\Carbon::parse($pengajuan->tanggal_awal)->format('Y-m-d') : '';
             $this->tanggalSelesai = $pengajuan->tanggal_akhir ? \Carbon\Carbon::parse($pengajuan->tanggal_akhir)->format('Y-m-d') : '';
             $this->alasan = $pengajuan->alasan;
+            $this->dokumenPath = $pengajuan->dokumen;
         } else {
             $this->dispatchBrowserEvent('custom-alert', [
                 'type' => 'error',

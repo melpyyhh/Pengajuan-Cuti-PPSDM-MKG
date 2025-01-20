@@ -211,6 +211,7 @@ class PengajuanForm extends Component
                     $fileName
                 );
 
+
                 // Ubah path agar sesuai dengan struktur yang diinginkan
                 $dokumenPath = str_replace('public/', '', $dokumenPath);
 

@@ -57,6 +57,15 @@ Route::middleware(['auth', 'penyetujuMiddleware'])->group(function () {
     Route::get('/penyetuju/riwayat-pengaduan', RiwayatPengaduan::class)->name('penyetuju.riwayat-pengaduan');
     Route::get('/penyetuju/pengaduan-form', PengaduanForm::class)->name('penyetuju.pengaduan.form');
     Route::get('/penyetuju-dashboard', [PenyetujuController::class, 'dashboard'])->name('penyetuju.penyetuju-dashboard');
+    Route::get('/download-dokumen/{filePath}', function ($filePath) {
+        $path = storage_path('app/public/' . $filePath);
+
+        if (!file_exists($path)) {
+            abort(404, 'File tidak ditemukan.');
+        }
+
+        return response()->download($path);
+    })->name('download.dokumen');
 });
 
 // Admin
@@ -69,8 +78,8 @@ Route::middleware(['auth', 'adminMiddleware'])->group(function () {
     Route::get('/admin/search-pegawai', [AdminController::class, 'searchPegawai'])->name('admin.search-pegawai');
 });
 
-Route::get('/pengajuan-cuti-email', function () { 
-    return view('emails.pengajuan-cuti'); 
+Route::get('/pengajuan-cuti-email', function () {
+    return view('emails.pengajuan-cuti');
 })->name('pengajuan.cuti.email');
 Route::get('/pengajuan-cuti-setuju-email', function () {
     return view('emails.penyetuju-setuju');
