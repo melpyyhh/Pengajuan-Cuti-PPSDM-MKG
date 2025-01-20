@@ -35,6 +35,8 @@ class AuthenticatedSessionController extends Controller
             return redirect(route('pengaju.riwayat'));
         } elseif ($role === 'penyetuju') {
             return redirect(route('penyetuju.daftar-cuti'));
+        } elseif ($role === 'dual_role') {
+            return redirect(route('pengaju.riwayat'));
         }
     }
 

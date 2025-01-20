@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ProsesCuti;
 use App\Models\RiwayatCuti;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PenyetujuController extends Controller
 {

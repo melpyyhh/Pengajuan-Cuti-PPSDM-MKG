@@ -224,7 +224,7 @@ class PengajuanForm extends Component
             $tanggalAkhir = $this->hitungTanggalAkhir($this->tanggalMulai, $this->durasiCuti);
             $pengajuan = Pengajuan::ajukanCuti([
                 'pengaju_id' => Auth::user()->pegawai->id,
-                'penyetuju_id' => 2,
+                'penyetuju_id' => Auth::user()->atasan_id,
                 'cuti_id' => $this->jenisCutiTerpilih,
                 'tanggal_awal' => $this->tanggalMulai,
                 'selama' => $this->durasiCuti,

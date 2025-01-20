@@ -5,7 +5,7 @@
             <h1 class="mb-4 text-4xl font-bold text-center">Sistem Pengajuan Cuti</h1>
             <h1 class="mb-4 text-4xl font-bold text-center">PPSDM BMKG</h1>
             <p class="mt-4 text-lg tracking-widest text-center">
-                Masukkan NIP atau email BMKG dan kata sandi Anda untuk mengakses.
+                Masukkan Email dan kata sandi Anda untuk mengakses.
             </p>
             <img src="img/mascot.png" alt="Maskot BMKG" class="mt-6 w-[200px] md:w-[300px]">
         </div>
