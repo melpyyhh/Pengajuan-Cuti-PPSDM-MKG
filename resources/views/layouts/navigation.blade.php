@@ -121,9 +121,9 @@
                     <span class="ms-3">Pengajuan</span>
                 </a>
 
-                <a href="{{ route('pengaju.riwayat-pengaduan') }}"
+                <a href="{{ route('pengaju.riwayat-pengaduan') }} "
                     class="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-gray-700 dark:hover:bg-gray-700 group
-                {{ request()->is('pengaju/riwayat-pengaduan') ? 'bg-tertiary text-white font-semibold rounded-lg' : 'rounded-lg hover:shadow' }}">
+                {{ request()->is('pengaju/pengaduan-form') ? 'bg-tertiary text-white font-semibold rounded-lg' : 'rounded-lg hover:shadow' }}">
                     <svg class="w-5 h-5" height="200px" width="200px" version="1.1" id="_x32_"
                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                         viewBox="0 0 512 512" xml:space="preserve" fill="#000000">
@@ -185,8 +185,7 @@
                     <span class="ms-3">Dashboard Cuti Pegawai</span>
                 </a>
                 <a href="{{ route('penyetuju.riwayat-pengaduan') }}"
-                    class="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-gray-700 dark:hover:bg-gray-700 group
-        {{ request()->is('penyetuju/riwayat-pengaduan') ? 'bg-tertiary text-white font-semibold rounded-lg' : 'rounded-lg hover:shadow' }}">
+                    class="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-gray-700 dark:hover:bg-gray-700 group {{ request()->is('penyetuju/pengaduan-form') ? 'bg-tertiary text-white font-semibold rounded-lg' : 'rounded-lg hover:shadow' }}">
                     <svg class="w-5 h-5" height="200px" width="200px" version="1.1" id="_x32_"
                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                         viewBox="0 0 512 512" xml:space="preserve" fill="#000000">
