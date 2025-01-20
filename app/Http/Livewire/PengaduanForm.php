@@ -14,7 +14,7 @@ class PengaduanForm extends Component
     public $subjek;
     public $isi;
 
-    public $dataPegawai= [];
+    public $dataPegawai = [];
     public $nama;
     public $email;
     public $sudahReset;
@@ -41,7 +41,7 @@ class PengaduanForm extends Component
     public function mount()
     {
         // Mendapatkan nama pengguna dari user yang sedang login
-        $this->dataPegawai =[
+        $this->dataPegawai = [
             'nama' => Auth::user()->pegawai->nama,
             'email' => Auth::user()->email,
             'unitKerja' => Auth::user()->pegawai->unitKerja
@@ -85,7 +85,6 @@ class PengaduanForm extends Component
             }
             // Kembali ke riwayat-pengaduan
             $this->goBack();
-            
         } catch (\Throwable $e) {
             Log::error('Error: ' . $e->getMessage());
             // Dispatch alert untuk error

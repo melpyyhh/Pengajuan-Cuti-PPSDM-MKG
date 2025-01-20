@@ -11,8 +11,16 @@ class Pengajuan extends Model
     use HasFactory;
 
     protected $fillable = [
-        'pengaju_id', 'penyetuju_id', 'cuti_id', 'alasan', 'tanggal_awal',
-        'tanggal_akhir', 'alamatCuti', 'nomorHp', 'selama'
+        'pengaju_id',
+        'penyetuju_id',
+        'cuti_id',
+        'alasan',
+        'tanggal_awal',
+        'tanggal_akhir',
+        'alamatCuti',
+        'nomorHp',
+        'selama',
+        'dokumen'
     ];
 
     // Define the relationship with Pegawai (pengaju)
@@ -59,6 +67,7 @@ class Pengajuan extends Model
             'nomorHp' => $data['nomorHp'],
             'selama' => $data['selama'],
             'alamatCuti' => $data['alamat'],
+            'dokumen' => $data['dokumen']
         ]);
 
         // Create ProsesCuti entry
@@ -79,7 +88,7 @@ class Pengajuan extends Model
             'tanggal_awal' => $pengajuan->tanggal_awal,
             'tanggal_akhir' => $pengajuan->tanggal_akhir
         ]);
-        
+
         return $pengajuan;
     }
 
@@ -91,11 +100,10 @@ class Pengajuan extends Model
             if (!$pengajuan) {
                 throw new \Exception('Pengajuan tidak ditemukan.');
             }
-            
             // Update status in ProsesCuti
             ProsesCuti::where('pengajuan_id', $pengajuan->id)
                 ->update(['status_ajuan' => $data['status']]);
-            
+
             // Update status in RiwayatCuti
             RiwayatCuti::where('pengajuan_id', $pengajuan->id)
                 ->update(['status_ajuan' => $data['status']]);

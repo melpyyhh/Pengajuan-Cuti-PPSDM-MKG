@@ -55,4 +55,10 @@ class RiwayatCuti extends Model
         }
         return  false;
     }
+
+    public static function updateFeedback($feedback, $pengajuanId)
+    {
+        return self::where('pengajuan_id', $pengajuanId)
+            ->update(['feedback' => $feedback]);
+    }
 }

@@ -8,9 +8,17 @@ use App\Mail\PengajuanDisetujui;
 use Illuminate\Support\Facades\Mail;
 use App\Models\Pengajuan;
 use App\Mail\PengajuanDisetujuiMail;
+use App\Models\RiwayatCuti;
+use Illuminate\Support\Facades\Auth;
 
 class PengajuController extends Controller
 {
+
+    public function riwayatCuti()
+    {
+        $listRiwayat = RiwayatCuti::getByPegawaiId(Auth::user()->pegawai_id)->paginate(5);
+        return view('pengaju.riwayat', compact('listRiwayat'));
+    }
     public function submitPenyetuju($id)
     {
         try {

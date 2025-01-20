@@ -66,6 +66,14 @@
                             class="mt-1 block w-full rounded-lg focus:border-blue-500 focus:ring-blue-500 border border-[#0032CC]"
                             disabled>
                     </div>
+                    @if ($statusAjuan == 'ditolak')
+                        <div>
+                            <label for="feedback" class="block mb-2 tracking-wider text-gray-800 text-md">Umpan
+                                Balik:</label>
+                            <textarea id="feedback" wire:model="feedback" rows="10"
+                                class="mt-1 block w-full rounded-lg focus:border-blue-500 focus:ring-blue-500 border border-[#0032CC]" disabled></textarea>
+                        </div>
+                    @endif
                 </div>
             </div>
 

@@ -19,6 +19,7 @@ class PengajuanDetail extends Component
     public $idPengajuan;
     public $idRiwayat;
     public $statusAjuan;
+    public $feedback;
 
 
     public $pages = [
@@ -34,6 +35,7 @@ class PengajuanDetail extends Component
         if ($riwayat) {
             $this->statusAjuan = strtolower($riwayat->status_ajuan); // Simpan status pengajuan (lowercase untuk konsistensi)
             $this->idRiwayat = $riwayat->id;
+            $this->feedback = $riwayat->feedback;
         }
 
         if ($pengajuan) {

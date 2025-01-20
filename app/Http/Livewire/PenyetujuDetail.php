@@ -28,6 +28,7 @@ class PenyetujuDetail extends Component
     public $modalAlasan = ''; // Alasan untuk penolakan
     public $idPengajuan;
     public $statusAjuan;
+    public $feedback;
 
     public $pages = [
         1 => ['heading' => 'Detail Pengajuan', 'subheading' => 'Berikut adalah detail pengajuan cuti pegawai'],
@@ -72,23 +73,23 @@ class PenyetujuDetail extends Component
         try {
             // Step 1: Retrieve the pengajuan data using id
             $pengajuan = Pengajuan::findOrFail($this->idPengajuan);
-    
+
             // Step 2: Update the status to 'ditolak'
             $data = [
                 'id' => $this->idPengajuan,
                 'status' => 'ditolak'
             ];
             Pengajuan::updateStatus($data);
-    
+            RiwayatCuti::updateFeedback($this->feedback, $this->idPengajuan);
             // Step 3: Get the email of the user who submitted the request
             $email = Pegawai::findOrFail($pengajuan->pengaju_id)->user->email;
-    
+
             // Step 4: Send the rejection email to the user
             Mail::to($email)->send(new PenyetujuTolak($pengajuan));
-    
+
             // Close the modal after rejection
             $this->closeModal();
-    
+
             // Dispatch a success alert
             $this->dispatch(
                 'custom-alert',
@@ -108,7 +109,7 @@ class PenyetujuDetail extends Component
             );
         }
     }
-    
+
 
     public function render()
     {

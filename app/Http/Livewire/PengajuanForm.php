@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -80,7 +81,7 @@ class PengajuanForm extends Component
     public function goToNextPage()
     {
 
-        
+
         // Validasi berdasarkan halaman saat ini
         $this->pegawaiId = Auth::user()->pegawai->id;
         if (isset($this->validationRules[$this->currentPage])) {
@@ -97,21 +98,16 @@ class PengajuanForm extends Component
             $result = $this->cekKetersediaanCuti($data);
 
             if (!$result['status']) {
-                $this->dispatch('custom-alert', [
-                    'type' => 'error',
-                    'title' => $result['message'],
-                    'position' => 'center',
-                    'timer' => 3000,
-                ]);
-                
+                $this->dispatch(
+                    'custom-alert',
+                    type: 'error',
+                    title: $result['message'],
+                    position: 'center',
+                    timer: 3000,
+                );
+
                 return;
             }
-
-            $this->sisaCuti = DataCuti::where('pegawais_id', $this->pegawaiId)
-                ->where('jenis_cuti_id', intval($this->jenisCutiTerpilih))
-                ->orderBy('tahun', 'desc') // Urutkan berdasarkan tahun
-                ->take(3) // Ambil hanya 3 data teratas
-                ->get(['tahun', 'sisa_cuti']);
         }
 
         if ($this->currentPage === 2) {
@@ -162,10 +158,18 @@ class PengajuanForm extends Component
 
         // Proses khusus untuk halaman 3 (Unggah Dokumen)
         if ($this->currentPage === 3) {
-            $this->validate([
-                'dokumen' => 'nullable|file|max:2048',
-            ]);
+            // Jika jenis cuti adalah 6 (cuti yang memerlukan dokumen)
+            if ($this->jenisCutiTerpilih == 6) {
+                $this->validate([
+                    'dokumen' => 'required|file|max:2048', // dokumen wajib
+                ]);
+            } else {
+                $this->validate([
+                    'dokumen' => 'nullable|file|max:2048', // dokumen opsional
+                ]);
+            }
 
+            // Tampilkan alert hanya jika ada dokumen yang diupload
             if ($this->dokumen) {
                 $this->dispatch(
                     'custom-alert',
@@ -194,7 +198,25 @@ class PengajuanForm extends Component
     // Atur lagi aja bang ini submit"annya, ini cuman sementara karena viewnya gabisa dinext kalo gaada submit
     public function submitForm()
     {
-        try {    
+        try {
+            $dokumenPath = null;
+            if ($this->dokumen) {
+                // Generate nama file yang unik
+                $fileName = time() . '_' . $this->dokumen->getClientOriginalName();
+
+                // Simpan file langsung ke storage/app/public/dokumen-cuti
+                $dokumenPath = Storage::putFileAs(
+                    'public/dokumen-cuti',
+                    $this->dokumen,
+                    $fileName
+                );
+
+                // Ubah path agar sesuai dengan struktur yang diinginkan
+                $dokumenPath = str_replace('public/', '', $dokumenPath);
+
+                // Log untuk debugging
+                Log::info('File path: ' . $dokumenPath);
+            }
             // Logika pengajuan cuti
             $tanggalAkhir = $this->hitungTanggalAkhir($this->tanggalMulai, $this->durasiCuti);
             $pengajuan = Pengajuan::ajukanCuti([
@@ -207,44 +229,41 @@ class PengajuanForm extends Component
                 'alamat' => $this->alamatCuti,
                 'nomorHp' => $this->nomorHp,
                 'tanggal_akhir' => $tanggalAkhir,
+                'dokumen' => $dokumenPath
             ]);
-    
+
             // Use $pengajuan->id instead of undefined $id
             $pengajuan = Pengajuan::with(['pengaju', 'penyetuju', 'cuti'])->findOrFail($pengajuan->id);
-         
+
             // Kirim email ke semua pengguna dengan role "penyetuju"
             $penyetujuUsers = User::where('role', 'penyetuju')->get();
             $penyetujuUsersEmail = $penyetujuUsers->pluck('email');
-            
+
             foreach ($penyetujuUsersEmail as $email) {
                 try {
                     Mail::to($email)->send(new PengajuanDisetujuiMail($pengajuan));
                 } catch (\Throwable $e) {
                     Log::error("Gagal mengirim email ke {$email}: " . $e->getMessage());
                 }
-            }            
-                
+            }
+
             // Dispatch alert untuk sukses
             $this->dispatch('custom-alert', type: 'success', title: 'Pengajuan Berhasil', position: 'center', timer: 3000);
-         
+
             // Reset form
             $this->reset(['jenisCutiTerpilih', 'tanggalMulai', 'alasan', 'durasiCuti', 'alamatCuti', 'nomorHp', 'currentPage']);
-         
+
             // Redirect ke route pengaju.riwayat
             return redirect()->route('pengaju.riwayat');
-    
         } catch (\Throwable $e) {
             // Log the error message for debugging
             Log::error('Error in submitForm: ' . $e->getMessage());
             Log::error($e->getTraceAsString());
-    
+
             // Dispatch alert untuk error
             $this->dispatch('custom-alert', type: 'error', title: 'Terjadi Kesalahan', position: 'center', timer: 3000);
         }
     }
-    
-    
-
 
     public function resetSuccess()
     {
@@ -276,7 +295,8 @@ class PengajuanForm extends Component
         $this->sisaCuti = DataCuti::where('pegawais_id', $this->pegawaiId)
             ->where('jenis_cuti_id', intval($this->jenisCutiTerpilih))
             ->orderBy('tahun', 'desc')
-            ->get(['tahun', 'sisa_cuti']);
+            ->get(['tahun', 'sisa_cuti'])
+            ->take(3);
     }
 
     public function updatedJenisCutiTerpilih()

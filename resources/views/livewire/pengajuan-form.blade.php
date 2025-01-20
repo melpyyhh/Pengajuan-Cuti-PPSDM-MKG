@@ -111,6 +111,9 @@
                         class="mt-4 flex items-center justify-center px-4 py-2 border border-[#0032CC] rounded-xl text-[#0032CC] bg-white hover:bg-[#0032CC] hover:text-white cursor-pointer">
                         Pilih File
                     </label>
+                    <div wire:loading wire:target="dokumen">
+                        Mengupload...
+                    </div>
 
                     @error('dokumen')
                         <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
