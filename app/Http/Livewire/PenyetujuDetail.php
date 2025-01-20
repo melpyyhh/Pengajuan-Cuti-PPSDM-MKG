@@ -9,6 +9,7 @@ use App\Models\Pegawai;
 use App\Mail\PenyetujuSetuju;
 use App\Mail\PenyetujuTolak;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Log;
@@ -123,6 +124,37 @@ class PenyetujuDetail extends Component
     public function submitPenyetuju()
     {
         try {
+            try {
+                // Step 1: Retrieve pengajuan data
+                $pengajuan = Pengajuan::find($this->idPengajuan);
+
+                // Step 2: Update penyetuju_id to atasan_id of dual_role
+                $atasanId = Auth::user()->atasan_id;
+                $pengajuan->update([
+                    'penyetuju_id' => $atasanId,
+                ]);
+
+                // Step 3: Dispatch success alert
+                $this->dispatch(
+                    'custom-alert',
+                    type: 'success',
+                    title: 'Pengajuan berhasil diproses ke penyetuju berikutnya',
+                    position: 'center',
+                    timer: 3000
+                );
+
+                return redirect()->route('penyetuju.daftar-cuti');
+            } catch (\Throwable $th) {
+                // Log error and dispatch error alert
+                Log::error('Error saat menyetujui pengajuan oleh dual_role: ' . $th->getMessage());
+                $this->dispatch(
+                    'custom-alert',
+                    type: 'error',
+                    title: 'Terjadi Kesalahan, mohon coba ulang atau hubungi Admin',
+                    position: 'center',
+                    timer: 3000
+                );
+            }
             // Step 1: Update status to 'disetujui'
             $data = [
                 'id' => $this->idPengajuan,

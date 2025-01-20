@@ -18,7 +18,7 @@ class PengajuMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check() && Auth::user()->role === 'pengaju') {
+        if (Auth::check() && Auth::user()->role === 'pengaju' || Auth::user()->role === 'dual_role') {
             return $next($request);
         }
 

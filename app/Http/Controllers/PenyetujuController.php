@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ProsesCuti;
 use App\Models\RiwayatCuti;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PenyetujuController extends Controller
 {
@@ -15,7 +16,10 @@ class PenyetujuController extends Controller
 
     public function daftarCuti()
     {
-        $listPengajuan = ProsesCuti::paginate(5);
+        $userId = Auth::user()->id;
+        $listPengajuan = ProsesCuti::whereHas('pengajuan', function ($query) use ($userId) {
+            $query->where('penyetuju_id', $userId);
+        })->paginate(5);
         return view('penyetuju.daftar-cuti', compact('listPengajuan'));
     }
 
