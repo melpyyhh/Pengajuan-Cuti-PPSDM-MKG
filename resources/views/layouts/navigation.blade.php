@@ -21,7 +21,9 @@
                         PPSDM BMKG</span>
                 </a>
             </div>
-            <div class="flex items-center">
+            <div class="flex items-center space-x-4">
+                @livewire('notifikasi')
+
                 <div class="flex items-center ms-3">
                     <div>
                         <button type="button"

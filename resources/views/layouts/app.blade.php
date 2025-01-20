@@ -28,12 +28,6 @@
             @include('layouts.navigation')
             @livewire('chatbot')
         </div>
-        {{--
-        <div class="flex space-x-4 py-4 px-6">
-            <div>
-                @livewire('notifikasi')
-            </div>
-        </div> --}}
     </div>
 
     @livewire('livewire-ui-modal')
