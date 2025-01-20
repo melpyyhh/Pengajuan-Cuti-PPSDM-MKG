@@ -73,7 +73,7 @@
     <div class="h-full px-3 pb-4 overflow-y-auto border-gray-700 bg-primary">
         <ul class="space-y-2 font-medium">
             {{-- Menu Pengaju --}}
-            @if (Auth::user()->hasRole('pengaju'))
+            @if (Auth::user()->hasRole('pengaju') || Auth::user()->hasRole('dual_role'))
                 <div class="mt-2 text-lg font-semibold uppercase text-secondary">
                     Menu Pengaju
                 </div>
@@ -147,7 +147,7 @@
             @endif
 
             {{-- Menu Penyetuju --}}
-            @if (Auth::user()->hasRole('penyetuju'))
+            @if (Auth::user()->hasRole('penyetuju') || Auth::user()->hasRole('dual_role'))
                 <div class="mt-2 text-lg font-semibold uppercase text-secondary">
                     Menu Penyetuju
                 </div>
