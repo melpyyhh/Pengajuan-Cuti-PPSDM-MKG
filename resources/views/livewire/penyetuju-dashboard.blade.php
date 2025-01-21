@@ -65,7 +65,7 @@
     <div class="fixed top-0 right-0 w-64 h-full pt-20 bg-white border-r border-gray-200 z-1 max-md:hidden dark:bg-primary dark:border-gray-700"
         style="background-color: #CED5E1;">
         <div class="flex flex-col items-center justify-center h-20">
-            <p class="text-2xl font-bold text-center text-black">Top 10 on Leave</p>
+            <p class="text-2xl font-bold text-center text-black">Top 10 Leave Applicants</p>
         </div>
         @foreach ($cutiPerPegawai as $pegawai)
             <div class="p-4 rounded-lg shadow">
@@ -96,36 +96,67 @@
     {{-- Mobile Layout --}}
     <div
         class="fixed top-0 right-0 block w-full h-full pt-20 bg-white border-t border-gray-200 z-1 md:hidden dark:bg-white">
-        <div class="flex flex-col items-center justify-center h-20">
-            <p class="text-2xl font-bold text-center text-black">Top 10 on Leave</p>
+        <div class="flex flex-col items-center justify-center">
+            <p class="px-5 py-2 mb-4 text-2xl font-bold text-center text-black rounded-full text-primary bg-tertiary">
+                Dashboard Cuti Pegawai
+            </p>
         </div>
-        @foreach ($cutiPerPegawai as $pegawai)
-            <div class="p-4 mb-4 rounded-lg shadow" style="background-color: #CED5E1;">
-                <!-- Tambahkan mb-4 untuk jarak antar baris -->
-                <div class="flex items-center justify-between">
-                    <!-- Kolom Kiri -->
-                    <div class="px-4"> <!-- Padding horizontal untuk kolom kiri -->
-                        <!-- Nama Pegawai -->
-                        <div class="text-xl text-black">
-                            {{ $pegawai->nama_pegawai }}
+        <div class="flex flex-col items-center justify-center h-10">
+            <p class="text-xl font-bold text-center text-black">Top 10 Leave Applicants</p>
+        </div>
+        <div class="px-6">
+            @foreach ($cutiPerPegawai as $pegawai)
+                <div class="p-2 mb-2 shadow-lg rounded-xl" style="background-color: #CED5E1;">
+                    <div class="flex items-center justify-between">
+                        <!-- Kolom Kiri -->
+                        <div class="px-4">
+                            <!-- Nama Pegawai -->
+                            <div class="text-xl text-black">
+                                {{ $pegawai->nama_pegawai }}
+                            </div>
+                            <!-- Unit Kerja -->
+                            <div class="text-sm text-gray-600">
+                                {{ $pegawai->unitKerja }}
+                            </div>
                         </div>
-                        <!-- Unit Kerja -->
-                        <div class="text-sm text-gray-600">
-                            {{ $pegawai->unitKerja }}
+                        <!-- Kolom Kanan -->
+                        <div class="px-4">
+                            <!-- Total Cuti -->
+                            <div class="text-xl text-black">
+                                {{ $pegawai->total_cuti }}
+                            </div>
                         </div>
                     </div>
-                    <!-- Kolom Kanan -->
-                    <div class="px-4"> <!-- Padding horizontal untuk kolom kanan -->
-                        <!-- Total Cuti -->
-                        <div class="text-xl text-black">
-                            {{ $pegawai->total_cuti }}
+                </div>
+            @endforeach
+        </div>
+
+        {{-- Laporan Jumlah Pengajuan dan Penyetujuan Cuti --}}
+        <div class="px-6">
+            <div class="grid items-start h-full grid-rows-2 gap-2">
+                <div class="flex items-center justify-center rounded-[25px] bg-gray-50 dark:bg-gray-800 h-full"
+                    style="background-color: #FFFFFF">
+                    <div class="mt-6 text-xl font-bold text-center text-black">Jumlah Pengajuan Cuti
+                        <div
+                            class="px-6 py-2 mt-2 text-xl font-semibold text-white bg-red-400 border border-red-700 shadow-md rounded-3xl">
+                            Terdapat {{ $cutiData->count() }} pengajuan cuti yang diajukan
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center justify-center rounded-[25px] bg-gray-50 dark:bg-gray-800 h-full"
+                    style="background-color: #FFFFFF">
+                    <div class="text-center">
+                        <div
+                            class="px-6 py-2 text-xl font-semibold text-white bg-green-400 border border-green-700 shadow-md rounded-3xl">
+                            Terdapat {{ $cutiDataDisetujui->count() }} pengajuan cuti berhasil disetujui
                         </div>
                     </div>
                 </div>
             </div>
-        @endforeach
+        </div>
+        {{-- Keterangan Detail dapat Dilihat di Desktop --}}
         <div>
-            <p class="pt-3 text-sm text-center text-gray-600">Detail Dashboard Dapat Dilihat di Desktop.</p>
+            <p class="pt-3 text-center text-gray-600 text-md">Detail Dashboard Dapat Dilihat di Desktop.</p>
         </div>
     </div>
 </div>
