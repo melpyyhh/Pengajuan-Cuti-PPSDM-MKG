@@ -16,9 +16,9 @@
                 <a href="#" class="flex ms-2 md:me-24">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/1/12/Logo_BMKG_%282010%29.png"
                         class="h-8 me-3" alt="FlowBite Logo" />
-                    <span
-                        class="self-center text-xl font-semibold tracking-wide text-white sm:text-2xl whitespace-nowrap dark:text-white">SIPETI
-                        PPSDM BMKG</span>
+                        <span class="self-center text-sm font-semibold tracking-wide text-white sm:text-xl dark:text-white whitespace-nowrap">
+                            SIPETI PPSDM BMKG
+                        </span>
                 </a>
             </div>
             <div class="flex items-center space-x-4">

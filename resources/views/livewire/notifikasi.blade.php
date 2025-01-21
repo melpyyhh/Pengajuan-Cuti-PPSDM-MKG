@@ -1,7 +1,7 @@
 <!-- Tombol Lonceng (Notification Button) -->
 <div>
     <button wire:click="toggleDropdown"
-        class="p-3 text-white rounded-full shadow-lg bg-primary hover:bg-tertiary focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50">
+        class="p-2 text-white rounded-full shadow-lg bg-primary hover:bg-tertiary focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50">
         <svg viewBox="-1.5 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink" fill="#ffffff" stroke="#ffffff" width="24" height="24">
             <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
