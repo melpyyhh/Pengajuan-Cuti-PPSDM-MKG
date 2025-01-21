@@ -134,7 +134,7 @@
                     <th colspan="4">II. JENIS CUTI</th>
                 </tr>
                 <tr>
-                    <td>1. {{ $pengajuan->jenis_cuti }}</td>
+                    <td>1. Cuti Tahunan</td>
                     <td><span class="checkbox">v</span></td>
                     <td>4. Cuti melahirkan</td>
                     <td><span class="checkbox"></span></td>
@@ -308,11 +308,11 @@
                             <br>
                             <span
                                 style="vertical-align: text-bottom; padding-right: 5px; font-size:10px; text-decoration:underline;">
-                                Penyetuju
+                                {{ $pengajuan->nama_atasan }}
                             </span>
                             <br>
                             <span style="vertical-align: text-bottom; padding-right: 5px; font-size:10px;">
-                                NIP.
+                                NIP.{{ $pengajuan->nip_atasan }}
                             </span>
                         </div>
                     </td>
@@ -349,11 +349,11 @@
                             <br>
                             <span
                                 style="vertical-align: text-bottom; padding-right: 5px; font-size:10px; text-decoration:underline;">
-                                Penyetuju
+                                {{ $pengajuan->nama_penyetuju }}
                             </span>
                             <br>
                             <span style="vertical-align: text-bottom; padding-right: 5px; font-size:10px;">
-                                NIP.
+                                NIP.{{ $pengajuan->nip_penyetuju }}
                             </span>
                         </div>
                     </td>

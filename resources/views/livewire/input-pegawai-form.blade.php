@@ -84,10 +84,9 @@
                                         class="block text-sm font-medium text-gray-700">
                                         Tahun Cuti:
                                     </label>
-                                    <select wire:model="selectedJenisCuti.{{ $index }}_tahun"
-                                        id="tahunCuti{{ $index }}"
+                                    <select wire:model="tahun.{{ $index }}" id="tahunCuti{{ $index }}"
                                         class="mt-1 block w-full rounded-2xl border border-[#0032CC] focus:ring-[#0032CC] focus:border-[#0032CC] tracking-widest">
-                                        <option value="" disabled>Pilih Tahun</option>
+                                        <option value="" selected hidden>Pilih Tahun</option>
                                         @foreach ($jenisCuti[0]['tahun'] as $tahun)
                                             <option value="{{ $tahun }}">{{ $tahun }}</option>
                                         @endforeach

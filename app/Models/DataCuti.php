@@ -28,10 +28,10 @@ class DataCuti extends Model
             'jenis_cuti_id' => $data['jenis_cuti_id'],
             'jumlah_cuti' => $data['jumlah_cuti'],
             'sisa_cuti' => $data['sisa_cuti'],
-            'tahun' => now()->year, // Menambahkan tahun saat ini
+            'tahun' => $data['tahun'],
         ]);
     }
-    
+
 
     public static function cekCutiTahunan($idPegawai)
     {

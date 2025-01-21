@@ -25,6 +25,7 @@ class InputPegawaiForm extends Component
     public $selectedJenisCuti = [];
     public $sisaCuti = [];
     public $jenisCutiFields = [0]; // Mengelola input
+    public $tahun = [];
 
     public $pages = [
         1 => ['heading' => 'Data Pegawai', 'subheading' => 'Isikan Data Pegawai'],
@@ -50,14 +51,16 @@ class InputPegawaiForm extends Component
         3 => ['unitKerjaPegawai' => 'required|string'],
         4 => ['masaKerjaPegawai' => 'required|integer|min:0'],
         5 => ['jabatanPegawai' => 'required|string'],
-        6 => ['sisaCuti' => 'required'],
-        7 => ['selectedJenisCuti' => 'required|exists:jenis_cuti,id',]
+        6 => ['sisaCuti.*' => 'required|integer|min:0'],
+        7 => ['selectedJenisCuti.*' => 'required|exists:jenis_cuti,id'],
+        8 => ['tahun.*' => 'nullable|integer']
     ];
 
     public function submitForm()
     {
         try {
-            $this->sisaCuti = array_map('intval', $this->sisaCuti);
+            $this->sisaCuti = is_array($this->sisaCuti) ? array_map('intval', $this->sisaCuti) : [];
+            $this->tahun = is_array($this->tahun) ? array_map('intval', $this->tahun) : [];
             $masaKerjaPegawai = intval(trim($this->masaKerjaPegawai));
             // Validasi akhir
             $this->validate(array_merge(...array_values($this->validationRules)));
@@ -69,16 +72,16 @@ class InputPegawaiForm extends Component
                 'unitKerja' => $this->unitKerjaPegawai,
                 'masaKerja' => $masaKerjaPegawai,
             ]);
-
             // Simpan data cuti
             $pegawaiId = $pegawaiBaru->id;
             foreach ($this->jenisCutiFields as $index) {
-                DataCuti::tambahDataCuti([
+                dd(DataCuti::tambahDataCuti([
                     'pegawai_id' => $pegawaiId,
                     'jenis_cuti_id' => $this->selectedJenisCuti[$index] ?? null,
                     'jumlah_cuti' => $this->sisaCuti[$index] ?? null,
                     'sisa_cuti' => $this->sisaCuti[$index] ?? null,
-                ]);
+                    'tahun' => $this->tahun[$index] ?? null
+                ]));
             }
 
             // Notifikasi sukses
@@ -94,10 +97,12 @@ class InputPegawaiForm extends Component
                 'sisaCuti',
                 'jenisCutiFields',
                 'selectedJenisCuti',
-                'currentPage'  // Reset selectedJenisCuti juga
+                'currentPage',  // Reset selectedJenisCuti juga
+                'tahun'
             ]);
             $this->dispatch('refreshPage');
         } catch (\Exception $e) {
+            Log::error($e->getMessage());
             $this->dispatch('custom-alert', type: 'error', title: 'Terjadi Kesalahan', position: 'center', timer: 1500);
         }
     }

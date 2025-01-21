@@ -239,7 +239,8 @@ class PengajuanForm extends Component
             $pengajuan = Pengajuan::with(['pengaju', 'penyetuju', 'cuti'])->findOrFail($pengajuan->id);
 
             // Kirim email ke semua pengguna dengan role "penyetuju"
-            $penyetujuUsers = User::where('role', 'penyetuju')->get();
+            $atasanId = Auth::user()->atasan_id;
+            $penyetujuUsers = User::where('pegawai_id', $atasanId)->get();
             $penyetujuUsersEmail = $penyetujuUsers->pluck('email');
 
             foreach ($penyetujuUsersEmail as $email) {
