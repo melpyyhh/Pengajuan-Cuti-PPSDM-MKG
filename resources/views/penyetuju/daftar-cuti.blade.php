@@ -20,20 +20,13 @@
                 <div class="flex items-center py-2 mb-5 space-x-4">
                     <!-- Input Search -->
                     <div class="flex items-center flex-1">
-                        <input type="text" placeholder="Cari..."
-                            class="flex-1 px-4 py-2 border rounded-l-md focus:outline-none max-w-[300px]">
-                        <button class="px-4 py-2 text-white bg-yellow-500 rounded-r-md">
-                            <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" fill="none" width="20"
-                            height="20">
-                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                            <g id="SVGRepo_iconCarrier">
-                                <path fill="#000000" fill-rule="evenodd"
-                                    d="M4 9a5 5 0 1110 0A5 5 0 014 9zm5-7a7 7 0 104.2 12.6.999.999 0 00.093.107l3 3a1 1 0 001.414-1.414l-3-3a.999.999 0 00-.107-.093A7 7 0 009 2z">
-                                </path>
-                            </g>
-                        </svg>
-                        </button>
+                        <form action="{{ route('penyetuju.daftar-cuti') }}" method="GET" class="flex items-center flex-1">
+                            <input type="text" name="search" id="search-input" placeholder="Cari..." value="{{ request()->search }}"
+                                class="flex-1 px-4 py-2 border rounded-l-md focus:outline-none max-w-[300px]">
+                            <button type="submit" class="px-4 py-2 text-white bg-yellow-500 rounded-r-md">
+                                🔍
+                            </button>
+                        </form>
                     </div>
                 </div>
 
@@ -64,7 +57,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($listPengajuan as $data)
+                                @forelse ($listPengajuan as $data)
                                     <tr class="odd:bg-white even:bg-gray-100 hover:bg-gray-100">
                                         <td class="px-16 py-10 text-center text-gray-800 text-s">
                                             {{ ($listPengajuan->currentPage() - 1) * $listPengajuan->perPage() + $loop->iteration }}
@@ -128,7 +121,13 @@
                                             </div>
                                         </td>
                                     </tr>
-                                @endforeach
+                                @empty
+                                    <tr>
+                                        <td colspan="6" class="px-4 py-4 text-center text-gray-500">
+                                            Tidak ada data yang ditemukan.
+                                        </td>
+                                    </tr>
+                                @endforelse
                             </tbody>
                         </table>
                     </div>
@@ -138,8 +137,17 @@
 
         <!-- Mobile View -->
         <div class="grid flex-1 grid-cols-1 gap-4 md:hidden">
+            <div class="flex items-center flex-1">
+                <form action="{{ route('penyetuju.daftar-cuti') }}" method="GET" class="flex items-center flex-1">
+                    <input type="text" name="search" id="search-input" placeholder="Cari..." value="{{ request()->search }}"
+                        class="flex-1 px-4 py-2 border rounded-l-md focus:outline-none max-w-[300px]">
+                    <button type="submit" class="px-4 py-2 text-white bg-yellow-500 rounded-r-md">
+                        🔍
+                    </button>
+                </form>
+            </div>
             <div class="grid flex-1 grid-cols-1 gap-4 md:hidden">
-                @foreach ($listPengajuan as $data)
+                @forelse ($listPengajuan as $data)
                     <div class="p-4 space-y-3 bg-[#F4F7FE] rounded-lg shadow-md">
                        <!-- Nomor -->
                     <div class="text-sm font-semibold text-gray-800">
@@ -182,7 +190,11 @@
                             </button>
                         </div>
                     </div>
-                @endforeach
+                @empty
+                    <div class="px-4 py-4 text-center text-gray-500">
+                            Tidak ada data yang ditemukan.
+                    </div>
+                @endforelse
             </div>
         </div>
 
@@ -231,4 +243,26 @@
             </button>
         </nav>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#search-input').on('keyup', function() {
+                let query = $(this).val();
+
+                $.ajax({
+                    url: "{{ route('penyetuju.search-cuti') }}",
+                    method: 'GET',
+                    data: {
+                        search: query
+                    },
+                    success: function(response) {
+                        $('tbody').html(response);
+                    },
+                    error: function() {
+                        console.error('Terjadi kesalahan.');
+                    }
+                });
+            });
+        });
+    </script>
 </x-app-layout>

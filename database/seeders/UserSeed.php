@@ -15,6 +15,22 @@ class UserSeed extends Seeder
     {
         $userData = [
             [
+                'name' => 'Admin',
+                'pegawai_id' => 1,
+                'email' => 'admin@gmail.com',
+                'role' => 'admin',
+                'password' => bcrypt('admin'),
+                'atasan_id' => 1
+            ],
+            [
+                'name' => 'Penyetuju',
+                'pegawai_id' => 2,
+                'email' => 'penyetuju@gmail.com',
+                'role' => 'penyetuju',
+                'password' => bcrypt('penyetuju'),
+                'atasan_id' => 1
+            ],
+            [
                 'name' => 'Pengaju2',
                 'pegawai_id' => 4,
                 'email' => 'pengaju2@gmail.com',
