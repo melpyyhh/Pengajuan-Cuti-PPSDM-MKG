@@ -21,20 +21,6 @@ class PengaduanForm extends Component
     public $email;
     public $sudahReset;
 
-    public function goBack()
-    {
-        $user = Auth::user(); // Mendapatkan user yang sedang login
-
-        if ($user->role === 'pengaju') {
-            return redirect('/pengaju/riwayat-pengaduan');
-        } elseif ($user->role === 'penyetuju') {
-            return redirect('/penyetuju/riwayat-pengaduan');
-        }
-
-        // Jika tidak ada role yang cocok, redirect ke halaman default
-        return redirect('/');
-    }
-
     public function render()
     {
         return view('livewire.pengaduan-form');

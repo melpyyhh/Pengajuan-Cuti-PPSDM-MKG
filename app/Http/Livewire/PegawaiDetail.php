@@ -24,6 +24,7 @@ class PegawaiDetail extends Component
         4 => 'Cuti Besar',
     ];
     public $sisaCuti = [];
+    public $tahun = [];
 
     public function mount($pegawaiId)
     {
@@ -44,6 +45,7 @@ class PegawaiDetail extends Component
                 if (isset($cuti->jenis_cuti_id) && isset($cuti->sisa_cuti)) {
                     $this->jenisCutiFields[$cuti->jenis_cuti_id] = $cuti->jenis_cuti_id;
                     $this->sisaCuti[$cuti->jenis_cuti_id] = $cuti->sisa_cuti;
+                    $this->tahun[$cuti->jenis_cuti_id] =  $cuti->tahun;
                 }
             }
         } else {
@@ -51,15 +53,21 @@ class PegawaiDetail extends Component
             session()->flash('error', 'Data pegawai tidak ditemukan.');
             return redirect()->route('admin.daftar-pegawai');
         }
-
-        // Normalize jenisCutiFields
-        $this->normalizeJenisCutiFields();
+        // dd($this->jenisCutiFields);
     }
 
-    public function normalizeJenisCutiFields()
+    public function addJenisCuti()
     {
-        // Fill missing indices (1 to 6) with null
-        $this->jenisCutiFields = array_replace(array_fill(1, 6, null), $this->jenisCutiFields);
+        $this->jenisCutiFields[] = count($this->jenisCutiFields); // Tambahkan indeks baru
+    }
+
+    public function removeJenisCuti()
+    {
+        if (count($this->jenisCutiFields) > 1) {
+            array_pop($this->jenisCutiFields); // Hapus elemen terakhir
+            array_pop($this->selectedJenisCuti); // Hapus jenis cuti terkait
+            array_pop($this->sisaCuti); // Hapus sisa cuti terkait
+        }
     }
 
     public function updatePegawai()
@@ -70,7 +78,6 @@ class PegawaiDetail extends Component
             'unitKerjaPegawai' => 'required|string|max:255',
             'jabatanPegawai' => 'required|string|max:255',
             'masaKerjaPegawai' => 'required|int|max:255',
-            'tanggalInputPegawai' => 'required|date',
         ]);
 
         $pegawai = Pegawai::find($this->pegawaiId);
@@ -81,7 +88,6 @@ class PegawaiDetail extends Component
                 'unitKerja' => $this->unitKerjaPegawai,
                 'jabatan' => $this->jabatanPegawai,
                 'masaKerja' => $this->masaKerjaPegawai,
-                'tanggal_input' => $this->tanggalInputPegawai,
             ]);
 
             foreach ($this->jenisCutiFields as $index => $jenisCutiId) {
@@ -132,9 +138,6 @@ class PegawaiDetail extends Component
 
     public function render()
     {
-        // Normalize fields before rendering
-        $this->normalizeJenisCutiFields();
-
         return view('livewire.pegawai-detail');
     }
 }

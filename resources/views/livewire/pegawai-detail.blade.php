@@ -192,9 +192,9 @@
         });
     }
 
-    window.Livewire.on('redirect-after-alert', (data) => {
+    Livewire.on('triggerRedirect', url => {
         setTimeout(() => {
-            window.location.href = data.url;
-        }, data.delay);
+            window.location.href = url;
+        }, 3000); // Delay untuk menunggu notifikasi selesai
     });
 </script>
