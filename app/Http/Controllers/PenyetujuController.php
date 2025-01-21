@@ -16,14 +16,18 @@ class PenyetujuController extends Controller
 
     public function daftarCuti(Request $request)
     {
+        $userId = Auth::user()->id;
         $search = $request->get('search'); // Mengambil query pencarian dari input
         if ($search) {
-            $listPengajuan = ProsesCuti::search($search) // Menggunakan scopeSearch
+            $listPengajuan = ProsesCuti::whereHas('pengajuan', function ($query) use ($userId) {
+                $query->where('penyetuju_id', $userId);
+            })->search($search) // Menggunakan scopeSearch
                 ->paginate(5)
                 ->appends(['search' => $search]); // Append search query to pagination links
         } else {
-            // Otherwise, show all results paginated
-            $listPengajuan = ProsesCuti::paginate(5);
+            $listPengajuan = ProsesCuti::whereHas('pengajuan', function ($query) use ($userId) {
+                $query->where('penyetuju_id', $userId);
+            })->paginate(5);
         }
         // Mengembalikan partial view dengan data hasil pencarian
         return view('penyetuju.daftar-cuti', compact('listPengajuan', 'search'));
