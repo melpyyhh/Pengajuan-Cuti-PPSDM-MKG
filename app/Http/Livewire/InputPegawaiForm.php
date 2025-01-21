@@ -75,17 +75,17 @@ class InputPegawaiForm extends Component
             // Simpan data cuti
             $pegawaiId = $pegawaiBaru->id;
             foreach ($this->jenisCutiFields as $index) {
-                dd(DataCuti::tambahDataCuti([
+                DataCuti::tambahDataCuti([
                     'pegawai_id' => $pegawaiId,
                     'jenis_cuti_id' => $this->selectedJenisCuti[$index] ?? null,
                     'jumlah_cuti' => $this->sisaCuti[$index] ?? null,
                     'sisa_cuti' => $this->sisaCuti[$index] ?? null,
                     'tahun' => $this->tahun[$index] ?? null
-                ]));
+                ]);
             }
 
             // Notifikasi sukses
-            $this->dispatch('custom-alert', type: 'success', title: 'Tambah Pegawai Berhasil', position: 'center', timer: 1500);
+            $this->dispatch('custom-alert', type: 'success', title: 'Tambah Pegawai Berhasil', position: 'center', timer: 3000);
             // Reset form setelah sukses submit
             $this->reset([
                 'namaPegawai',
@@ -100,10 +100,13 @@ class InputPegawaiForm extends Component
                 'currentPage',  // Reset selectedJenisCuti juga
                 'tahun'
             ]);
-            $this->dispatch('refreshPage');
+            $this->dispatch('redirect-after-alert', [
+                'url' => request()->header('Referer'),
+                'delay' => 3000, // Waktu tunggu sebelum redirect (ms)
+            ]);
         } catch (\Exception $e) {
             Log::error($e->getMessage());
-            $this->dispatch('custom-alert', type: 'error', title: 'Terjadi Kesalahan', position: 'center', timer: 1500);
+            $this->dispatch('custom-alert', type: 'error', title: 'Terjadi Kesalahan', position: 'center', timer: 3000);
         }
     }
 
@@ -114,8 +117,16 @@ class InputPegawaiForm extends Component
 
     public function mount()
     {
-        $this->jenisCuti = JenisCuti::all()->toArray();
-
+        $this->jenisCuti = [
+            [
+                'id' => '1',
+                'jenis_cuti' => "Cuti Tahunan",
+            ],
+            [
+                'id' => '4',
+                'jenis_cuti' => "Cuti Besar",
+            ]
+        ];
         // Jika 'Cuti Tahunan' memiliki tahun dinamis
         foreach ($this->jenisCuti as &$cuti) {
             if ($cuti['jenis_cuti'] === 'Cuti Tahunan') {

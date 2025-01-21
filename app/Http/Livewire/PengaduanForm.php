@@ -78,7 +78,6 @@ class PengaduanForm extends Component
                     'title' => $this->subjek,
                     'descriptions' => $this->isi,
                 ]);
-                Log::info('Data berhasil disimpan.');
                 // Dispatch alert untuk sukses
                 $this->dispatch('custom-alert', type: 'success', title: 'Pengaduan Berhasil', position: 'center', timer: 3000);
                 // Reset form
@@ -86,7 +85,10 @@ class PengaduanForm extends Component
                 $this->sudahReset = 1;
             }
             // Kembali ke riwayat-pengaduan
-            $this->goBack();
+            $this->dispatch('redirect-after-alert', [
+                'url' => request()->header('Referer'),
+                'delay' => 3000, // Waktu tunggu sebelum redirect (ms)
+            ]);
         } catch (\Throwable $e) {
             Log::error('Error: ' . $e->getMessage());
             // Dispatch alert untuk error

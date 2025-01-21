@@ -18,15 +18,10 @@ class PegawaiDetail extends Component
     public $unitKerjaPegawai;
     public $jabatanPegawai;
     public $masaKerjaPegawai;
-    public $tanggalInputPegawai;
     public $jenisCutiFields = [];
     public $selectedJenisCuti = [
         1 => 'Cuti Tahunan',
-        2 => 'Cuti Sakit',
-        3 => 'Cuti Bersalin',
         4 => 'Cuti Besar',
-        5 => 'Cuti Alasan Penting',
-        6 => 'Cuti di Luar Tanggunan Negara (CLTN)',
     ];
     public $sisaCuti = [];
 
@@ -41,7 +36,6 @@ class PegawaiDetail extends Component
             $this->unitKerjaPegawai = $pegawai->unitKerja;
             $this->jabatanPegawai = $pegawai->jabatan;
             $this->masaKerjaPegawai = $pegawai->masaKerja;
-            $this->tanggalInputPegawai = $pegawai->created_at->format('Y-m-d');
 
             // Initialize data cuti
             $dataCuti = DataCuti::where('pegawais_id', $pegawaiId)->get();
@@ -104,8 +98,11 @@ class PegawaiDetail extends Component
                 }
             }
 
-            session()->flash('success', 'Data pegawai berhasil diperbarui!');
-            return redirect()->to(request()->header('Referer'));
+            $this->dispatch('custom-alert', type: 'success', title: 'Data Pegawai Berhasil Diperbarui', position: 'center', timer: 3000);
+            $this->dispatch('redirect-after-alert', [
+                'url' => request()->header('Referer'),
+                'delay' => 3000, // Waktu tunggu sebelum redirect (ms)
+            ]);
         } else {
             session()->flash('error', 'Data pegawai tidak ditemukan!');
         }

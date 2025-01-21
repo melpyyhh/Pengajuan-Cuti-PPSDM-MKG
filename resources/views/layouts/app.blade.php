@@ -31,8 +31,7 @@
     </div>
 
     @livewire('livewire-ui-modal')
-    <!-- <script src="/livewire/livewire.js"></script> -->
-    <!-- @stack('js') -->
+    @stack('js')
     @livewireScripts
 </body>
 

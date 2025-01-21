@@ -128,3 +128,10 @@
             </div>
     @endif
 </div>
+<script>
+    window.Livewire.on('redirect-after-alert', (data) => {
+        setTimeout(() => {
+            window.location.href = data.url;
+        }, data.delay);
+    });
+</script>

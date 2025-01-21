@@ -42,16 +42,10 @@
 
                     <!-- Masa Kerja dan Tanggal Input Pegawai -->
                     <div class="flex space-x-4">
-                        <div class="w-1/2">
+                        <div class="w-full">
                             <label for="masaKerjaPegawai" class="block text-sm font-medium text-gray-700">Masa
                                 Kerja:</label>
                             <input wire:model="masaKerjaPegawai" type="text" id="masaKerjaPegawai"
-                                class="mt-1 block w-full rounded-2xl border border-[#0032CC] focus:ring-[#0032CC] focus:border-[#0032CC]">
-                        </div>
-                        <div class="w-1/2">
-                            <label for="tanggalInputPegawai" class="block text-sm font-medium text-gray-700">Tanggal
-                                Input:</label>
-                            <input wire:model="tanggalInputPegawai" type="date" id="tanggalInputPegawai"
                                 class="mt-1 block w-full rounded-2xl border border-[#0032CC] focus:ring-[#0032CC] focus:border-[#0032CC]">
                         </div>
                     </div>
@@ -142,3 +136,10 @@
         </div>
     </div>
 </div>
+<script>
+    window.Livewire.on('redirect-after-alert', (data) => {
+        setTimeout(() => {
+            window.location.href = data.url;
+        }, data.delay);
+    });
+</script>

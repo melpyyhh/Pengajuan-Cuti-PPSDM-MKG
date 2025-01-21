@@ -83,7 +83,6 @@ class DaftarPengaduan extends Component
             Pengaduan::updateStatusReply($data);
             Log::info("Membalas pengaduan dengan id: {$this->selectedPengaduan->id}");
             $this->closeModal();
-            $this->dispatch('refreshPage');
             $this->dispatch(
                 'custom-alert',
                 type: 'success',
@@ -91,6 +90,10 @@ class DaftarPengaduan extends Component
                 position: 'center',
                 timer: 3000
             );
+            $this->dispatch('redirect-after-alert', [
+                'url' => request()->header('Referer'),
+                'delay' => 3000, // Waktu tunggu sebelum redirect (ms)
+            ]);
         } catch (\Exception $e) {
             Log::error("Error saat membalas pengaduan dengan id: {$this->selectedPengaduan->id}");
             $this->dispatch(
