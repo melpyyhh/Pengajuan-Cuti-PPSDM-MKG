@@ -95,10 +95,8 @@
                 <textarea wire:model="feedback" class="w-full p-2 mt-2 border rounded-lg" rows="6"
                     placeholder="Tuliskan Alasan Anda disini..."></textarea>
                 <div class="flex justify-end gap-4 mt-4">
-                    <button wire:click="closeModal"
-                        class="px-4 py-2 text-white bg-red-500 rounded-xl bg-tertiary">Tutup</button>
-                    <button wire:click="submitTolak"
-                        class="px-4 py-2 text-white bg-blue-500 rounded-xl bg-tertiary">Tolak</button>
+                    <button wire:click="closeModal" class="px-4 py-2 text-white rounded-xl bg-tertiary">Tutup</button>
+                    <button wire:click="submitTolak" class="px-4 py-2 text-white bg-red-500 rounded-xl">Tolak</button>
                 </div>
             </div>
         </div>
