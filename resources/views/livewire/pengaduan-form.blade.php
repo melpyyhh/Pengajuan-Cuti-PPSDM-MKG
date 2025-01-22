@@ -18,7 +18,7 @@
                     <!-- divisinya tar dibuat getdivisibyid yah bang, kan blm ada tuh di tabel -->
                     <label for="unitKerjaPegawai" class="block text-sm font-medium text-gray-700">Unit Kerja :</label>
                     {{-- ini divisinya masih dummy --}}
-                    <input type="text" id="unitKerjaPegawai" disabled value="{{$dataPegawai['unitKerja']}}"
+                    <input type="text" id="unitKerjaPegawai" disabled value="{{ $dataPegawai['unitKerja'] }}"
                         class="mt-1 block w-full rounded-md focus:border-blue-500 focus:ring-blue-500 border border-[#0032CC]">
                 </div>
                 <div>
@@ -48,11 +48,12 @@
 
             <!-- Button-->
             <div class="flex justify-between mt-6">
-                <button type="button" wire:click="goBack"
+                <button type="button" onclick="window.location.href='/{{ Auth::user()->role }}/riwayat-pengaduan'"
                     class="px-4 py-2 text-white transition-colors shadow rounded-xl bg-tertiary hover:bg-orange-300">Kembali</button>
-                    <!-- ini blm ada method submitnya bang -->
+                <!-- ini blm ada method submitnya bang -->
                 <button type="submit" wire:click="submitPengaduan"
-                    class="px-4 py-2 text-white transition-colors shadow rounded-xl bg-tertiary hover:bg-orange-300">Kirim Pengaduan</button>
+                    class="px-4 py-2 text-white transition-colors shadow rounded-xl bg-tertiary hover:bg-orange-300">Kirim
+                    Pengaduan</button>
             </div>
         </form>
     </div>

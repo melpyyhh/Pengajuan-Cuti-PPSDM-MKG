@@ -37,15 +37,10 @@
                                     Pendukung:</label>
                                 <div class="flex items-center space-x-4">
                                     <!-- Tombol Preview -->
-                                    <a href="{{ Storage::url($dokumenPath) }}" target="_blank"
+                                    <a href="{{ $dokumenPath }}" target="_blank"
                                         class="px-4 py-2 text-white bg-blue-500 hover:bg-blue-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                        Preview
+                                        Preview Dokumen
                                     </a>
-                                    <!-- Tombol Download -->
-                                    <button type="button" onclick="downloadDokumen('{{ $dokumenPath }}')"
-                                        class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
-                                        Download Dokumen
-                                    </button>
                                 </div>
                             @endif
                         </div>

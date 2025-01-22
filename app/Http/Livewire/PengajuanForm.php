@@ -206,16 +206,12 @@ class PengajuanForm extends Component
                 // Generate nama file yang unik
                 $fileName = time() . '_' . $this->dokumen->getClientOriginalName();
 
-                // Simpan file langsung ke storage/app/public/dokumen-cuti
+                // Simpan file langsung ke storage/app/dokumen-cuti
                 $dokumenPath = Storage::putFileAs(
-                    'public/dokumen-cuti',
+                    'dokumen-cuti',
                     $this->dokumen,
                     $fileName
                 );
-
-
-                // Ubah path agar sesuai dengan struktur yang diinginkan
-                $dokumenPath = str_replace('public/', '', $dokumenPath);
 
                 // Log untuk debugging
                 Log::info('File path: ' . $dokumenPath);
@@ -258,7 +254,10 @@ class PengajuanForm extends Component
             $this->reset(['jenisCutiTerpilih', 'tanggalMulai', 'alasan', 'durasiCuti', 'alamatCuti', 'nomorHp', 'currentPage']);
 
             // Redirect ke route pengaju.riwayat
-            return redirect()->route('pengaju.riwayat');
+            $this->dispatch('redirect-after-alert', [
+                'url' => request()->header('Referer'),
+                'delay' => 3000, // Waktu tunggu sebelum redirect (ms)
+            ]);
         } catch (\Throwable $e) {
             // Log the error message for debugging
             Log::error('Error in submitForm: ' . $e->getMessage());

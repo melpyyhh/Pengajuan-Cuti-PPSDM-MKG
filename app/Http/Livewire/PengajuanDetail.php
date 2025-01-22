@@ -48,12 +48,13 @@ class PengajuanDetail extends Component
             $this->nomorHp = $pengajuan->nomorHp;
             $this->alamatCuti = $pengajuan->alamatCuti;
         } else {
-            $this->dispatchBrowserEvent('custom-alert', [
-                'type' => 'error',
-                'title' => 'Data Pengajuan Tidak Ditemukan',
-                'position' => 'center',
-                'timer' => 3000
-            ]);
+            $this->dispatch(
+                'custom-alert',
+                type: 'error',
+                title: 'Data Pengajuan Tidak Ditemukan',
+                position: 'center',
+                timer: 3000
+            );
         }
     }
 
