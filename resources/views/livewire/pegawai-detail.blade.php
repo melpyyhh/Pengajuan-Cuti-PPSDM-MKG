@@ -1,59 +1,59 @@
-<div class="bg-white min-h-screen flex flex-col items-center">
-    <div class="text-left w-full max-w-5xl mt-4">
+<div class="flex flex-col items-center min-h-screen bg-white">
+    <div class="w-full max-w-5xl mt-4 text-left">
         <h2 class="text-3xl font-bold text-gray-900">Data Pegawai</h2>
     </div>
 
-    <div class="bg-blue-50 p-6 rounded-xl shadow-xl max-w-5xl w-full mt-6" style="max-height: 700px; overflow-y: auto;">
-        <div class="grid grid-cols-2 gap-8">
+    <div class="w-full max-w-5xl p-6 mt-6 shadow-xl bg-blue-50 rounded-xl" style="max-height: 700px; overflow-y: auto;">
+        <div class="grid grid-cols-2 gap-4">
             <!-- Bagian Kiri -->
             <div>
-                <h3 class="text-lg font-semibold text-blue-900 mb-4">🧑‍💼 Informasi Pegawai</h3>
+                <h3 class="mb-4 text-lg font-semibold text-blue-900">🧑‍💼 Informasi Pegawai</h3>
                 <div class="mb-4">
-                    <label for="namaPegawai" class="block text-md text-gray-700 font-medium mb-2">Nama Pegawai</label>
-                    <input id="namaPegawai" type="text" class="w-full border border-gray-300 rounded-lg p-2 text-md"
+                    <label for="namaPegawai" class="block mb-2 font-medium text-gray-700 text-md">Nama Pegawai</label>
+                    <input id="namaPegawai" type="text" class="w-full p-2 border border-gray-300 rounded-lg text-md"
                         wire:model="namaPegawai">
                     @error('namaPegawai')
                         <span class="text-red-500">{{ $message }}</span>
                     @enderror
                 </div>
                 <div class="mb-4">
-                    <label for="NIP" class="block text-md text-gray-700 font-medium mb-2">NIP</label>
-                    <input id="NIP" type="text" class="w-full border border-gray-300 rounded-lg p-2 text-md"
+                    <label for="NIP" class="block mb-2 font-medium text-gray-700 text-md">NIP</label>
+                    <input id="NIP" type="text" class="w-full p-2 border border-gray-300 rounded-lg text-md"
                         wire:model="NIP">
                     @error('NIP')
                         <span class="text-red-500">{{ $message }}</span>
                     @enderror
                 </div>
                 <div class="mb-4">
-                    <label for="unitKerjaPegawai" class="block text-md text-gray-700 font-medium mb-2">Unit
+                    <label for="unitKerjaPegawai" class="block mb-2 font-medium text-gray-700 text-md">Unit
                         Kerja</label>
                     <input id="unitKerjaPegawai" type="text"
-                        class="w-full border border-gray-300 rounded-lg p-2 text-md" wire:model="unitKerjaPegawai">
+                        class="w-full p-2 border border-gray-300 rounded-lg text-md" wire:model="unitKerjaPegawai">
                     @error('unitKerjaPegawai')
                         <span class="text-red-500">{{ $message }}</span>
                     @enderror
                 </div>
                 <div class="mb-4">
-                    <label for="jabatanPegawai" class="block text-md text-gray-700 font-medium mb-2">Jabatan</label>
+                    <label for="jabatanPegawai" class="block mb-2 font-medium text-gray-700 text-md">Jabatan</label>
                     <input id="jabatanPegawai" type="text"
-                        class="w-full border border-gray-300 rounded-lg p-2 text-md" wire:model="jabatanPegawai">
+                        class="w-full p-2 border border-gray-300 rounded-lg text-md" wire:model="jabatanPegawai">
                     @error('jabatanPegawai')
                         <span class="text-red-500">{{ $message }}</span>
                     @enderror
                 </div>
                 <div class="mb-4">
-                    <label for="masaKerjaPegawai" class="block text-md text-gray-700 font-medium mb-2">Masa
+                    <label for="masaKerjaPegawai" class="block mb-2 font-medium text-gray-700 text-md">Masa
                         Kerja</label>
                     <input id="masaKerjaPegawai" type="number"
-                        class="w-full border border-gray-300 rounded-lg p-2 text-md" wire:model="masaKerjaPegawai">
+                        class="w-full p-2 border border-gray-300 rounded-lg text-md" wire:model="masaKerjaPegawai">
                     @error('masaKerjaPegawai')
                         <span class="text-red-500">{{ $message }}</span>
                     @enderror
                 </div>
             </div>
-
-            {{-- <!-- Daftar Jenis Cuti -->
+            <!-- Bagian Kanan -->
             <div>
+                <h3 class="mb-4 text-lg font-semibold text-blue-900">📋 Data Cuti Pegawai</h3>
                 @foreach ($jenisCutiFields as $index => $field)
                     <div class="flex space-x-4" wire:key="jenisCutiField-{{ $index }}">
                         <!-- Dropdown Jenis Cuti -->
@@ -113,63 +113,20 @@
                     @endif
                 </div>
             </div>
-            @endif
-        </div> --}}
-            <!-- Bagian Kanan -->
-            <div>
-                <h3 class="text-lg font-semibold text-blue-900 mb-4">📋 Data Cuti Pegawai</h3>
-                @if (!empty($jenisCutiFields))
-                    @foreach ($jenisCutiFields as $fieldIndex)
-                        @if (!is_null($fieldIndex) && $fieldIndex !== 0)
-                            <div class="mb-4">
-                                <label for="jenisCuti-{{ $fieldIndex }}"
-                                    class="block text-md text-gray-700 font-medium mb-2">
-                                    Jenis Cuti
-                                </label>
-                                <select id="jenisCuti-{{ $fieldIndex }}"
-                                    class="w-full border border-gray-300 rounded-lg p-2 text-md"
-                                    wire:model="jenisCutiFields.{{ $fieldIndex }}">
-                                    <option value="">Pilih Jenis Cuti</option>
-                                    @foreach ($selectedJenisCuti as $key => $label)
-                                        <option value="{{ $key }}">{{ $label }}</option>
-                                    @endforeach
-                                </select>
-                                @error('jenisCutiFields.' . $fieldIndex)
-                                    <span class="text-red-500">{{ $message }}</span>
-                                @enderror
-                            </div>
-                            <div class="mb-4">
-                                <label for="sisaCuti-{{ $fieldIndex }}"
-                                    class="block text-md text-gray-700 font-medium mb-2">
-                                    Sisa Cuti
-                                </label>
-                                <input id="sisaCuti-{{ $fieldIndex }}" type="number"
-                                    class="w-full border border-gray-300 rounded-lg p-2 text-md"
-                                    wire:model="sisaCuti.{{ $fieldIndex }}" min="0">
-                                @error('sisaCuti.' . $fieldIndex)
-                                    <span class="text-red-500">{{ $message }}</span>
-                                @enderror
-                            </div>
-                        @endif
-                    @endforeach
-                @else
-                    <p class="text-gray-600">Tidak ada data cuti untuk ditampilkan.</p>
-                @endif
-            </div>
         </div>
     </div>
 
     <div class="flex justify-center gap-6 mt-6">
         <button type="button" wire:click="goBack"
-            class="bg-orange-500 text-white px-6 py-2 rounded-lg hover:bg-orange-600">
+            class="px-6 py-2 text-white bg-orange-500 rounded-lg hover:bg-orange-600">
             Kembali
         </button>
         <button type="button" wire:click="updatePegawai"
-            class="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600">
+            class="px-6 py-2 text-white bg-green-500 rounded-lg hover:bg-green-600">
             Simpan
         </button>
         <button @click="confirmDelete(() => $wire.deletePegawai())"
-            class="bg-red-500 text-white px-6 py-2 rounded-lg hover:bg-red-600">
+            class="px-6 py-2 text-white bg-red-500 rounded-lg hover:bg-red-600">
             Hapus Pegawai
         </button>
     </div>
