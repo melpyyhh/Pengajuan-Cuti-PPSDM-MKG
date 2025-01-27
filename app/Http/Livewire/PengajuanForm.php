@@ -82,8 +82,6 @@ class PengajuanForm extends Component
 
     public function goToNextPage()
     {
-
-
         // Validasi berdasarkan halaman saat ini
         $this->pegawaiId = Auth::user()->pegawai->id;
         if (isset($this->validationRules[$this->currentPage])) {

@@ -18,6 +18,7 @@ class PegawaiDetail extends Component
     public $unitKerjaPegawai;
     public $jabatanPegawai;
     public $masaKerjaPegawai;
+    public $jenisCuti = [];
     public $jenisCutiFields = [];
     public $selectedJenisCuti = [
         1 => 'Cuti Tahunan',
@@ -28,6 +29,26 @@ class PegawaiDetail extends Component
 
     public function mount($pegawaiId)
     {
+        // Inisialisasi jenis cuti
+        $this->jenisCuti = [
+            [
+                'id' => '1',
+                'jenis_cuti' => "Cuti Tahunan",
+            ],
+            [
+                'id' => '4',
+                'jenis_cuti' => "Cuti Besar",
+            ]
+        ];
+
+        // Tambahkan tahun dinamis untuk Cuti Tahunan
+        foreach ($this->jenisCuti as &$cuti) {
+            if ($cuti['jenis_cuti'] === 'Cuti Tahunan') {
+                $currentYear = now()->year;
+                $cuti['tahun'] = range($currentYear - 2, $currentYear); // 3 tahun ke belakang + tahun sekarang
+            }
+        }
+
         $pegawai = Pegawai::find($pegawaiId);
 
         if ($pegawai) {
@@ -53,7 +74,11 @@ class PegawaiDetail extends Component
             session()->flash('error', 'Data pegawai tidak ditemukan.');
             return redirect()->route('admin.daftar-pegawai');
         }
-        // dd($this->jenisCutiFields);
+        if (empty($this->jenisCutiFields)) {
+            $this->jenisCutiFields[] = '';
+            $this->sisaCuti[] = '';
+            $this->tahun[] = '';
+        }
     }
 
     public function addJenisCuti()
