@@ -20,10 +20,7 @@ class PegawaiDetail extends Component
     public $masaKerjaPegawai;
     public $jenisCuti = [];
     public $jenisCutiFields = [];
-    public $selectedJenisCuti = [
-        1 => 'Cuti Tahunan',
-        4 => 'Cuti Besar',
-    ];
+    public $selectedJenisCuti = [];
     public $sisaCuti = [];
     public $tahun = [];
 
@@ -41,13 +38,13 @@ class PegawaiDetail extends Component
             ]
         ];
 
-        // Tambahkan tahun dinamis untuk Cuti Tahunan
-        foreach ($this->jenisCuti as &$cuti) {
-            if ($cuti['jenis_cuti'] === 'Cuti Tahunan') {
-                $currentYear = now()->year;
-                $cuti['tahun'] = range($currentYear - 2, $currentYear); // 3 tahun ke belakang + tahun sekarang
-            }
-        }
+        $currentYear = now()->year;
+        // Generate 3 tahun terakhir untuk Cuti Tahunan
+        $this->tahun = [
+            $currentYear,
+            $currentYear - 1,
+            $currentYear - 2
+        ];
 
         $pegawai = Pegawai::find($pegawaiId);
 
@@ -64,9 +61,13 @@ class PegawaiDetail extends Component
 
             foreach ($dataCuti as $cuti) {
                 if (isset($cuti->jenis_cuti_id) && isset($cuti->sisa_cuti)) {
-                    $this->jenisCutiFields[$cuti->jenis_cuti_id] = $cuti->jenis_cuti_id;
-                    $this->sisaCuti[$cuti->jenis_cuti_id] = $cuti->sisa_cuti;
-                    $this->tahun[$cuti->jenis_cuti_id] =  $cuti->tahun;
+                    if ($cuti->jenis_cuti_id == '1') {
+                        // Untuk Cuti Tahunan
+                        $this->sisaCuti[$cuti->tahun] = $cuti->sisa_cuti;
+                    } elseif ($cuti->jenis_cuti_id == '4') {
+                        // Untuk Cuti Besar
+                        $this->sisaCuti['cutiBesar'] = $cuti->sisa_cuti;
+                    }
                 }
             }
         } else {
@@ -74,81 +75,100 @@ class PegawaiDetail extends Component
             session()->flash('error', 'Data pegawai tidak ditemukan.');
             return redirect()->route('admin.daftar-pegawai');
         }
-        if (empty($this->jenisCutiFields)) {
-            $this->jenisCutiFields[] = '';
-            $this->sisaCuti[] = '';
-            $this->tahun[] = '';
-        }
     }
 
-    public function addJenisCuti()
-    {
-        $this->jenisCutiFields[] = count($this->jenisCutiFields); // Tambahkan indeks baru
-    }
-
-    public function removeJenisCuti()
-    {
-        if (count($this->jenisCutiFields) > 1) {
-            array_pop($this->jenisCutiFields); // Hapus elemen terakhir
-            array_pop($this->selectedJenisCuti); // Hapus jenis cuti terkait
-            array_pop($this->sisaCuti); // Hapus sisa cuti terkait
-        }
-    }
+    public function messages()
+{
+    return [
+        'sisaCuti.*.max' => 'Sisa cuti tidak boleh lebih dari :max hari.'
+    ];
+}
 
     public function updatePegawai()
     {
-        $this->validate([
-            'namaPegawai' => 'required|string|max:255',
-            'NIP' => 'required|string|max:20',
-            'unitKerjaPegawai' => 'required|string|max:255',
-            'jabatanPegawai' => 'required|string|max:255',
-            'masaKerjaPegawai' => 'required|int|max:255',
-        ]);
+        try {
+            $rules = [
+                'namaPegawai' => 'required|string|max:255',
+                'NIP' => 'required|string|max:20',
+                'unitKerjaPegawai' => 'required|string|max:255',
+                'jabatanPegawai' => 'required|string|max:255',
+                'masaKerjaPegawai' => 'required|int|max:255',
+            ];
 
-        $pegawai = Pegawai::find($this->pegawaiId);
-        if ($pegawai) {
-            $pegawai->update([
-                'nama' => $this->namaPegawai,
-                'nip' => $this->NIP,
-                'unitKerja' => $this->unitKerjaPegawai,
-                'jabatan' => $this->jabatanPegawai,
-                'masaKerja' => $this->masaKerjaPegawai,
-            ]);
-
-            foreach ($this->jenisCutiFields as $index => $jenisCutiId) {
-                if ($jenisCutiId && isset($this->sisaCuti[$index]) && is_numeric($this->sisaCuti[$index])) {
-                    DataCuti::updateOrCreate(
-                        [
-                            'pegawais_id' => $this->pegawaiId,
-                            'jenis_cuti_id' => $jenisCutiId,
-                        ],
-                        [
-                            'sisa_cuti' => $this->sisaCuti[$index],
-                        ]
-                    );
+            // Tambahkan validasi untuk setiap tahun cuti tahunan
+            foreach ($this->tahun as $index => $tahun) {
+                if ($index === 0) {
+                    // Tahun saat ini, boleh sampai 12 hari
+                    $rules['sisaCuti.' . $tahun] = 'nullable|numeric|max:12';
+                } else {
+                    // Tahun sebelumnya, maksimal 6 hari
+                    $rules['sisaCuti.' . $tahun] = 'nullable|numeric|max:6';
                 }
             }
 
-            $this->dispatch('custom-alert', type: 'success', title: 'Data Pegawai Berhasil Diperbarui', position: 'center', timer: 3000);
-            $this->dispatch('redirect-after-alert', [
-                'url' => request()->header('Referer'),
-                'delay' => 3000, // Waktu tunggu sebelum redirect (ms)
-            ]);
-        } else {
-            session()->flash('error', 'Data pegawai tidak ditemukan!');
+            // Validasi untuk cuti besar
+            $rules['sisaCuti.cutiBesar'] = 'nullable|numeric|max:90';
+
+            $this->validate($rules);
+            $pegawai = Pegawai::find($this->pegawaiId);
+            if ($pegawai) {
+                $pegawai->update([
+                    'nama' => $this->namaPegawai,
+                    'nip' => $this->NIP,
+                    'unitKerja' => $this->unitKerjaPegawai,
+                    'jabatan' => $this->jabatanPegawai,
+                    'masaKerja' => $this->masaKerjaPegawai,
+                ]);
+
+                // Simpan data cuti tahunan
+                foreach ($this->tahun as $tahun) {
+                    DataCuti::updateOrCreate(
+                        [
+                            'pegawais_id' => $this->pegawaiId,
+                            'jenis_cuti_id' => '1', // ID untuk Cuti Tahunan
+                            'tahun' => $tahun
+                        ],
+                        [
+                            'sisa_cuti' => $this->sisaCuti[$tahun] ?? 0
+                        ]
+                    );
+                }
+
+                // Simpan data cuti besar
+                DataCuti::updateOrCreate(
+                    [
+                        'pegawais_id' => $this->pegawaiId,
+                        'jenis_cuti_id' => '4', // ID untuk Cuti Besar
+                    ],
+                    [
+                        'sisa_cuti' => $this->sisaCuti['cutiBesar'] ?? 0
+                    ]
+                );
+
+                $this->dispatch('custom-alert', type: 'success', title: 'Data Pegawai Berhasil Diperbarui', position: 'center', timer: 3000);
+                $this->dispatch('redirect-after-alert', [
+                    'url' => request()->header('Referer'),
+                    'delay' => 3000,
+                ]);
+            } else {
+                $this->dispatch('custom-alert', type: 'error', title: 'Data Pegawai Tidak Ditemukan', position: 'center', timer: 3000);
+            }
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            $this->dispatch('custom-alert', type: 'error', title: 'Terjadi Kesalahan', position: 'center', timer: 3000);
         }
     }
-
     public function deletePegawai()
     {
         try {
             $pegawai = Pegawai::find($this->pegawaiId);
             if ($pegawai) {
-                $pegawai->dataCuti()->delete();
                 $pegawai->delete();
-
-                session()->flash('success', 'Data pegawai berhasil dihapus!');
-                return redirect()->route('admin.daftar-pegawai');
+                $this->dispatch('custom-alert', type: 'success', title: 'Data Pegawai Berhasil Dihapus', position: 'center', timer: 3000);
+                $this->dispatch('redirect-after-alert', [
+                    'url' => route('admin.daftar-pegawai'),
+                    'delay' => 3000
+                ]);
             } else {
                 session()->flash('error', 'Data pegawai tidak ditemukan!');
             }

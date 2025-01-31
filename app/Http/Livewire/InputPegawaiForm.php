@@ -2,15 +2,18 @@
 
 namespace App\Http\Livewire;
 
+use App\Mail\AccountPassword;
 use App\Models\DataCuti;
 use App\Models\JenisCuti;
 use App\Models\Pegawai;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Illuminate\Support\Facades\Log;
 use Livewire\Attributes\Title;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 #[Title('Input Pegawai Form')]
 class InputPegawaiForm extends Component
@@ -25,7 +28,6 @@ class InputPegawaiForm extends Component
     public $masaKerjaPegawai;
     public $tanggalInputPegawai;
     public $jenisCuti = [];
-    public $selectedJenisCuti = [];
     public $sisaCuti = [];
     public $jenisCutiFields = [0]; // Mengelola input
     public $tahun = [];
@@ -77,21 +79,8 @@ class InputPegawaiForm extends Component
         $this->sisaCuti = session('sisaCuti', $this->sisaCuti);
     }
 
-    public function addJenisCuti()
-    {
-        $this->jenisCutiFields[] = count($this->jenisCutiFields); // Tambahkan indeks baru
-    }
-
-    public function removeJenisCuti()
-    {
-        if (count($this->jenisCutiFields) > 1) {
-            array_pop($this->jenisCutiFields); // Hapus elemen terakhir
-            array_pop($this->selectedJenisCuti); // Hapus jenis cuti terkait
-            array_pop($this->sisaCuti); // Hapus sisa cuti terkait
-        }
-    }
-
-    protected $validationRules = [
+    protected $validationRules =
+    [
         1 => [
             'namaPegawai' => 'required|string',
             'NIP' => 'required|string',
@@ -99,11 +88,10 @@ class InputPegawaiForm extends Component
             'masaKerjaPegawai' => 'required|integer|min:0',
             'jabatanPegawai' => 'required|string',
             'sisaCuti.*' => 'required|integer|min:0',
-            'selectedJenisCuti.*' => 'required|exists:jenis_cuti,id',
-            'tahun.*' => 'nullable|integer'
+            'tahun.*' => 'nullable|integer',
         ],
         2 => [
-            'email' => 'required|email|confirmed'
+            'email' => 'required|email|confirmed',
         ]
     ];
 
@@ -125,8 +113,6 @@ class InputPegawaiForm extends Component
         'sisaCuti.*.required' => 'Sisa cuti wajib diisi!',
         'sisaCuti.*.integer' => 'Sisa cuti harus berupa angka!',
         'sisaCuti.*.min' => 'Sisa cuti tidak boleh kurang dari 0!',
-        'selectedJenisCuti.*.required' => 'Jenis cuti wajib dipilih!',
-        'selectedJenisCuti.*.exists' => 'Jenis cuti yang dipilih tidak valid!',
         'tahun.*.nullable' => 'Tahun boleh dikosongkan.',
         'tahun.*.integer' => 'Tahun harus berupa angka!'
     ];
@@ -134,11 +120,23 @@ class InputPegawaiForm extends Component
 
     public function submitForm()
     {
-
+        DB::beginTransaction();
         try {
             $this->sisaCuti = is_array($this->sisaCuti) ? array_map('intval', $this->sisaCuti) : [];
             $this->tahun = is_array($this->tahun) ? array_map('intval', $this->tahun) : [];
             $masaKerjaPegawai = intval(trim($this->masaKerjaPegawai));
+            foreach ($this->tahun as $index => $tahun) {
+                if ($index === 0) {
+                    // Tahun saat ini, boleh sampai 12 hari
+                    $this->validationRules[1]['sisaCuti.' . $tahun] = 'nullable|numeric|max:12';
+                } else {
+                    // Tahun sebelumnya, maksimal 6 hari
+                    $this->validationRules[1]['sisaCuti.' . $tahun] = 'nullable|numeric|max:6';
+                }
+            }
+            // Validasi untuk cuti besar
+            $this->validationRules[1]['sisaCuti.cutiBesar'] = 'nullable|numeric|max:90';
+
             // Validasi akhir
             $this->validate(array_merge(...array_values($this->validationRules)));
             // Simpan data pegawai
@@ -165,7 +163,7 @@ class InputPegawaiForm extends Component
             if (!empty($this->sisaCuti['cutiBesar'])) {
                 DataCuti::tambahDataCuti([
                     'pegawai_id' => $pegawaiId,
-                    'jenis_cuti_id' => 2, // ID untuk Cuti Besar
+                    'jenis_cuti_id' => 4, // ID untuk Cuti Besar
                     'jumlah_cuti' => $this->sisaCuti['cutiBesar'],
                     'sisa_cuti' => $this->sisaCuti['cutiBesar'],
                     'tahun' => date('Y') // Tahun saat ini untuk Cuti Besar
@@ -173,7 +171,7 @@ class InputPegawaiForm extends Component
             }
             $password = Str::random(10);
             $hashed = Hash::make($password);
-            User::tambahUser([
+            $user= User::tambahUser([
                 'pegawai_id' => $pegawaiId,
                 'email' => $this->email,
                 'name' => $this->namaPegawai,
@@ -181,6 +179,8 @@ class InputPegawaiForm extends Component
                 'role' => 'pengaju',
                 'atasan_id' => $this->atasanId
             ]);
+            Mail::to($user->email)->later(now()->addMinute(), new AccountPassword($user->nama, $user->email, $password));
+            DB::commit();
             // Notifikasi sukses
             $this->dispatch(
                 'custom-alert',
@@ -200,18 +200,19 @@ class InputPegawaiForm extends Component
                 'sisaCuti',
                 'email',
                 'email_confirmation',
-                'currentPage',  // Reset selectedJenisCuti juga
+                'currentPage',
             ]);
             $this->dispatch('redirect-after-alert', [
                 'url' => request()->header('Referer'),
                 'delay' => 3000, // Waktu tunggu sebelum redirect (ms)
             ]);
         } catch (\Exception $e) {
+            DB::rollBack();
             Log::error($e->getMessage());
             $this->dispatch(
                 'custom-alert',
                 type: 'error',
-                title: $e->getMessage(),
+                title: 'Terjadi kesalahan saat menambahkan pegawai',
                 position: 'center',
                 timer: 3000
             );
@@ -246,16 +247,17 @@ class InputPegawaiForm extends Component
         $this->sisaCuti['cutiBesar'] = 0;
 
         $penyetuju = User::where('role', 'penyetuju')->get()->first();
-
-
-        // Ambil Data Pegawai dengan Role Atasan
         $dual_role = User::where('role', 'dual_role')->get()->first();
 
-        $this->atasan=[[
-            'id' => $penyetuju->pegawai_id,
-                    'nama' => $penyetuju->name,
-        ],
-        ['id' => $dual_role->pegawai_id,
-        'nama' => $dual_role->name]];
+        $this->atasan=[
+            [
+                'id' => $penyetuju->pegawai_id,
+                'nama' => $penyetuju->name,
+            ],
+            [
+                'id' => $dual_role->pegawai_id,
+                'nama' => $dual_role->name
+            ]
+        ];
     }
 }
