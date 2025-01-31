@@ -5,9 +5,9 @@
         </div>
 
         <div class="w-full max-w-5xl p-6 mt-6 shadow-xl bg-blue-50 rounded-xl" style="max-height: 700px; overflow-y: auto;">
-            <div class="grid grid-cols-2 gap-4">
-                <!-- Bagian Kiri -->
-                <div>
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <!-- Bagian Kiri: Informasi Pegawai -->
+                <div class="col-span-1">
                     <h3 class="mb-4 text-lg font-semibold text-blue-900">🧑‍💼 Informasi Pegawai</h3>
                     <div class="mb-4">
                         <label for="namaPegawai" class="block mb-2 font-medium text-gray-700 text-md">Nama Pegawai</label>
@@ -52,12 +52,12 @@
                         @enderror
                     </div>
                 </div>
-                <!-- Bagian Kanan -->
-                <div>
+
+                <!-- Bagian Kanan: Data Cuti Pegawai -->
+                <div class="col-span-1">
                     <h3 class="mb-4 text-lg font-semibold text-blue-900">📋 Data Cuti Pegawai</h3>
                     @foreach ($tahun as $tahunValue)
                         <div class="flex space-x-4" wire:key="cutiTahunan-{{ $tahunValue }}">
-
                             <div class="w-1/2">
                                 <label class="block text-sm font-medium text-gray-700">Jenis Cuti:</label>
                                 <input type="text" value="Cuti Tahunan" readonly
@@ -101,6 +101,7 @@
                     </div>
                 </div>
             </div>
+
             <div>
                 <div class="flex justify-center gap-6 mt-6">
                     <button type="button" wire:click="goBack"
@@ -116,34 +117,7 @@
                         Hapus Pegawai
                     </button>
                 </div>
-
             </div>
         </div>
     </div>
 </div>
-
-
-<script>
-    function confirmDelete(callback) {
-        Swal.fire({
-            title: 'Apakah Anda yakin?',
-            text: 'Data ini akan dihapus secara permanen!',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#d33',
-            cancelButtonColor: '#3085d6',
-            confirmButtonText: 'Ya, hapus!',
-            cancelButtonText: 'Batal'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                callback();
-            }
-        });
-    }
-
-    Livewire.on('triggerRedirect', url => {
-        setTimeout(() => {
-            window.location.href = url;
-        }, 1000); // Delay untuk menunggu notifikasi selesai
-    });
-</script>
