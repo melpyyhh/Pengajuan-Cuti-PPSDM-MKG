@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang='id'>
+
 <head>
     <title>Pengajuan Cuti</title>
 </head>
+
 <body>
     <h1>Pengajuan Cuti Baru</h1>
     <p>Halo,</p>
@@ -11,4 +13,5 @@
     <p>Silakan login ke sistem untuk menyetujui atau menolak pengajuan ini.</p>
     <p>Terima kasih.</p>
 </body>
+
 </html>
