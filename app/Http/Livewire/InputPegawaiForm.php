@@ -171,7 +171,7 @@ class InputPegawaiForm extends Component
             }
             $password = Str::random(10);
             $hashed = Hash::make($password);
-            $user= User::tambahUser([
+            $user = User::tambahUser([
                 'pegawai_id' => $pegawaiId,
                 'email' => $this->email,
                 'name' => $this->namaPegawai,
@@ -238,7 +238,11 @@ class InputPegawaiForm extends Component
         ];
         $currentYear = now()->year;
         // Tahun cuti tahunan otomatis 3 tahun terakhir
-        $this->tahun = range($currentYear - 2, $currentYear);
+        $this->tahun = [
+            $currentYear,
+            $currentYear - 1,
+            $currentYear - 2
+        ];
         // Inisialisasi sisa cuti untuk tiap tahun dengan nilai default (misal 0)
         foreach ($this->tahun as $tahun) {
             $this->sisaCuti[$tahun] = 0;
@@ -249,7 +253,7 @@ class InputPegawaiForm extends Component
         $penyetuju = User::where('role', 'penyetuju')->get()->first();
         $dual_role = User::where('role', 'dual_role')->get()->first();
 
-        $this->atasan=[
+        $this->atasan = [
             [
                 'id' => $penyetuju->pegawai_id,
                 'nama' => $penyetuju->name,

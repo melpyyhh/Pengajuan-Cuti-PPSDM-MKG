@@ -8,12 +8,12 @@
     <style>
         @page {
             size: A4;
-            margin: 15mm;
+            margin: 22mm;
         }
 
         body {
             font-size: 10px;
-            font-family: Arial, sans-serif;
+            font-family: Calibri, Arial, sans-serif;
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -27,7 +27,7 @@
 
         th,
         td {
-            padding: 3px;
+            padding: 2px;
             text-align: left;
             border: 1px solid black;
             word-wrap: break-word;
@@ -85,6 +85,36 @@
             margin: 0;
             padding-bottom: 10px;
         }
+
+        #jenisCuti td {
+            width: 25%;
+            text-align: left;
+            padding: 2px;
+        }
+
+        .checkbox-small {
+            width: 15px;
+            height: 15px;
+        }
+
+        .tanggalSurat {
+            margin-left: 340px;
+        }
+
+        .tanggalSurat p {
+            text-align: left;
+            margin: 2px 0;
+            /* Reduces space above and below each <p> element */
+            padding: 0;
+            font-size: 12px;
+        }
+
+        th {
+            font-weight: normal;
+            /* Removes bold */
+            font-size: 12px;
+            /* Slightly increases font size */
+        }
     </style>
 </head>
 
@@ -135,32 +165,48 @@
                 </tr>
                 <tr>
                     <td>1. Cuti Tahunan</td>
-                    <td><span class="checkbox">v</span></td>
-                    <td>4. Cuti melahirkan</td>
-                    <td><span class="checkbox"></span></td>
+                    <td>
+                        @if ($pengajuan->jenis_cuti == 'Cuti Tahunan')
+                            <img src="{{ public_path('img/check-mark.png') }}" alt="checkbox" class="checkbox-small">
+                        @endif
+                    </td>
+                    <td>4. Cuti Melahirkan</td>
+                    <td>
+                        @if ($pengajuan->jenis_cuti == 'Cuti Melahirkan')
+                            <img src="{{ public_path('img/check-mark.png') }}" alt="checkbox" class="checkbox-small">
+                        @endif
+                    </td>
                 </tr>
                 <tr>
-                    <td>2. Cuti besar</td>
-                    <td><span class="checkbox"></span></td>
-                    <td>5. Cuti karena alasan penting</td>
-                    <td><span class="checkbox"></span></td>
+                    <td>2. Cuti Besar</td>
+                    <td>
+                        @if ($pengajuan->jenis_cuti == 'Cuti Besar')
+                            <img src="{{ public_path('img/check-mark.png') }}" alt="checkbox" class="checkbox-small">
+                        @endif
+                    </td>
+                    <td>5. Cuti Karena Alasan Penting</td>
+                    <td>
+                        @if ($pengajuan->jenis_cuti == 'Cuti Karena Alasan Penting')
+                            <img src="{{ public_path('img/check-mark.jpg') }}" alt="checkbox" class="checkbox-small">
+                        @endif
+                    </td>
                 </tr>
                 <tr>
-                    <td>3. Cuti sakit</td>
-                    <td><span class="checkbox"></span></td>
-                    <td>6. Cuti diluar tanggungan negara</td>
-                    <td><span class="checkbox"></span></td>
+                    <td>3. Cuti Sakit</td>
+                    <td>
+                        @if ($pengajuan->jenis_cuti == 'Cuti Sakit')
+                            <img src="{{ public_path('img/check-mark.png') }}" alt="checkbox" class="checkbox-small">
+                        @endif
+                    </td>
+                    <td>6. Cuti Diluar Tanggungan Negara</td>
+                    <td>
+                        @if ($pengajuan->jenis_cuti == 'Cuti Diluar Tanggungan Negara')
+                            <img src="{{ public_path('img/check-mark.png') }}" alt="checkbox" class="checkbox-small">
+                        @endif
+                    </td>
                 </tr>
             </table>
         </div>
-
-        <style>
-            #jenisCuti td {
-                width: 25%;
-                text-align: left;
-                padding: 2px;
-            }
-        </style>
 
         <!-- Tabel III Alasan Cuti -->
         <div class="alasanCuti">
@@ -271,32 +317,17 @@
                     <th colspan="4">VII. PERTIMBANGAN ATASAN</th>
                 </tr>
                 <tr>
-                    <td>Disetujui</td>
-                    <td>Perubahan</td>
-                    <td>Ditangguhkan</td>
-                    <td>Tidak Disetujui</td>
+                    <td>DISETUJUI</td>
+                    <td>PERUBAHAN</td>
+                    <td>DITANGGUHKAN</td>
+                    <td>TIDAK DISETUJUI</td>
                 </tr>
                 <tr>
-                    <td style="height: 10px;"></td>
+                    <td><img src="{{ public_path('img/check-mark.png') }}" alt="checkbox" class="checkbox-small"></td>
                     <td style="height: 10px;"></td>
                     <td style="height: 10px;"></td>
                     <td style="height: 10px;"></td>
                 </tr>
-                {{-- <table class="ttd1" style="border: none;">
-                        <tr>
-                            <td style="text-align: center; border: none;">Kepala Pusat Pendidikan dan Pelatihan</td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: center; border: none;"><img src="{{ $ttd }}"
-                                    style="height: 50px; width: 50px; object-fit: contain;" alt="TTD1"></td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: center; border: none;">{{ $pengajuan->nama_pengaju }}</td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: center; border: none;">{{ $pengajuan->nip_pengaju }}</td>
-                        </tr>
-                    </table> - --}}
                 <tr>
                     <td style="text-align: right; vertical-align: middle; padding-right: 10px;" colspan="4">
                         <div style="display: flex; flex-direction: column; align-items: center;">
@@ -327,13 +358,13 @@
                     <th colspan="4">VIII. KEPUTUSAN PEJABAT</th>
                 </tr>
                 <tr>
-                    <td>Disetujui</td>
-                    <td>Perubahan</td>
-                    <td>Ditangguhkan</td>
-                    <td>Tidak Disetujui</td>
+                    <td>DISETUJUI</td>
+                    <td>PERUBAHAN</td>
+                    <td>DITANGGUHKAN</td>
+                    <td>TIDAK DISETUJUI</td>
                 </tr>
                 <tr>
-                    <td style="height: 10px;"></td>
+                    <td><img src="{{ public_path('img/check-mark.png') }}" alt="checkbox" class="checkbox-small"></td>
                     <td style="height: 10px;"></td>
                     <td style="height: 10px;"></td>
                     <td style="height: 10px;"></td>
