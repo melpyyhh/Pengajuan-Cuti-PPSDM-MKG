@@ -77,3 +77,11 @@ Route::get('/pengajuan-cuti-setuju-email', function () {
 Route::get('/pengajuan-cuti-tolak-email', function () {
     return view('emails.penyetuju-tolak');
 })->name('pengajuan.cuti.tolak.email');
+
+Route::get('/storage/public/{filename}', function ($filename) {
+    $path = storage_path('app/public/' . $filename);
+    if (file_exists($path)) {
+        return response()->file($path);
+    }
+    abort(404);
+})->where('filename', '.*')->name('preview');

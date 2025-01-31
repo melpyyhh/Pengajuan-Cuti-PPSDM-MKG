@@ -72,7 +72,8 @@
                             @enderror
                         </div>
                         <div>
-                            <label for="tanggalAkhir" class="block text-sm font-bold text-gray-700">Tanggal Akhir</label>
+                            <label for="tanggalAkhir" class="block text-sm font-bold text-gray-700">Tanggal
+                                Akhir</label>
                             <input wire:model="tanggalAkhir" type="date" id="tanggalAkhir"
                                 class="mt-1 block w-full rounded-xl border border-[#0032CC]">
                             @error('tanggalAkhir')
@@ -166,9 +167,10 @@
                                 class="mt-1 block w-full rounded-xl border border-[#0032CC]" disabled>
                         </div>
                         <div>
-                            <label for="durasiCuti" class="block text-sm font-bold text-gray-700">Selama</label>
-                            <input wire:model="durasiCuti" type="text" id="durasiCuti"
-                                class="mt-1 block w-full rounded-xl border border-[#0032CC]" disabled>
+                            <label for="tanggalAkhir" class="block text-sm font-bold text-gray-700">Tanggal
+                                Akhir</label>
+                            <input wire:model="tanggalAkhir" type="date" id="tanggalAkhir"
+                                class="mt-1 block w-full rounded-xl border border-[#0032CC]">
                         </div>
                         <div>
                             @if ($sisaCuti && $sisaCuti->isNotEmpty())

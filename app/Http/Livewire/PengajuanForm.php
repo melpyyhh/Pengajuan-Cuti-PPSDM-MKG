@@ -234,7 +234,7 @@ class PengajuanForm extends Component
 
             foreach ($penyetujuUsersEmail as $email) {
                 try {
-                    Mail::to($email)->send(new PengajuanDisetujuiMail($pengajuan));
+                    Mail::to($email)->later(now()->addMinute(), new PengajuanDisetujuiMail($pengajuan));
                 } catch (\Throwable $e) {
                     Log::error("Gagal mengirim email ke {$email}: " . $e->getMessage());
                 }
@@ -303,18 +303,18 @@ class PengajuanForm extends Component
 
     private function hitungHariKerja($tanggalMulai, $tanggalAkhir)
     {
-    $tanggalMulai = Carbon::parse($tanggalMulai);
-    $tanggalAkhir = Carbon::parse($tanggalAkhir);
-    $jumlahHariKerja = 0;
+        $tanggalMulai = Carbon::parse($tanggalMulai);
+        $tanggalAkhir = Carbon::parse($tanggalAkhir);
+        $jumlahHariKerja = 0;
 
-    while ($tanggalMulai->lte($tanggalAkhir)) {
-        if (!$tanggalMulai->isWeekend()) { // Hanya tambahkan jika bukan Sabtu atau Minggu
-            $jumlahHariKerja++;
+        while ($tanggalMulai->lte($tanggalAkhir)) {
+            if (!$tanggalMulai->isWeekend()) { // Hanya tambahkan jika bukan Sabtu atau Minggu
+                $jumlahHariKerja++;
+            }
+            $tanggalMulai->addDay();
         }
-        $tanggalMulai->addDay();
-    }
 
-    return $jumlahHariKerja;
+        return $jumlahHariKerja;
     }
 
 

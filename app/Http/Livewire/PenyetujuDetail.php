@@ -90,7 +90,7 @@ class PenyetujuDetail extends Component
             $email = Pegawai::findOrFail($pengajuan->pengaju_id)->user->email;
 
             // Step 4: Send the rejection email to the user
-            Mail::to($email)->send(new PenyetujuTolak($pengajuan));
+            Mail::to($email)->later(now()->addMinute(), new PenyetujuTolak($pengajuan));
 
             // Close the modal after rejection
             $this->closeModal();
@@ -178,7 +178,7 @@ class PenyetujuDetail extends Component
             $email = Pegawai::findOrFail($pengajuan->pengaju_id)->user->email;
 
             // Step 5: Send the approval email to the user
-            Mail::to($email)->send(new PenyetujuSetuju($pengajuan));
+            Mail::to($email)->later(now()->addMinute(), new PenyetujuSetuju($pengajuan));
 
             // Step 6: Dispatch success alert
             $this->dispatch(

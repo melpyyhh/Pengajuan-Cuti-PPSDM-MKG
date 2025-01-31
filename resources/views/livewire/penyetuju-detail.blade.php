@@ -37,7 +37,7 @@
                                     Pendukung:</label>
                                 <div class="flex items-center space-x-4">
                                     <!-- Tombol Preview -->
-                                    <a href="{{ $dokumenPath }}" target="_blank"
+                                    <a href="{{ route('preview', ['filename' => $dokumenPath]) }}" target="_blank"
                                         class="px-4 py-2 text-white bg-blue-500 hover:bg-blue-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                                         Preview Dokumen
                                     </a>
