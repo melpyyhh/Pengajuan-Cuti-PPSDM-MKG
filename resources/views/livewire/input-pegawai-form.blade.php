@@ -62,12 +62,26 @@
 
                         <!-- Masa Kerja dan Tanggal Input Pegawai -->
                         <div class="flex space-x-4">
-                            <div class="w-full">
+                            <div class="w-1/2">
                                 <label for="masaKerjaPegawai" class="block text-sm font-medium text-gray-700">Masa
                                     Kerja:</label>
                                 <input wire:model="masaKerjaPegawai" type="number" id="masaKerjaPegawai"
                                     class="mt-1 block w-full rounded-2xl border border-[#0032CC] focus:ring-[#0032CC] focus:border-[#0032CC]">
                                 @error('masaKerjaPegawai')
+                                    <p class="px-2 mt-2 text-sm text-red-600 bg-red-200 border border-red-600 rounded-xl">
+                                        {{ $message }}</p>
+                                @enderror
+                            </div>
+                            <div class="w-1/2">
+                                <label for="namaAtasan" class="block text-sm font-medium text-gray-700">Atasan:</label>
+                                <select wire:model="atasanId" id="namaAtasan"
+                                        class="mt-1 block w-full rounded-2xl border border-[#0032CC] focus:ring-[#0032CC] focus:border-[#0032CC]">
+                                    <option value="" hidden selected>Pilih Atasan</option>
+                                    @foreach($atasan as $atasan)
+                                        <option value="{{ $atasan['id'] }}">{{ $atasan['nama'] }}</option>
+                                    @endforeach
+                                </select>
+                                @error('atasanId')
                                     <p class="px-2 mt-2 text-sm text-red-600 bg-red-200 border border-red-600 rounded-xl">
                                         {{ $message }}</p>
                                 @enderror

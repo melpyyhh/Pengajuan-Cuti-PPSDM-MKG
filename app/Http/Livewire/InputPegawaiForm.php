@@ -29,6 +29,8 @@ class InputPegawaiForm extends Component
     public $sisaCuti = [];
     public $jenisCutiFields = [0]; // Mengelola input
     public $tahun = [];
+    public $atasanId;
+    public $atasan = [];
     public $email;
     public $email_confirmation;
 
@@ -177,7 +179,7 @@ class InputPegawaiForm extends Component
                 'name' => $this->namaPegawai,
                 'password' => $hashed,
                 'role' => 'pengaju',
-                'atasan_id' => 2
+                'atasan_id' => $this->atasanId
             ]);
             // Notifikasi sukses
             $this->dispatch(
@@ -242,5 +244,18 @@ class InputPegawaiForm extends Component
         }
         // Tambahkan untuk cuti besar
         $this->sisaCuti['cutiBesar'] = 0;
+
+        $penyetuju = User::where('role', 'penyetuju')->get()->first();
+
+
+        // Ambil Data Pegawai dengan Role Atasan
+        $dual_role = User::where('role', 'dual_role')->get()->first();
+
+        $this->atasan=[[
+            'id' => $penyetuju->pegawai_id,
+                    'nama' => $penyetuju->name,
+        ],
+        ['id' => $dual_role->pegawai_id,
+        'nama' => $dual_role->name]];
     }
 }
