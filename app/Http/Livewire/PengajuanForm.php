@@ -55,7 +55,6 @@ class PengajuanForm extends Component
             'alamatCuti' => 'required|string',
             'nomorHp' => 'required|string|regex:/^08\d{8,12}$/|min:10|max:14',
             'tanggalMulai' => 'required|date',
-            'durasiCuti' => 'required|integer|min:1|max:90', // Tambahkan max untuk cuti bersalin
         ],
         3 => ['dokumen' => 'nullable|file|max:2048'],
     ];
@@ -74,10 +73,6 @@ class PengajuanForm extends Component
         'nomorHp.regex' => 'Nomor HP tidak sesuai format!',
         'nomorHp.min' => 'Nomor HP minimal terdiri dari 10 angka!',
         'nomorHp.max' => 'Nomor HP maksimal terdiri dari 15 angka!',
-        'durasiCuti.required' => 'Durasi cuti wajib diisi!',
-        'durasiCuti.integer' => 'Durasi cuti harus berupa angka!',
-        'durasiCuti.min' => 'Durasi cuti minimal 1 hari!',
-        'durasiCuti.max' => 'Anda hanya dapat mengajukan cuti bersalin maksimal 90 hari.',
     ];
 
     public function goToNextPage()
@@ -215,17 +210,17 @@ class PengajuanForm extends Component
                 Log::info('File path: ' . $dokumenPath);
             }
             // Logika pengajuan cuti
-            $tanggalAkhir = $this->hitungTanggalAkhir($this->tanggalMulai, $this->durasiCuti);
+            $selama = $this->hitungHariKerja($this->tanggalMulai, $this->tanggalAkhir);
             $pengajuan = Pengajuan::ajukanCuti([
                 'pengaju_id' => Auth::user()->pegawai->id,
                 'penyetuju_id' => Auth::user()->atasan_id,
                 'cuti_id' => $this->jenisCutiTerpilih,
                 'tanggal_awal' => $this->tanggalMulai,
-                'selama' => $this->durasiCuti,
+                'selama' => $selama,
                 'alasan' => $this->alasan,
                 'alamat' => $this->alamatCuti,
                 'nomorHp' => $this->nomorHp,
-                'tanggal_akhir' => $tanggalAkhir,
+                'tanggal_akhir' => $this->tanggalAkhir,
                 'dokumen' => $dokumenPath
             ]);
 
@@ -306,20 +301,22 @@ class PengajuanForm extends Component
     }
 
 
-    private function hitungTanggalAkhir($tanggalMulai, $durasiCuti)
+    private function hitungHariKerja($tanggalMulai, $tanggalAkhir)
     {
-        $tanggal = Carbon::parse($tanggalMulai);
+    $tanggalMulai = Carbon::parse($tanggalMulai);
+    $tanggalAkhir = Carbon::parse($tanggalAkhir);
+    $jumlahHariKerja = 0;
 
-        // Tambahkan durasi hanya untuk hari kerja
-        for ($i = 0; $i < $durasiCuti; $i++) {
-            // Tambahkan satu hari ke tanggal, jika itu hari Sabtu atau Minggu, tambahkan lagi
-            do {
-                $tanggal->addDay();
-            } while ($tanggal->isWeekend()); // Mengecek apakah hari tersebut Sabtu atau Minggu
+    while ($tanggalMulai->lte($tanggalAkhir)) {
+        if (!$tanggalMulai->isWeekend()) { // Hanya tambahkan jika bukan Sabtu atau Minggu
+            $jumlahHariKerja++;
         }
-
-        return $tanggal;
+        $tanggalMulai->addDay();
     }
+
+    return $jumlahHariKerja;
+    }
+
 
     public function cekKetersediaanCuti($data)
     {

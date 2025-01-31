@@ -72,11 +72,10 @@
                             @enderror
                         </div>
                         <div>
-                            <label for="durasiCuti" class="block text-sm font-bold text-gray-700">Selama</label>
-                            <input wire:model="durasiCuti" type="text" id="durasiCuti"
-                                class="mt-1 block w-full rounded-xl border border-[#0032CC]"
-                                placeholder="Isikan dengan angka durasi cuti (dalam satuan hari)">
-                            @error('durasiCuti')
+                            <label for="tanggalAkhir" class="block text-sm font-bold text-gray-700">Tanggal Akhir</label>
+                            <input wire:model="tanggalAkhir" type="date" id="tanggalAkhir"
+                                class="mt-1 block w-full rounded-xl border border-[#0032CC]">
+                            @error('tanggalAkhir')
                                 <p class="px-2 mt-2 text-sm text-red-600 bg-red-200 border border-red-600 rounded-xl">
                                     {{ $message }}</p>
                             @enderror
