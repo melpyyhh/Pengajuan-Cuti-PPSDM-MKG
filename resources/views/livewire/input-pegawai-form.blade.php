@@ -65,7 +65,7 @@
                             <div class="w-full">
                                 <label for="masaKerjaPegawai" class="block text-sm font-medium text-gray-700">Masa
                                     Kerja:</label>
-                                <input wire:model="masaKerjaPegawai" type="text" id="masaKerjaPegawai"
+                                <input wire:model="masaKerjaPegawai" type="number" id="masaKerjaPegawai"
                                     class="mt-1 block w-full rounded-2xl border border-[#0032CC] focus:ring-[#0032CC] focus:border-[#0032CC]">
                                 @error('masaKerjaPegawai')
                                     <p class="px-2 mt-2 text-sm text-red-600 bg-red-200 border border-red-600 rounded-xl">
@@ -79,8 +79,8 @@
                     <div>
                         <div>
                             {{-- Cuti Tahunan (3 Form) --}}
-                            @foreach ($tahun as $tahun)
-                                <div class="flex space-x-4" wire:key="cutiTahunan-{{ $tahun }}">
+                            @foreach ($tahun as $index => $tahunValue)
+                                <div class="flex space-x-4" wire:key="cutiTahunan-{{ $tahunValue }}">
                                     <!-- Dropdown Jenis Cuti -->
                                     <div class="w-1/2">
                                         <label class="block text-sm font-medium text-gray-700">
@@ -95,7 +95,7 @@
                                         <label class="block text-sm font-medium text-gray-700">
                                             Tahun Cuti:
                                         </label>
-                                        <input type="text" value="{{ $tahun }}" readonly
+                                        <input type="text" value="{{ $tahunValue }}" readonly
                                             class="mt-1 block w-full rounded-2xl border border-[#0032CC] bg-gray-200 tracking-widest">
                                     </div>
 
@@ -104,7 +104,7 @@
                                         <label class="block text-sm font-medium text-gray-700">
                                             Sisa Cuti:
                                         </label>
-                                        <input wire:model="sisaCuti.{{ $tahun }}" type="number"
+                                        <input wire:model="sisaCuti.{{ $tahunValue }}" type="number"
                                             class="mt-1 block w-full rounded-2xl border border-[#0032CC] focus:ring-[#0032CC] focus:border-[#0032CC]">
                                     </div>
                                 </div>
@@ -139,16 +139,16 @@
                             <label for="emailPengguna" class="block text-sm font-medium text-gray-700">
                                 Email Akun Pengguna:
                             </label>
-                            <input wire:model="emailPengguna" type="email" id="emailPengguna"
+                            <input wire:model="email" type="email" id="emailPengguna"
                                 class="mt-1 block w-full rounded-2xl border border-[#0032CC] focus:ring-[#0032CC] focus:border-[#0032CC]"
                                 placeholder="Masukkan email pengguna">
                         </div>
 
                         <div class="w-full">
-                            <label for="konfirmasiEmailPengguna" class="block text-sm font-medium text-gray-700">
+                            <label for="konfirmasiEmail" class="block text-sm font-medium text-gray-700">
                                 Konfirmasi Email:
                             </label>
-                            <input wire:model="konfirmasiEmailPengguna" type="email" id="konfirmasiEmailPengguna"
+                            <input wire:model="email_confirmation" type="email" id="konfirmasiEmailPengguna"
                                 class="mt-1 block w-full rounded-2xl border border-[#0032CC] focus:ring-[#0032CC] focus:border-[#0032CC]"
                                 placeholder="Masukkan ulang email pengguna">
                         </div>

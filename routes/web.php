@@ -45,7 +45,6 @@ Route::middleware(['auth', 'pengajuMiddleware'])->group(function () {
     Route::get('/pengaju/pengajuan-detail/{idPengajuan}', PengajuanDetail::class)->name('pengaju.pengajuan-detail');
     Route::get('/pengaju/riwayat-pengaduan', RiwayatPengaduan::class)->name('pengaju.riwayat-pengaduan');
     Route::get('/pengaju/pengaduan-form', PengaduanForm::class)->name('pengaju.pengaduan.form');
-    // Cetak PDF
     Route::get('/exportPdf/{idPengajuan}', [PDFController::class, 'exportPDF']);
     // Route::get('/index/{idPengajuan}', [PDFController::class, 'index'])->name('pengaju.export-pdf');
 });
@@ -58,15 +57,6 @@ Route::middleware(['auth', 'penyetujuMiddleware'])->group(function () {
     Route::get('/penyetuju/riwayat-pengaduan', RiwayatPengaduan::class)->name('penyetuju.riwayat-pengaduan');
     Route::get('/penyetuju/pengaduan-form', PengaduanForm::class)->name('penyetuju.pengaduan.form');
     Route::get('/penyetuju-dashboard', [PenyetujuController::class, 'dashboard'])->name('penyetuju.penyetuju-dashboard');
-    Route::get('/download-dokumen/{filePath}', function ($filePath) {
-        $path = storage_path('app/public/' . $filePath);
-
-        if (!file_exists($path)) {
-            abort(404, 'File tidak ditemukan.');
-        }
-
-        return response()->download($path);
-    })->name('download.dokumen');
 });
 
 // Admin
@@ -74,7 +64,6 @@ Route::middleware(['auth', 'adminMiddleware'])->group(function () {
     Route::get('/admin', DaftarPengaduan::class)->name('admin.daftar-pengaduan');
     Route::get('/daftar-pegawai', [AdminController::class, 'daftarPegawai'])->name('admin.daftar-pegawai');
     Route::get('/input-pegawai', InputPegawaiForm::class)->name('admin.input-pegawai');
-    // Perbaikan rute detail pegawai
     Route::get('/pegawai/{pegawaiId}', PegawaiDetail::class)->name('admin.detail-pegawai');
     Route::get('/admin/search-pegawai', [AdminController::class, 'searchPegawai'])->name('admin.search-pegawai');
 });

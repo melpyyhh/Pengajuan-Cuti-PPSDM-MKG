@@ -5,9 +5,12 @@ namespace App\Http\Livewire;
 use App\Models\DataCuti;
 use App\Models\JenisCuti;
 use App\Models\Pegawai;
+use App\Models\User;
 use Livewire\Component;
 use Illuminate\Support\Facades\Log;
 use Livewire\Attributes\Title;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 
 #[Title('Input Pegawai Form')]
 class InputPegawaiForm extends Component
@@ -26,8 +29,8 @@ class InputPegawaiForm extends Component
     public $sisaCuti = [];
     public $jenisCutiFields = [0]; // Mengelola input
     public $tahun = [];
-    public  $email;
-    public $konfirmasiEmail;
+    public $email;
+    public $email_confirmation;
 
     public $pages = [
         1 => ['heading' => 'Data Pegawai', 'subheading' => 'Isikan Data Pegawai'],
@@ -90,10 +93,8 @@ class InputPegawaiForm extends Component
         1 => [
             'namaPegawai' => 'required|string',
             'NIP' => 'required|string',
-
             'unitKerjaPegawai' => 'required|string',
             'masaKerjaPegawai' => 'required|integer|min:0',
-
             'jabatanPegawai' => 'required|string',
             'sisaCuti.*' => 'required|integer|min:0',
             'selectedJenisCuti.*' => 'required|exists:jenis_cuti,id',
@@ -107,31 +108,23 @@ class InputPegawaiForm extends Component
     protected $messages = [
         'namaPegawai.required' => 'Nama pegawai wajib diisi!',
         'namaPegawai.string' => 'Nama pegawai harus berupa teks!',
-
         'NIP.required' => 'NIP wajib diisi!',
         'NIP.string' => 'NIP harus berupa teks!',
-
         'email.required' => 'Email wajib diisi!',
         'email.email' => 'Format email tidak valid!',
         'email.confirmed' => 'Konfirmasi email tidak sesuai dengan email yang dimasukkan!',
-
         'unitKerjaPegawai.required' => 'Unit kerja pegawai wajib diisi!',
         'unitKerjaPegawai.string' => 'Unit kerja pegawai harus berupa teks!',
-
         'masaKerjaPegawai.required' => 'Masa kerja pegawai wajib diisi!',
         'masaKerjaPegawai.integer' => 'Masa kerja pegawai harus berupa angka!',
         'masaKerjaPegawai.min' => 'Masa kerja pegawai tidak boleh kurang dari 0 tahun!',
-
         'jabatanPegawai.required' => 'Jabatan pegawai wajib diisi!',
         'jabatanPegawai.string' => 'Jabatan pegawai harus berupa teks!',
-
         'sisaCuti.*.required' => 'Sisa cuti wajib diisi!',
         'sisaCuti.*.integer' => 'Sisa cuti harus berupa angka!',
         'sisaCuti.*.min' => 'Sisa cuti tidak boleh kurang dari 0!',
-
         'selectedJenisCuti.*.required' => 'Jenis cuti wajib dipilih!',
         'selectedJenisCuti.*.exists' => 'Jenis cuti yang dipilih tidak valid!',
-
         'tahun.*.nullable' => 'Tahun boleh dikosongkan.',
         'tahun.*.integer' => 'Tahun harus berupa angka!'
     ];
@@ -156,18 +149,44 @@ class InputPegawaiForm extends Component
             ]);
             // Simpan data cuti
             $pegawaiId = $pegawaiBaru->id;
-            foreach ($this->jenisCutiFields as $index) {
+            foreach ($this->tahun as $tahunValue) {
                 DataCuti::tambahDataCuti([
                     'pegawai_id' => $pegawaiId,
-                    'jenis_cuti_id' => $this->selectedJenisCuti[$index] ?? null,
-                    'jumlah_cuti' => $this->sisaCuti[$index] ?? null,
-                    'sisa_cuti' => $this->sisaCuti[$index] ?? null,
-                    'tahun' => $this->tahun[$index] ?? null
+                    'jenis_cuti_id' => 1, // Sesuaikan dengan ID Cuti Tahunan di database
+                    'jumlah_cuti' => $this->sisaCuti[$tahunValue] ?? 0, // Ambil sesuai tahun
+                    'sisa_cuti' => $this->sisaCuti[$tahunValue] ?? 0, // Ambil sesuai tahun
+                    'tahun' => $tahunValue
                 ]);
             }
 
+            // Simpan Cuti Besar jika ada
+            if (!empty($this->sisaCuti['cutiBesar'])) {
+                DataCuti::tambahDataCuti([
+                    'pegawai_id' => $pegawaiId,
+                    'jenis_cuti_id' => 2, // ID untuk Cuti Besar
+                    'jumlah_cuti' => $this->sisaCuti['cutiBesar'],
+                    'sisa_cuti' => $this->sisaCuti['cutiBesar'],
+                    'tahun' => date('Y') // Tahun saat ini untuk Cuti Besar
+                ]);
+            }
+            $password = Str::random(10);
+            $hashed = Hash::make($password);
+            User::tambahUser([
+                'pegawai_id' => $pegawaiId,
+                'email' => $this->email,
+                'name' => $this->namaPegawai,
+                'password' => $hashed,
+                'role' => 'pengaju',
+                'atasan_id' => 2
+            ]);
             // Notifikasi sukses
-            $this->dispatch('custom-alert', type: 'success', title: 'Tambah Pegawai Berhasil', position: 'center', timer: 3000);
+            $this->dispatch(
+                'custom-alert',
+                type: 'success',
+                title: 'Tambah Pegawai Berhasil',
+                position: 'center',
+                timer: 3000
+            );
             // Reset form setelah sukses submit
             $this->reset([
                 'namaPegawai',
@@ -177,10 +196,9 @@ class InputPegawaiForm extends Component
                 'masaKerjaPegawai',
                 'jenisCuti',
                 'sisaCuti',
-                'jenisCutiFields',
-                'selectedJenisCuti',
+                'email',
+                'email_confirmation',
                 'currentPage',  // Reset selectedJenisCuti juga
-                'tahun'
             ]);
             $this->dispatch('redirect-after-alert', [
                 'url' => request()->header('Referer'),
@@ -188,7 +206,13 @@ class InputPegawaiForm extends Component
             ]);
         } catch (\Exception $e) {
             Log::error($e->getMessage());
-            $this->dispatch('custom-alert', type: 'error', title: 'Terjadi Kesalahan', position: 'center', timer: 3000);
+            $this->dispatch(
+                'custom-alert',
+                type: 'error',
+                title: $e->getMessage(),
+                position: 'center',
+                timer: 3000
+            );
         }
     }
 
@@ -210,15 +234,12 @@ class InputPegawaiForm extends Component
             ]
         ];
         $currentYear = now()->year;
-
         // Tahun cuti tahunan otomatis 3 tahun terakhir
         $this->tahun = range($currentYear - 2, $currentYear);
-
         // Inisialisasi sisa cuti untuk tiap tahun dengan nilai default (misal 0)
         foreach ($this->tahun as $tahun) {
             $this->sisaCuti[$tahun] = 0;
         }
-
         // Tambahkan untuk cuti besar
         $this->sisaCuti['cutiBesar'] = 0;
     }

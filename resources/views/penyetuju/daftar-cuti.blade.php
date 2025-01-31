@@ -20,8 +20,10 @@
                 <div class="flex items-center py-2 mb-5 space-x-4">
                     <!-- Input Search -->
                     <div class="flex items-center flex-1">
-                        <form action="{{ route('penyetuju.daftar-cuti') }}" method="GET" class="flex items-center flex-1">
-                            <input type="text" name="search" id="search-input" placeholder="Cari..." value="{{ request()->search }}"
+                        <form action="{{ route('penyetuju.daftar-cuti') }}" method="GET"
+                            class="flex items-center flex-1">
+                            <input type="text" name="search" id="search-input" placeholder="Cari..."
+                                value="{{ request()->search }}"
                                 class="flex-1 px-4 py-2 border rounded-l-md focus:outline-none max-w-[300px]">
                             <button type="submit" class="px-4 py-2 text-white bg-yellow-500 rounded-r-md">
                                 🔍
@@ -139,7 +141,8 @@
         <div class="grid flex-1 grid-cols-1 gap-4 md:hidden">
             <div class="flex items-center flex-1">
                 <form action="{{ route('penyetuju.daftar-cuti') }}" method="GET" class="flex items-center flex-1">
-                    <input type="text" name="search" id="search-input" placeholder="Cari..." value="{{ request()->search }}"
+                    <input type="text" name="search" id="search-input" placeholder="Cari..."
+                        value="{{ request()->search }}"
                         class="flex-1 px-4 py-2 border rounded-l-md focus:outline-none max-w-[300px]">
                     <button type="submit" class="px-4 py-2 text-white bg-yellow-500 rounded-r-md">
                         🔍
@@ -149,12 +152,12 @@
             <div class="grid flex-1 grid-cols-1 gap-4 md:hidden">
                 @forelse ($listPengajuan as $data)
                     <div class="p-4 space-y-3 bg-[#F4F7FE] rounded-lg shadow-md">
-                       <!-- Nomor -->
-                    <div class="text-sm font-semibold text-gray-800">
-                        <p>Ajuan Cuti ke :
-                            {{ ($listPengajuan->currentPage() - 1) * $listPengajuan->perPage() + $loop->iteration }}
-                        </p>
-                    </div>
+                        <!-- Nomor -->
+                        <div class="text-sm font-semibold text-gray-800">
+                            <p>Ajuan Cuti ke :
+                                {{ ($listPengajuan->currentPage() - 1) * $listPengajuan->perPage() + $loop->iteration }}
+                            </p>
+                        </div>
                         <!-- Nama Pegawai -->
                         <div class="text-sm text-gray-600">
                             Nama Pegawai: {{ $data->pegawai->nama }}
@@ -192,7 +195,7 @@
                     </div>
                 @empty
                     <div class="px-4 py-4 text-center text-gray-500">
-                            Tidak ada data yang ditemukan.
+                        Tidak ada data yang ditemukan.
                     </div>
                 @endforelse
             </div>

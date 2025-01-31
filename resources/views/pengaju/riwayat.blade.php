@@ -54,7 +54,7 @@
                                         {{ ($listRiwayat->currentPage() - 1) * $listRiwayat->perPage() + $loop->iteration }}
                                     </td>
                                     <td class="px-16 py-10 text-center text-gray-800 text-s">
-                                        {{ $cuti->tanggal_awal }}</td>
+                                        {{ date('j F Y', strtotime($cuti->tanggal_awal)) }}</td>
                                     <td class="px-10 py-10 text-center text-gray-800 text-s">
                                         {{ $cuti->pengajuan->cuti->jenis_cuti ?? '-' }}
                                     </td>

@@ -11,7 +11,6 @@ use App\Mail\PenyetujuTolak;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
-use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
@@ -45,17 +44,18 @@ class PenyetujuDetail extends Component
         $riwayat = RiwayatCuti::getByPengajuanId($idPengajuan)->first();
         $this->statusAjuan = $riwayat->status_ajuan;
         if ($pengajuan) {
-            $this->tanggalMulai = $pengajuan->tanggal_awal ? \Carbon\Carbon::parse($pengajuan->tanggal_awal)->format('Y-m-d') : '';
-            $this->tanggalSelesai = $pengajuan->tanggal_akhir ? \Carbon\Carbon::parse($pengajuan->tanggal_akhir)->format('Y-m-d') : '';
+            $this->tanggalMulai = $pengajuan->tanggal_awal ? \Carbon\Carbon::parse($pengajuan->tanggal_awal)->locale('id')->translatedFormat('j F Y') : '';
+            $this->tanggalSelesai = $pengajuan->tanggal_akhir ? \Carbon\Carbon::parse($pengajuan->tanggal_akhir)->locale('id')->translatedFormat('j F Y') : '';
             $this->alasan = $pengajuan->alasan;
             $this->dokumenPath = $pengajuan->dokumen;
         } else {
-            $this->dispatchBrowserEvent('custom-alert', [
-                'type' => 'error',
-                'title' => 'Data Pengajuan Tidak Ditemukan',
-                'position' => 'center',
-                'timer' => 3000
-            ]);
+            $this->dispatch(
+                'custom-alert',
+                type: 'error',
+                title: 'Data Pengajuan Tidak Ditemukan',
+                position: 'center',
+                timer: 3000
+            );
         }
     }
 
