@@ -230,7 +230,7 @@
                     <td>Selama</td>
                     <td>{{ $pengajuan->lama_cuti }}</td>
                     <td>Mulai Tanggal</td>
-                    <td>{{ $pengajuan->start_cuti }}</td>
+                    <td>{{ $pengajuan->startCutiFormatted }}</td>
                 </tr>
             </table>
         </div>
