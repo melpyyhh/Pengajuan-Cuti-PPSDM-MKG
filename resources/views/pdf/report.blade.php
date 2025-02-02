@@ -167,13 +167,13 @@
                     <td>1. Cuti Tahunan</td>
                     <td>
                         @if ($pengajuan->jenis_cuti == 'Cuti Tahunan')
-                            <img src="{{ public_path('img/check-mark.png') }}" alt="checkbox" class="checkbox-small">
+                            <img src="img/check-mark.png" alt="checkbox" class="checkbox-small">
                         @endif
                     </td>
                     <td>4. Cuti Melahirkan</td>
                     <td>
                         @if ($pengajuan->jenis_cuti == 'Cuti Melahirkan')
-                            <img src="{{ public_path('img/check-mark.png') }}" alt="checkbox" class="checkbox-small">
+                            <img src="img/check-mark.png" alt="checkbox" class="checkbox-small">
                         @endif
                     </td>
                 </tr>
@@ -181,13 +181,13 @@
                     <td>2. Cuti Besar</td>
                     <td>
                         @if ($pengajuan->jenis_cuti == 'Cuti Besar')
-                            <img src="{{ public_path('img/check-mark.png') }}" alt="checkbox" class="checkbox-small">
+                            <img src="img/check-mark.png'" alt="checkbox" class="checkbox-small">
                         @endif
                     </td>
                     <td>5. Cuti Karena Alasan Penting</td>
                     <td>
                         @if ($pengajuan->jenis_cuti == 'Cuti Karena Alasan Penting')
-                            <img src="{{ public_path('img/check-mark.jpg') }}" alt="checkbox" class="checkbox-small">
+                            <img src="img/check-mark.jpg" alt="checkbox" class="checkbox-small">
                         @endif
                     </td>
                 </tr>
@@ -195,13 +195,13 @@
                     <td>3. Cuti Sakit</td>
                     <td>
                         @if ($pengajuan->jenis_cuti == 'Cuti Sakit')
-                            <img src="{{ public_path('img/check-mark.png') }}" alt="checkbox" class="checkbox-small">
+                            <img src="img/check-mark.png" alt="checkbox" class="checkbox-small">
                         @endif
                     </td>
                     <td>6. Cuti Diluar Tanggungan Negara</td>
                     <td>
                         @if ($pengajuan->jenis_cuti == 'Cuti Diluar Tanggungan Negara')
-                            <img src="{{ public_path('img/check-mark.png') }}" alt="checkbox" class="checkbox-small">
+                            <img src="img/check-mark.png" alt="checkbox" class="checkbox-small">
                         @endif
                     </td>
                 </tr>
@@ -323,7 +323,7 @@
                     <td>TIDAK DISETUJUI</td>
                 </tr>
                 <tr>
-                    <td><img src="{{ public_path('img/check-mark.png') }}" alt="checkbox" class="checkbox-small"></td>
+                    <td><img src="img/check-mark.png" alt="checkbox" class="checkbox-small"></td>
                     <td style="height: 10px;"></td>
                     <td style="height: 10px;"></td>
                     <td style="height: 10px;"></td>
@@ -364,7 +364,7 @@
                     <td>TIDAK DISETUJUI</td>
                 </tr>
                 <tr>
-                    <td><img src="{{ public_path('img/check-mark.png') }}" alt="checkbox" class="checkbox-small"></td>
+                    <td><img src="img/check-mark.png" alt="checkbox" class="checkbox-small"></td>
                     <td style="height: 10px;"></td>
                     <td style="height: 10px;"></td>
                     <td style="height: 10px;"></td>
