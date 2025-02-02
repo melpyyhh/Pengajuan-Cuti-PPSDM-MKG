@@ -153,7 +153,6 @@ class InputPegawaiForm extends Component
                 DataCuti::tambahDataCuti([
                     'pegawai_id' => $pegawaiId,
                     'jenis_cuti_id' => 1, // Sesuaikan dengan ID Cuti Tahunan di database
-                    'jumlah_cuti' => $this->sisaCuti[$tahunValue] ?? 0, // Ambil sesuai tahun
                     'sisa_cuti' => $this->sisaCuti[$tahunValue] ?? 0, // Ambil sesuai tahun
                     'tahun' => $tahunValue
                 ]);
@@ -164,7 +163,6 @@ class InputPegawaiForm extends Component
                 DataCuti::tambahDataCuti([
                     'pegawai_id' => $pegawaiId,
                     'jenis_cuti_id' => 4, // ID untuk Cuti Besar
-                    'jumlah_cuti' => $this->sisaCuti['cutiBesar'],
                     'sisa_cuti' => $this->sisaCuti['cutiBesar'],
                     'tahun' => date('Y') // Tahun saat ini untuk Cuti Besar
                 ]);

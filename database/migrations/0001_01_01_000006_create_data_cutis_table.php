@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('pegawais_id')->constrained('pegawais')->onDelete('cascade'); // Foreign Key ke pegawai
             $table->foreignId('jenis_cuti_id')->constrained('jenis_cuti')->onDelete('cascade'); // Foreign Key ke jenis_cuti
-            $table->integer('jumlah_cuti');
             $table->integer('sisa_cuti'); // Nama kolom diperbaiki
             $table->timestamps();
         });

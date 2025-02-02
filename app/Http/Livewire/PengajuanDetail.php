@@ -43,8 +43,8 @@ class PengajuanDetail extends Component
         if ($pengajuan) {
             $this->jenisCuti = $pengajuan->cuti->jenis_cuti;
             $this->alasanCuti = $pengajuan->alasan;
-            $this->tanggalMulai = $pengajuan->tanggal_awal ? \Carbon\Carbon::parse($pengajuan->tanggal_awal)->format('Y-m-d') : '';
-            $this->tanggalSelesai = $pengajuan->tanggal_akhir ? \Carbon\Carbon::parse($pengajuan->tanggal_akhir)->format('Y-m-d') : '';
+            $this->tanggalMulai = $pengajuan->tanggal_awal ? \Carbon\Carbon::parse($pengajuan->tanggal_awal)->locale('id')->translatedFormat('j F Y') : '';
+            $this->tanggalSelesai = $pengajuan->tanggal_akhir ? \Carbon\Carbon::parse($pengajuan->tanggal_akhir)->locale('id')->translatedFormat('j F Y') : '';
             $this->nomorHp = $pengajuan->nomorHp;
             $this->alamatCuti = $pengajuan->alamatCuti;
         } else {

@@ -26,7 +26,6 @@ class DataCuti extends Model
         return self::create([
             'pegawais_id' => $data['pegawai_id'],
             'jenis_cuti_id' => $data['jenis_cuti_id'],
-            'jumlah_cuti' => $data['jumlah_cuti'],
             'sisa_cuti' => $data['sisa_cuti'],
             'tahun' => $data['tahun'],
         ]);

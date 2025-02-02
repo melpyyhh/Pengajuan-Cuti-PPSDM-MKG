@@ -49,8 +49,6 @@ class DummyPegawaiSeeder extends Seeder
                 'unitKerja' => 'Front End Department',
                 'masaKerja' => 10,
             ],
-
-
         ];
         foreach ($pegawaiData as $key => $var) {
             Pegawai::create($var);
