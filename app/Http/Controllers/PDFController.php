@@ -57,6 +57,9 @@ class PDFController extends Controller
         // Format Tanggal Surat
         $pengajuan->tanggalDiajukanFormatted = Carbon::parse($pengajuan->tanggalDiajukan)
             ->translatedFormat('l, d F Y');
+        // Format Tanggal Section IV
+        $pengajuan->startCutiFormatted = Carbon::parse($pengajuan->start_cuti)
+        ->translatedFormat('d F Y');
         // Kirim data ke tampilan PDF
         $pdf = Pdf::loadView('pdf.report', ['pengajuan' => $pengajuan, 'ttd' => public_path('img/dummy.jpg'), 'sisaCuti' => $sisaCuti]);
         // Unduh PDF
