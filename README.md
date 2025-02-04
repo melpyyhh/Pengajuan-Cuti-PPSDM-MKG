@@ -1,66 +1,161 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Project Title: Aplikasi Sistem Pengajuan Cuti PPSDM BMKG Berbasis Web
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Deskripsi Singkat
 
-## About Laravel
+Website ini dirancang dalam rangka menciptakan serangkaian proses pengajuan cuti berbasis elektronik (website) dalam lingkungan PPSDM BMKG.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- Adapun identifikasi masalah yang ditemui antara lain minimnya monitoring dan transparansi pengajuan cuti antara pegawai (pihak yang mengajukan cuti) dan atasan (pihak yang menyetujui cuti), adanya ketergantungan pengajuan cuti yang masih dikelola oleh Badan Kepegawaian Negara (BKN), serta masih adanya urgensi bukti fisik pengajuan cuti dalam bentuk hardfile.
+- Harapannya dengan dirancang serta dibangunnya sistem pengajuan cuti ini berhasil menyelesaikan masalah-masalah yang telah dijelaskan sebelumnya.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+#Fitur-fitur Utama Sistem
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+1. Modul Pengajuan Cuti Online dengan Form Digital
 
-## Learning Laravel
+- User dapat mengajukan cuti dengan mengakses form digital secara online.
+- User cukup mengisi pertanyaan yang telah disediakan, sistem telah menyesuaikan dengan kebutuhan terkait sistem pengajuan cuti yang sedang berjalan di PPSDM BMKG.
+- User secara tidak langsung dapat mengetahui sisa cuti atau apakah user masih dapat mengajukan cuti saat mengajukan pengajuan cuti di sistem ini.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+2. Sistem Persetujuan Bertingkat sesuai hierarki organisasi
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+- Proses penyetujuan cuti telah disesuaikan dengan kebutuhan terkait sistem pengajuan cuti yang sedang berjalan di PPSDM BMKG.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+3. Fitur Ekspor Dokumen Cuti dalam Format PDF
 
-## Laravel Sponsors
+- User dapat mengunduh bukti pengajuan cuti yang telah disetujui dalam format PDF, kemudian dapat menyimpannya di direktori masing-masing jika perlu akan kebutuhan dokumen fisik di kemudian hari.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+4. Sistem Tracking dan Monitoring Status Pengajuan Cuti
 
-### Premium Partners
+- User (pegawai maupun pengaju) dapat mengakses status pengajuan cuti yang sedang diajukan untuk melihat perubahannya setiap waktu.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+5. Implementasi Chabot untuk Bantuan Informasi
 
-## Contributing
+- User dapat mengajukan pertanyaan seputar pengajuan cuti atau pengiriman pengaduan ke admin melalui fitur chatbot.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+6. Manajemen Data Pegawai dan Sisa Cuti
 
-## Code of Conduct
+- Admin dapat menambahkan data pegawai beserta data sisa cuti masing-masing pegawainya.
+- Penambahan data pegawai secara tidak langsung akan membuat akun untuk pegawai tersebut agar dapat mengakses aplikasi web ini menggunakan email dan password.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+5. Sistem Pelaporan dan Analisis Data Cuti
 
-## Security Vulnerabilities
+- Atasan/Penyetuju dapat melihat analisis deskriptif atau ringkasan pengajuan cuti yang terjadi di PPSDM BMKG melalui dashboard.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+#Struktur repositori
+root/
+app/
+├── Console/ # Folder untuk menyimpan perintah Artisan custom (Console Commands)
+│ └── Commands/ # Folder untuk menyimpan perintah-perintah khusus yang dapat dijalankan melalui Artisan
+├── Http/ # Folder yang berisi logika untuk menangani HTTP request
+│ ├── Controllers/ # Folder untuk menyimpan controller yang menangani permintaan HTTP
+│ ├── Livewire/ # Folder untuk komponen Livewire, yang memungkinkan interaktivitas langsung di frontend
+│ ├── Middleware/ # Folder untuk middleware, yaitu lapisan antara request dan aplikasi
+│ ├── Requests/ # Folder untuk form request validation
+│ └── Mail/ # Folder untuk pengaturan pengiriman email
+├── Models/ # Folder untuk menyimpan model yang berhubungan dengan database
+├── Policies/ # Folder untuk menyimpan kebijakan yang mengatur akses ke resource
+├── Providers/ # Folder untuk menyimpan service providers, yang mendaftarkan berbagai layanan dalam aplikasi
+└── View/ # Folder untuk menyimpan komponen-komponen Blade
+└── Components/ # Folder untuk menyimpan komponen Blade reusable
+├── bootstrap/ # Berisi file bootstrap untuk caching
+├── config/ # Berisi file konfigurasi aplikasi, seperti setting database, mail, dll.
+├── database/ # Berisi file yang berhubungan dengan migrasi dan seeder database
+├── public/ # Folder yang berisi file publik seperti file CSS, JS, dan gambar
+├── resources/ # Folder untuk tampilan dan resource lainnya
+├── routes/ # Berisi file untuk mendefinisikan rute aplikasi
+├── storage/ # Tempat penyimpanan file yang dihasilkan aplikasi, seperti logs
+├── tests/ # Berisi file untuk unit testing aplikasi
+├── .editorconfig # File konfigurasi editor untuk menyamakan gaya kode
+├── .env.example # Contoh file .env untuk konfigurasi lingkungan
+├── .gitattributes # Menentukan aturan untuk file yang ada di repositori Git
+├── .gitignore # Mengatur file/folder yang diabaikan oleh Git
+├── README.md # Dokumentasi umum tentang proyek
+├── artisan # Skrip artisan untuk menjalankan perintah di Laravel
+├── composer.json # File konfigurasi Composer untuk dependensi PHP
+├── composer.lock # File lock untuk dependensi yang digunakan oleh Composer
+├── package-lock.json # File lock untuk dependensi Node.js
+├── package.json # File konfigurasi untuk dependensi Node.js
+├── phpunit.xml # File konfigurasi untuk PHPUnit
+├── postcss.config.js # File konfigurasi untuk PostCSS
+├── tailwind.config.js # File konfigurasi untuk Tailwind CSS
+└── vite.config.js # File konfigurasi untuk Vite (tool untuk bundling)
 
-## License
+## Teknologi yang Digunakan
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Presentation Tier
+
+- **HTML**
+- **CSS (Framework Tailwind)**
+- **JavaScript**
+- **JavaScript (Framework ChartJS)**
+
+### Application Tier
+
+- **PHP (Framework Laravel)**
+- **PHP (Livewire, Framework Laravel)**
+
+### Database Tier
+
+- **MySQL**
+
+## Cara Menggunakan
+
+1. Clone repositori menggunakan git clone:
+   ```bash
+   git clone https://github.com/melpyyhh/Pengajuan-Cuti-PPSDM-MKG
+   ```
+2. Instal dependensi menggunakan Composer:
+   ```bash
+   composer install
+   ```
+3. Generate key
+   ```bash
+   php artisan generate:key
+   ```
+4. Konfigurasi file `.env` sesuai dengan database dan email:
+
+   ```env
+   database.default.hostname = localhost
+   database.default.database = nama_database
+   database.default.username = root
+   database.default.password =
+   database.default.DBDriver = MySQLi
+
+   MAIL_MAILER=smtp
+   MAIL_HOST=smtp.gmail.com
+   MAIL_PORT=465
+   MAIL_USERNAME=
+   MAIL_PASSWORD=
+   MAIL_ENCRYPTION=ssl
+   MAIL_FROM_ADDRESS=""
+   MAIL_FROM_NAME="${APP_NAME}"
+   ```
+
+5. Migrasi database:
+   ```bash
+   php artisan migrate
+   php artisan db:seed --class=JenisCutiSeeder  # menjalankan seeder untuk jenis cuti
+   php artisan db:seed --class=DummyPegawaiSeeder  # menjalankan seeder untuk dummy pegawai
+   php artisan db:seed --class=DummyUserSeeder  # menjalankan seeder untuk dummy user
+   ```
+6. Untuk penggunaan lokal, hidupkan erver dengan:
+   ```bash
+   php artisan serve
+   php artisan queue:work
+   ```
+   dan di terminal yang berbeda jalankan:
+   ```bash
+   nmp run dev
+   ```
+7. Untuk deploy gunakan perintah:
+   ```
+   npm run build
+   ```
+8. Set cron job untuk Queue Worker:
+   ```
+   /usr/local/bin/php /home/username/public_html/laravel/artisan queue:work --tries=3
+   /home/username/public_html/laravel/artisan # sesuaikan menuju folder yang memiliki file artisan
+   ```
+9. Set cron job untuk Scheduler:
+   ```
+   * * * * * /usr/local/bin/php /home/username/laravel_app/artisan schedule:run >> /dev/null 2>&1
+   ```
